@@ -1,0 +1,13 @@
+*{
+    transition: all .5s;
+}
+
+.banner{
+    position: relative;
+    background-size: cover;
+}
+.sticky{
+    position: fixed;
+    background-color: aliceblue;
+    transition: all .5s;
+}
