@@ -1,3 +1,5 @@
+import Hero from "@/components/Hero";
+import Scroll from "@/components/Scroll";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 // import { useEffect, useState } from "react";
@@ -31,6 +33,8 @@ export default function Home() {
           className="w-full h-screen bg-cover object-cover"
         />
       </section>
+      <Hero />
+      <Scroll />
       <h1 className="h-screen">Hello </h1>
     </>
   );
