@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-
+import styles from "./navbar.module.css";
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
   { name: "Team", href: "#", current: false },
@@ -30,7 +30,7 @@ export default function Example() {
   return (
     <Disclosure
       as="nav"
-      className={`z-10 fixed w-full ${isSticky ? "sticky" : ""}`}
+      className={`z-10 fixed w-full ${isSticky ? styles.sticky : ""}`}
     >
       {({ open }) => (
         <>
