@@ -4,6 +4,7 @@ import Scroll from "@/components/Scroll";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import Navbar from "../components/Navbar/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,10 @@ export default function Home() {
 
       {/* <Hero />
       <Scroll /> */}
+      <Hero />
+      {/* <Scroll /> */}
+      <Footer />
+      {/* <h1 className="h-screen">Hello </h1> */}
     </>
   );
 }
