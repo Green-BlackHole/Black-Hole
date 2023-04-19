@@ -1,8 +1,8 @@
 import Hero from "@/components/Hero";
+import ProductCard from "@/components/ProductCard";
 import Scroll from "@/components/Scroll";
 import { Inter } from "next/font/google";
 import Image from "next/image";
-// import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "@/components/Footer";
 
@@ -34,6 +34,10 @@ export default function Home() {
           className="w-full h-[700] bg-cover object-cover"
         />
       </section>
+      <ProductCard />
+
+      {/* <Hero />
+      <Scroll /> */}
       <Hero />
       {/* <Scroll /> */}
       <Footer />
