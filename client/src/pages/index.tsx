@@ -26,11 +26,11 @@ export default function Home() {
       <Navbar />
       <section className="banner">
         <Image
-          src="https://www.freecodecamp.org/news/content/images/size/w2000/2022/09/jonatan-pie-3l3RwQdHRHg-unsplash.jpg"
+          src="https://thumbs.dreamstime.com/b/flat-line-design-website-banner-e-commerce-modern-vector-illustration-web-marketing-print-material-68581557.jpg"
           alt="fgh"
           width={1000}
           height={100}
-          className="w-full h-screen bg-cover object-cover"
+          className="w-full h-[700] bg-cover object-cover"
         />
       </section>
       <Hero />
