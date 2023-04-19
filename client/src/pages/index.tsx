@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 // import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,8 +35,9 @@ export default function Home() {
         />
       </section>
       <Hero />
-      <Scroll />
-      <h1 className="h-screen">Hello </h1>
+      {/* <Scroll /> */}
+      <Footer />
+      {/* <h1 className="h-screen">Hello </h1> */}
     </>
   );
 }
