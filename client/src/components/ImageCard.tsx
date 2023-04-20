@@ -10,7 +10,7 @@ const ImageCard = () => {
             <Image
               src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/fjfip8ga1ep22vhxdcew/air-max-97-mens-shoe-LJmK45.png"
               alt="nike"
-              width={100}
+              width={1000}
               height={100}
               className="w-full h-[700] bg-cover object-cover"
             />
@@ -20,7 +20,7 @@ const ImageCard = () => {
               <Image
                 src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/fjfip8ga1ep22vhxdcew/air-max-97-mens-shoe-LJmK45.png"
                 alt="nike"
-                width={100}
+                width={1000}
                 height={100}
                 className="w-full h-[700] bg-cover object-cover"
               />
@@ -29,7 +29,7 @@ const ImageCard = () => {
               <Image
                 src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/fjfip8ga1ep22vhxdcew/air-max-97-mens-shoe-LJmK45.png"
                 alt="nike"
-                width={100}
+                width={1000}
                 height={100}
                 className="w-full h-[700] bg-cover object-cover"
               />
@@ -38,7 +38,7 @@ const ImageCard = () => {
               <Image
                 src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/fjfip8ga1ep22vhxdcew/air-max-97-mens-shoe-LJmK45.png"
                 alt="nike"
-                width={100}
+                width={1000}
                 height={100}
                 className="w-full h-[700] bg-cover object-cover"
               />
@@ -47,7 +47,7 @@ const ImageCard = () => {
               <Image
                 src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/fjfip8ga1ep22vhxdcew/air-max-97-mens-shoe-LJmK45.png"
                 alt="nike"
-                width={100}
+                width={1000}
                 height={100}
                 className="w-full h-[700] bg-cover object-cover"
               />
