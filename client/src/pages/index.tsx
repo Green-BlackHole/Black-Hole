@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "@/components/Footer";
+import ImageCard from "@/components/ImageCard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +35,9 @@ export default function Home() {
           className="w-full h-[700] bg-cover object-cover"
         />
       </section>
+
+      <ImageCard />
+
       <ProductCard />
 
       {/* <Hero />
