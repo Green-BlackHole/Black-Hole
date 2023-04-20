@@ -6,6 +6,7 @@ import Image from "next/image";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "@/components/Footer";
 import ImageCard from "@/components/ImageCard";
+import Reklam from "@/components/Reklam";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,8 @@ export default function Home() {
       </section>
 
       <ImageCard />
+
+      <Reklam />
 
       <ProductCard />
 
