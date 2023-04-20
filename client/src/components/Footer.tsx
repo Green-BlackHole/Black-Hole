@@ -5,8 +5,8 @@ import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";
 const Footer = () => {
   return (
     <>
-      <footer className="p-4 bg-white sm:p-6 dark:bg-purple-900">
-        <div className=" max-w-screen-xl">
+      <footer className="bg-white dark:bg-purple-900">
+        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <div className="md:flex md:justify-between gap-3">
             {/* Logo */}
             <div className="flex justify-between">
@@ -63,7 +63,12 @@ const Footer = () => {
                     <li className="flex  mt-4 space-x-6  sm:mt-0">
                       <BsFacebook />
                       <BsInstagram />
-                      <BsYoutube />
+                      <Link
+                        href="https://www.youtube.com/"
+                        target="https://www.youtube.com/"
+                      >
+                        <BsYoutube />
+                      </Link>
                     </li>
 
                     {/* <ul className="flex justify-between mt-4 space-x-6 sm:justify-center sm:mt-0"></ul> */}
