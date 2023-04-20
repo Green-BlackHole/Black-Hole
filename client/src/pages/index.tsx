@@ -29,7 +29,7 @@ export default function Home() {
       <section className="banner">
         <Image
           src="https://thumbs.dreamstime.com/b/flat-line-design-website-banner-e-commerce-modern-vector-illustration-web-marketing-print-material-68581557.jpg"
-          alt="fgh"
+          alt="banner image"
           width={1000}
           height={100}
           className="w-full h-[700] bg-cover object-cover"
