@@ -8,13 +8,16 @@ interface ProductCardProps {
   product: IProduct;
 }
 
-const ProductCard: FC<ProductCardProps> = () => {
+const ProductCard: FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [ordering, setOrdering] = useState<string>("");
+  const [ordering, setOrdering] = useState<string>("releasedDesc");
+  const [searchValue, setSearchValue] = useState<string>("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/products")
+      .get(
+        `http://localhost:8000/products?limit=6&ordering=${ordering}&q=${searchValue}`
+      )
       .then((response) => {
         const data: IProduct[] = response.data;
         setProducts(data);
@@ -22,7 +25,7 @@ const ProductCard: FC<ProductCardProps> = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [ordering]);
 
   return (
     <div className="bg-white">
