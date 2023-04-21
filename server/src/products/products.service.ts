@@ -14,8 +14,17 @@ export class ProductsService {
     return 'This action adds a new product';
   }
 
-  async findAll() {
-    return await this.ProductModel.find();
+  async findAll(
+    limit: number,
+    skip: number,
+    sort: string,
+    condition: any,
+  ): Promise<Product[]> {
+    return await this.ProductModel.find(condition)
+      .sort(sort)
+      .limit(limit)
+      .skip(skip)
+      .exec();
   }
 
   async findOne(id: number) {

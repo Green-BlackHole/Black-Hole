@@ -9,23 +9,12 @@ import ImageCard from "@/components/ImageCard";
 import Reklam from "@/components/Reklam";
 import Category from "@/components/Category";
 import Script from "next/script";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  // const [isSticky, setIsSticky] = useState(0);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setIsSticky(window.scrollY);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
+  // const [queryValue, setQueryValue] = useState([]);
   return (
     <>
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js" />
@@ -44,7 +33,6 @@ export default function Home() {
 
       <Reklam />
 
-      <ProductCard />
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 grid grid-cols-4">
         <div className="col-span-1 max-md:hidden">
           <Category />
