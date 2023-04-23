@@ -7,16 +7,13 @@ import { FC, useEffect, useState } from "react";
 const Index: FC = () => {
   const [product, setProduct] = useState<IProduct | undefined>();
   const a = useRouter();
-  console.log(a.query);
   const { _id } = a.query;
-  console.log(_id);
 
   useEffect(() => {
     axios
       .get(`http://localhost:8000/products/${_id}`)
       .then((res) => {
         setProduct(res.data);
-        console.log("data", res.data);
       })
       .catch((error) => console.error(error));
   }, []);

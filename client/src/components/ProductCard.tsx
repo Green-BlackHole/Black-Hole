@@ -16,7 +16,7 @@ const ProductCard: FC = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8000/products?limit=6&ordering=${ordering}&q=${searchValue}`
+        `http://localhost:8000/products?limit=12&ordering=${ordering}&q=${searchValue}`
       )
       .then((response) => {
         const data: IProduct[] = response.data;
@@ -34,7 +34,7 @@ const ProductCard: FC = () => {
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
             Products
           </h2>
-          <div className="md:hidden">
+          <div >
             <select
               value={ordering}
               onChange={(e): void => {
@@ -51,7 +51,7 @@ const ProductCard: FC = () => {
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
+        <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
           {products.map((product) => (
             <Link href={`/products/${product.id}`} key={product.id}>
               <div className="group relative">
