@@ -6,9 +6,26 @@ export default function Category() {
     <>
       <Accordion alwaysOpen={true} className="border-none">
         <Accordion.Panel>
-          <Accordion.Title className="p-3 ">.</Accordion.Title>
+          <Accordion.Title className="p-3 ">angilal</Accordion.Title>
           <Accordion.Content>
+            <ul className="px-3">
+              <li>
+            <a href="">huvtsas</a>
+
+              </li>
+              <li>
             <a href="">gutal</a>
+
+              </li>
+              <li>
+            <a href="">omd</a>
+
+              </li>
+              <li>
+            <a href="">tsamts</a>
+
+              </li>
+            </ul>
           </Accordion.Content>
         </Accordion.Panel>
         <Accordion.Panel>

@@ -1,6 +1,4 @@
-import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
-import Scroll from "@/components/Scroll";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import Navbar from "../components/Navbar/Navbar";
@@ -25,29 +23,13 @@ export default function Home() {
           alt="banner image"
           width={1000}
           height={100}
-          className="w-full h-[700] bg-cover object-cover"
+          className="w-full h-[700] bg-cover object-cover max-h-96"
         />
       </section>
-
-      <ImageCard />
-
-      <Reklam />
-
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 grid grid-cols-4">
-        <div className="col-span-1 max-md:hidden">
-          <Category />
-        </div>
-        <div className="col-span-3 max-md:col-span-4">
           <ProductCard />
-        </div>
-      </div>
-
-      {/* <Hero />
-      <Scroll /> */}
-      <Hero />
-      {/* <Scroll /> */}
+      <ImageCard />
+      <Reklam />
       <Footer />
-      {/* <h1 className="h-screen">Hello </h1> */}
     </>
   );
 }
