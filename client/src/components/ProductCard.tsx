@@ -34,7 +34,7 @@ const ProductCard: FC = () => {
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
             Products
           </h2>
-          <div >
+          <div>
             <select
               value={ordering}
               onChange={(e): void => {

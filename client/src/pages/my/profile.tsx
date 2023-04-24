@@ -1,7 +1,10 @@
-import React from 'react'
+import Layout from "@/components/Layout";
+import React from "react";
 
 export default function profile() {
   return (
-    <div>profile</div>
-  )
+    <Layout>
+      <div>profile</div>
+    </Layout>
+  );
 }

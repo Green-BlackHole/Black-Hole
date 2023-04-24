@@ -8,28 +8,20 @@ import Reklam from "@/components/Reklam";
 import Category from "@/components/Category";
 import Script from "next/script";
 import { useState } from "react";
+import Layout from "@/components/Layout";
+import Carousel from "@/components/Carousel";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  // const [queryValue, setQueryValue] = useState([]);
   return (
     <>
-      <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js" />
-      <Navbar />
-      <section className="banner">
-        <Image
-          src="https://thumbs.dreamstime.com/b/flat-line-design-website-banner-e-commerce-modern-vector-illustration-web-marketing-print-material-68581557.jpg"
-          alt="banner image"
-          width={1000}
-          height={100}
-          className="w-full h-[700] bg-cover object-cover max-h-96"
-        />
-      </section>
-          <ProductCard />
-      <ImageCard />
-      <Reklam />
-      <Footer />
+      <Layout>
+        <Carousel slideInterval={3000} />
+        <ProductCard />
+        <ImageCard />
+        <Reklam />
+      </Layout>
     </>
   );
 }
