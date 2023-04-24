@@ -3,19 +3,24 @@ import { nanoid } from 'nanoid';
 
 // export class Product {}
 
-@Schema({ collection: 'product' })
+@Schema({ timestamps: true })
 export class Product {
   @Prop({ default: () => nanoid() })
   _id: string;
-
-  @Prop({ required: true })
-  id: number;
+  @Prop()
+  about: string;
+  @Prop()
+  brand: string;
+  @Prop()
   name: string;
+  @Prop()
   price: string;
+  @Prop()
   imageSrc: string;
-
   @Prop()
   size: string;
+  @Prop()
+  streetAddress: string;
   createdAt: Date;
   updatedAt: Date;
 }

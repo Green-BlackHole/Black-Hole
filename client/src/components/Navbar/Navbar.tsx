@@ -19,24 +19,26 @@ function classNames(...classes: string[]) {
 }
 
 export default function Example() {
-  const [isSticky, setIsSticky] = useState(false);
+  // const [isSticky, setIsSticky] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 0);
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setIsSticky(window.scrollY > 0);
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+  // className={`fixed w-full ${isSticky ? styles.sticky : ""}`}
+
   return (
     <>
       <Disclosure
         as="nav"
-        className={`z-10 fixed w-full ${isSticky ? styles.sticky : ""}`}
+        className={`z-10 sticky top-0 w-full bg-sky-500/100`}
       >
         {({ open }) => (
           <>
@@ -179,7 +181,7 @@ export default function Example() {
                   rightIcon={HiSearch}
                   placeholder="haih"
                   required={true}
-                  className="w-full col-end-4 col-span-1 max-sm:col-span-3"
+                  className="w-full col-end-4 col-span-1 max-sm:col-span-3 my-2"
                 />
               </div>
             </div>

@@ -1,3 +1,5 @@
+import Breadcrumd from "@/components/Breadcrumd";
+import Layout from "@/components/Layout";
 import { IProduct } from "@/interfaces/product";
 import axios from "axios";
 import Image from "next/image";
@@ -22,13 +24,16 @@ const Index: FC = () => {
 
   return (
     <>
-      <h1>{product.id}</h1>
-      <Image
-        src={product.imageSrc}
-        alt={product.imageAlt}
-        width={1000}
-        height={100}
-      />
+      <Layout>
+        <Breadcrumd />
+        <h1>{product.id}</h1>
+        <Image
+          src={product.imageSrc}
+          alt={product.imageAlt}
+          width={1000}
+          height={100}
+        />
+      </Layout>
     </>
   );
 };
