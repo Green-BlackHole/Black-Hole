@@ -1,5 +1,6 @@
 import Breadcrumd from "@/components/Breadcrumd";
 import Layout from "@/components/Layout";
+import Spinner from "@/components/Spinner";
 import { IProduct } from "@/interfaces/product";
 import axios from "axios";
 import Image from "next/image";
@@ -20,7 +21,7 @@ const Index: FC = () => {
       .catch((error) => console.error(error));
   }, [_id]);
 
-  if (!product) return <h1>Product not found</h1>;
+  if (!product) return <>ghjk</>;
 
   return (
     <>
