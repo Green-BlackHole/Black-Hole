@@ -7,4 +7,5 @@ export class CreateProductDto {
   price: string;
   size: string;
   streetAddress: string;
+  productImageSrc: string;
 }

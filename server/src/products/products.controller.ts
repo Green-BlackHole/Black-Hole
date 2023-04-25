@@ -7,11 +7,27 @@ import {
   Param,
   Delete,
   Query,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
+import * as cloudinary from 'cloudinary';
+import * as multer from 'multer';
+import { nanoid } from 'nanoid';
+
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 @Controller('products')
 export class ProductsController {
@@ -21,6 +37,32 @@ export class ProductsController {
   create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
   }
+  @Post('upload')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: multer.diskStorage({
+        destination: (req, file, cb) => {
+          cb(null, '/tmp');
+        },
+        filename: (req, file, cb) => {
+          const fileName = nanoid();
+          const splittedPath = file.originalname.split('.');
+          const fileExtention = splittedPath[splittedPath.length - 1];
+          cb(null, `${fileName}.${fileExtention}`);
+        },
+      }),
+    }),
+  )
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    const result = await cloudinary.v2.uploader.upload(file.path);
+    return result;
+  }
+  // @Post('upload')
+  // @UseInterceptors(FileInterceptor('file'))
+  // async uploadFile(@UploadedFile() file: Express.Multer.File) {
+  //   const result = await cloudinary.v2.uploader.upload(file.path);
+  //   return result.secure_url;
+  // }
 
   @Get()
   findAll(
@@ -31,11 +73,11 @@ export class ProductsController {
   ): Promise<Product[]> {
     let sort = '';
     switch (ordering) {
-      case 'releasedAsc':
-        sort = 'released';
+      case 'old':
+        sort = 'createdAt';
         break;
-      case 'awardsWinsDesc':
-        sort = '-awards.wins';
+      case 'young':
+        sort = '-createdAt';
         break;
       case 'titleAsc':
         sort = 'name';
@@ -66,13 +108,13 @@ export class ProductsController {
     );
   }
   @Get(':id')
-  findOne(@Param('id') id: number) {
+  findOne(@Param('id') id: string) {
     return this.productsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productsService.update(+id, updateProductDto);
+    return this.productsService.update(id, updateProductDto);
   }
 
   @Delete(':id')

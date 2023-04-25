@@ -18,7 +18,7 @@ const Index: FC = () => {
         setProduct(res.data);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [_id]);
 
   if (!product) return <h1>Product not found</h1>;
 
@@ -26,9 +26,9 @@ const Index: FC = () => {
     <>
       <Layout>
         <Breadcrumd />
-        <h1>{product.id}</h1>
+        <h1>{product._id}</h1>
         <Image
-          src={product.imageSrc}
+          src={product.productImageSrc}
           alt={product.imageAlt}
           width={1000}
           height={100}

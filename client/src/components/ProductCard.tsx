@@ -10,7 +10,7 @@ interface ProductCardProps {
 
 const ProductCard: FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [ordering, setOrdering] = useState<string>("releasedDesc");
+  const [ordering, setOrdering] = useState<string>("young");
   const [searchValue, setSearchValue] = useState<string>("");
 
   useEffect(() => {
@@ -25,7 +25,8 @@ const ProductCard: FC = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, [ordering]);
+    console.log(products);
+  }, [ordering, products, searchValue]);
 
   return (
     <div className="bg-white">
@@ -42,8 +43,8 @@ const ProductCard: FC = () => {
               }}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
-              <option value="releasedAsc">Oldest</option>
-              <option value="releasedDesc">Newest</option>
+              <option value="old">Oldest</option>
+              <option value="young">Newest</option>
               <option value="awardsWinsDesc">Most popular</option>
               <option value="titleAsc">A-Z</option>
               <option value="titleDesc">Z-A</option>
@@ -53,11 +54,11 @@ const ProductCard: FC = () => {
 
         <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
           {products.map((product) => (
-            <Link href={`/products/${product.id}`} key={product.id}>
+            <Link href={`/products/${product._id}`} key={product._id}>
               <div className="group relative">
                 <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <Image
-                    src={product.imageSrc}
+                    src={product.productImageSrc}
                     alt={product.imageAlt}
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                     width={1000}
