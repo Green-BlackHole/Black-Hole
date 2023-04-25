@@ -29,11 +29,11 @@ export class ProductsService {
       .exec();
   }
 
-  async findOne(id: number) {
-    return await this.ProductModel.findOne({ id });
+  async findOne(id: string) {
+    return await this.ProductModel.findOne({ _id: id });
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
+  update(id: string, updateProductDto: UpdateProductDto) {
     return `This action updates a #${id} product`;
   }
 

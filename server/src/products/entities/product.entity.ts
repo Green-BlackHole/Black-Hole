@@ -16,7 +16,7 @@ export class Product {
   @Prop()
   price: string;
   @Prop()
-  imageSrc: string;
+  productImageSrc: string;
   @Prop()
   size: string;
   @Prop()

@@ -1,10 +1,14 @@
 import Layout from "@/components/Layout";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
+import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 
 export default function Example() {
+  const [imageUrl, setImageUrl] = useState("");
+  // const [loading, setLoading] = useState(false);
   const [addProduct, setAddProduct] = useState({
+    productImageSrc: "",
     brand: "",
     angilal: "",
     size: "",
@@ -14,6 +18,20 @@ export default function Example() {
     phoneNumber: "",
     price: "",
   });
+
+  const uploadImg = (e) => {
+    const fd = new FormData();
+    fd.append("file", e.target.files[0]);
+    axios
+      .post("http://localhost:8000/products/upload", fd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        setImageUrl(res.data.secure_url);
+      });
+  };
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -28,7 +46,11 @@ export default function Example() {
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setAddProduct({ ...addProduct, [e.target.name]: e.target.value });
+    setAddProduct({
+      ...addProduct,
+      [e.target.name]: e.target.value,
+      productImageSrc: imageUrl,
+    });
   };
   return (
     <Layout>
@@ -54,8 +76,9 @@ export default function Example() {
                   >
                     <span>Upload a file</span>
                     <input
+                      onChange={uploadImg}
                       id="file-upload"
-                      name="file-upload"
+                      name="imageUpload"
                       type="file"
                       className="sr-only required:border-red-500"
                     />
@@ -67,6 +90,35 @@ export default function Example() {
                 </p>
               </div>
             </div>
+            <Image
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+              src={imageUrl}
+              alt="image"
+              width={100}
+              height={100}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src =
+                  "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png";
+              }}
+            />
+            {/* <input
+              type="file"
+              onChange={uploadImg}
+              style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                bottom: 0,
+                top: 0,
+                opacity: 0,
+                cursor: "pointer",
+              }}
+            /> */}
 
             <label
               htmlFor="country"
