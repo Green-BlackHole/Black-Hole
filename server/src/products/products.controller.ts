@@ -57,12 +57,6 @@ export class ProductsController {
     const result = await cloudinary.v2.uploader.upload(file.path);
     return result;
   }
-  // @Post('upload')
-  // @UseInterceptors(FileInterceptor('file'))
-  // async uploadFile(@UploadedFile() file: Express.Multer.File) {
-  //   const result = await cloudinary.v2.uploader.upload(file.path);
-  //   return result.secure_url;
-  // }
 
   @Get()
   findAll(
