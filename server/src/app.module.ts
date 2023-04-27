@@ -6,6 +6,8 @@ import { ProductsModule } from './products/products.module';
 import * as dotenv from 'dotenv';
 import { MulterModule } from '@nestjs/platform-express';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 dotenv.config();
 
 @Module({
@@ -14,6 +16,11 @@ dotenv.config();
     ProductsModule,
     MulterModule.register({ dest: './upload' }),
     UsersModule,
+    AuthModule,
+    JwtModule.register({
+      secret: 'YOUR_SECRET_KEY',
+      signOptions: { expiresIn: '1d' },
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -72,31 +72,16 @@ export default function Example() {
                       height={100}
                     />
                   </div>
-                  <div className="hidden sm:ml-6 sm:block">
-                    <div className="flex space-x-4">
-                      {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? "bg-gray-900 text-black"
-                              : "text-black-300 hover:bg-gray-100",
-                            "rounded-md px-3 py-2 text-sm font-medium"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          <Dropdown label={item.name} inline={true}>
-                            <Dropdown.Item>angilal</Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item>huvtsas</Dropdown.Item>
-                          </Dropdown>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <TextInput
+                    id="email4"
+                    type="email"
+                    rightIcon={HiSearch}
+                    placeholder="haih"
+                    required={true}
+                    className="w-full mx-3 md:w-96 max-sm:hidden"
+                  />
                   <Link href={"/products/add"}>
                     <button
                       type="button"
@@ -123,15 +108,28 @@ export default function Example() {
                   </Menu>
                 </div>
               </div>
-              <div className=" max-w-80 grid grid-cols-3">
-                <TextInput
-                  id="email4"
-                  type="email"
-                  rightIcon={HiSearch}
-                  placeholder="haih"
-                  required={true}
-                  className="w-full col-end-4 col-span-1 max-sm:col-span-3 my-2"
-                />
+              <div className="hidden sm:block">
+                <div className="flex space-x-4">
+                  {navigation.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className={classNames(
+                        item.current
+                          ? "bg-gray-900 text-black"
+                          : "text-black-300 hover:bg-gray-100",
+                        "rounded-md px-3 py-2 text-sm font-medium"
+                      )}
+                      aria-current={item.current ? "page" : undefined}
+                    >
+                      <Dropdown label={item.name} inline={true}>
+                        <Dropdown.Item>angilal</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item>huvtsas</Dropdown.Item>
+                      </Dropdown>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
 
