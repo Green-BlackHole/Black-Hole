@@ -11,7 +11,6 @@ export class ProductsService {
     @InjectModel(Product.name) private readonly ProductModel: Model<Product>,
   ) {}
   async create(createProductDto: CreateProductDto): Promise<Product> {
-    console.log('createProductDto:', createProductDto);
     const createdProduct = new this.ProductModel(createProductDto);
     return createdProduct.save();
   }

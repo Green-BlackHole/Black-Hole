@@ -1,4 +1,6 @@
+import Layout from "@/components/Layout";
 import axios from "axios";
+import Image from "next/image";
 import React, { ChangeEvent, useState } from "react";
 
 export default function signUp() {
@@ -26,8 +28,11 @@ export default function signUp() {
     });
   };
   return (
-    <div className="container ">
-      <form onSubmit={handleSubmit}>
+    <Layout>
+    <div className="container grid grid-cols-6 flex items-center ">
+      <div className="col-span-3 max-md:col-span-6">
+      <form onSubmit={handleSubmit} className="w-2/3 mx-auto border rounded-2xl p-5
+       shadow-2xl">
         <div className="sm:col-span-4">
           <label
             htmlFor="email"
@@ -84,11 +89,17 @@ export default function signUp() {
         </div>
         <button
           type="submit"
-          className="bg-indigo-500/100 w-full rounded-2xl py-1 my-2 cursor-pointer"
+          className="bg-indigo-400/100 w-full rounded-2xl py-1 my-2 cursor-pointer my-7"
         >
-          submit
+          бүртгүүлэх
         </button>
       </form>
+      </div>
+      <div className="col-span-3 max-md:col-span-6">
+        <Image src={"https://scribie.com/assets/front/illustrations/Welcome-to-scribie-512x391.svg"} alt={"signup imaged"} width={1000}
+        height={100}       />
+      </div>
     </div>
+    </Layout>
   );
 }

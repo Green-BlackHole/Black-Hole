@@ -1,8 +1,25 @@
 import { data } from "@/data/data";
+import { IProduct } from "@/interfaces/product";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaShoppingBag } from "react-icons/fa";
 
 const Orders = () => {
+    const [products, setProducts] = useState<IProduct[]>([]);
+
+  useEffect(()=>{
+    axios.get('http://localhost:8000/products').then((response)=>{
+      const data=response.data;
+      setProducts(data)
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  },[products])
+products.map((item)=>(
+  console.log(item.price  )
+))
   return (
     <div className="bg-gray-100 min-h-screen text-black">
       <div className="flex justify-between p-4">
