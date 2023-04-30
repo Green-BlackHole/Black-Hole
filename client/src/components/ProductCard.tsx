@@ -25,7 +25,6 @@ const ProductCard: FC = () => {
       .catch((error) => {
         console.error(error);
       });
-    console.log(products);
   }, [ordering, products, searchValue]);
 
   return (

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Dropdown, TextInput } from "flowbite-react";
 import { HiSearch } from "react-icons/hi";
+import { FiPlusCircle,FiUser,FiHeart } from "react-icons/fi";
 
 const navigation = [
   { name: "эрэгтэй", href: "#", current: false },
@@ -38,7 +39,8 @@ export default function Example() {
     <>
       <Disclosure
         as="nav"
-        className={`z-10 sticky top-0 w-full bg-sky-500/100`}
+        className={`z-10 sticky top-0 w-full bg-white`}
+        // className={`z-10 fixed w-full ${isSticky ? styles.sticky : ""}`}
       >
         {({ open }) => (
           <>
@@ -80,32 +82,36 @@ export default function Example() {
                     rightIcon={HiSearch}
                     placeholder="haih"
                     required={true}
-                    className="w-full mx-3 md:w-96 max-sm:hidden"
+                    className="w-full mx-3 md:w-96 max-sm:hidden text-black"
                   />
+                  
                   <Link href={"/products/add"}>
                     <button
                       type="button"
-                      className="rounded-full bg-blue-500 p-1 text-black hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 px-3"
+                      className="rounded-full text-black hover:pb-5 text-lg p-3"
                     >
-                      +
+                      <FiHeart/>
+                    </button>
+                  </Link>
+                  <Link href={"/products/add"}>
+                    <button
+                      type="button"
+                      className="rounded-full text-black hover:pb-5 text-lg p-3"
+                    >
+                      <FiPlusCircle/>
                     </button>
                   </Link>
 
                   {/* Profile dropdown */}
-                  <Menu as="div" className="relative ml-3">
-                    <div>
-                      <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <span className="sr-only">Open user menu</span>
-                        <Image
-                          className="h-8 w-8 rounded-full"
-                          src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
-                          alt=""
-                          width={100}
-                          height={100}
-                        />
-                      </Menu.Button>
-                    </div>
-                  </Menu>
+                  <Link href={"/my/profile"}>
+                    <button
+                      type="button"
+                      className="rounded-full text-black hover:pb-5 text-lg p-3"
+                    >
+                       <FiUser/>
+                    </button>
+                  </Link>
+                  
                 </div>
               </div>
               <div className="hidden sm:block">
@@ -153,9 +159,18 @@ export default function Example() {
                 ))}
               </div>
             </Disclosure.Panel>
+            <TextInput
+                    id="email4"
+                    type="email"
+                    rightIcon={HiSearch}
+                    placeholder="haih"
+                    required={true}
+                    className="w-full sm:hidden text-black"
+                  />
           </>
         )}
       </Disclosure>
+
     </>
   );
 }

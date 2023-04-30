@@ -8,6 +8,7 @@ interface Props {
 
 const MyCarousel: React.FC<Props> = ({ slideInterval }) => {
   return (
+    
     <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 ">
       <Carousel slideInterval={slideInterval}>
         <Image
