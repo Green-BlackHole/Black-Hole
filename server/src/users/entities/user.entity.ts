@@ -11,6 +11,10 @@ export class User {
 
   @Prop()
   password: string;
+  @Prop()
+  name: string;
+  @Prop()
+  phoneNumber: number;
 
   createdAt: Date;
   updatedAt: Date;

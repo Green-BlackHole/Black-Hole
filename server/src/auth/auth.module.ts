@@ -5,10 +5,11 @@ import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import env from '../env';
 import { MongooseModule } from '@nestjs/mongoose';
+import { Otp, OtpSchema } from './entities/otp.entity';
 console.log('JWT', env.JWT_SECRET, env.MONGO_URL);
 @Module({
   imports: [
-    MongooseModule.forRoot(env.MONGO_URL),
+    MongooseModule.forFeature([{ name: Otp.name, schema: OtpSchema }]),
     UsersModule,
     AuthModule,
     UsersModule,

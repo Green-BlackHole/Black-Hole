@@ -6,7 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Dropdown, TextInput } from "flowbite-react";
 import { HiSearch } from "react-icons/hi";
-import { FiPlusCircle,FiUser,FiHeart } from "react-icons/fi";
+import { FiPlusCircle, FiUser, FiHeart } from "react-icons/fi";
+import Profile from "../../pages/my/profile";
+import Signin from "@/pages/auth/signIn";
 
 const navigation = [
   { name: "эрэгтэй", href: "#", current: false },
@@ -16,8 +18,17 @@ const navigation = [
 ];
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join("");
 }
+// function login() {
+//   if (typeof localStorage !== "undefined") {
+//     const token = localStorage.getItem("token");
+//     return token ? <Profile /> : <Signin />;
+//   } else {
+//     console.log("localStorage is not available");
+//     return null;
+//   }
+// }
 
 export default function Example() {
   // const [isSticky, setIsSticky] = useState(false);
@@ -84,13 +95,13 @@ export default function Example() {
                     required={true}
                     className="w-full mx-3 md:w-96 max-sm:hidden text-black"
                   />
-                  
+
                   <Link href={"/products/add"}>
                     <button
                       type="button"
                       className="rounded-full text-black hover:pb-5 text-lg p-3"
                     >
-                      <FiHeart/>
+                      <FiHeart />
                     </button>
                   </Link>
                   <Link href={"/products/add"}>
@@ -98,7 +109,7 @@ export default function Example() {
                       type="button"
                       className="rounded-full text-black hover:pb-5 text-lg p-3"
                     >
-                      <FiPlusCircle/>
+                      <FiPlusCircle />
                     </button>
                   </Link>
 
@@ -108,10 +119,9 @@ export default function Example() {
                       type="button"
                       className="rounded-full text-black hover:pb-5 text-lg p-3"
                     >
-                       <FiUser/>
+                      <FiUser />
                     </button>
                   </Link>
-                  
                 </div>
               </div>
               <div className="hidden sm:block">
@@ -160,17 +170,16 @@ export default function Example() {
               </div>
             </Disclosure.Panel>
             <TextInput
-                    id="email4"
-                    type="email"
-                    rightIcon={HiSearch}
-                    placeholder="haih"
-                    required={true}
-                    className="w-full sm:hidden text-black"
-                  />
+              id="email4"
+              type="email"
+              rightIcon={HiSearch}
+              placeholder="haih"
+              required={true}
+              className="w-full sm:hidden text-black"
+            />
           </>
         )}
       </Disclosure>
-
     </>
   );
 }
