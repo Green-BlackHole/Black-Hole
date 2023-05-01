@@ -1,3 +1,4 @@
+import { useCurrentUser } from "@/components/CurretnUserProvider";
 import Layout from "@/components/Layout";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
@@ -10,7 +11,7 @@ export default function Example() {
   const [addProduct, setAddProduct] = useState({
     productImageSrc: "",
     brand: "",
-    angilal: "",
+    category: "",
     size: "",
     name: "",
     about: "",
@@ -52,6 +53,10 @@ export default function Example() {
       productImageSrc: imageUrl,
     });
   };
+  const { currentUser } = useCurrentUser();
+  if (!currentUser) {
+    return <>Ta nevtreegui baina!</>;
+  }
   return (
     <Layout>
       <div className="container max-w-xl">
@@ -124,18 +129,18 @@ export default function Example() {
               htmlFor="country"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              angilal
+              category
             </label>
             <div className="mt-2">
               <select
                 id="country"
-                name="angilal"
+                name="category"
                 autoComplete="country-name"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option>huvtsas</option>
-                <option>gutal</option>
-                <option>malgai</option>
+                <option value="huvtsas">huvtsas</option>
+                <option value="gutal">gutal</option>
+                <option value="malgai">malgai</option>
               </select>
             </div>
             <label
@@ -193,11 +198,10 @@ export default function Example() {
               About
             </label>
             <div className="mt-2">
-              <textarea
+              <input
                 onChange={(e) => handleChange(e)}
                 id="about"
                 name="about"
-                rows={3}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 defaultValue={""}
               />

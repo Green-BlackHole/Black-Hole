@@ -6,20 +6,20 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaShoppingBag } from "react-icons/fa";
 
 const Orders = () => {
-    const [products, setProducts] = useState<IProduct[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
 
-  useEffect(()=>{
-    axios.get('http://localhost:8000/products').then((response)=>{
-      const data=response.data;
-      setProducts(data)
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  },[products])
-products.map((item)=>(
-  console.log(item.price  )
-))
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/products")
+      .then((response: { data: any }) => {
+        const data = response.data;
+        setProducts(data);
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  }, [products]);
+  products.map((item) => console.log(item.price));
   return (
     <div className="bg-gray-100 min-h-screen text-black">
       <div className="flex justify-between p-4">

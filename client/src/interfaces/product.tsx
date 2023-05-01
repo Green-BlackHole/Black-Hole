@@ -3,6 +3,7 @@ export interface IProduct {
   _id: string;
   name: string;
   href: string;
+  category: string;
   imageSrc: string;
   imageAlt: string;
   price: string;
