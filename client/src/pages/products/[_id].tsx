@@ -21,19 +21,28 @@ const Index: FC = () => {
       .catch((error) => console.error(error));
   }, [_id]);
 
-  if (!product) return <>ghjk</>;
+  if (!product) return <>page not found</>;
 
   return (
     <>
       <Layout>
+        <div className="container">
         <Breadcrumd />
-        <h1>{product._id}</h1>
+        <div className="grid grid-cols-2 gap-10 max-md:grid-cols-1 ">
+        <div>
         <Image
           src={product.productImageSrc}
           alt={product.imageAlt}
           width={1000}
           height={100}
         />
+        </div>
+        <div>
+          <h2 className="font-bold text-3xl">{product.name}</h2>
+          <div className="text-2xl">{product.price}</div>
+          </div>
+        </div>
+        </div>
       </Layout>
     </>
   );
