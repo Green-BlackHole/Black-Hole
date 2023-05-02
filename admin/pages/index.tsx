@@ -1,6 +1,6 @@
 import BarChart from "@/components/BarChart";
 import Header from "@/components/Header";
-import Orders from "@/components/Orders";
+import Products from "@/components/Products";
 import TopCards from "@/components/TopCards";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
       <TopCards />
       <div className=" p-4 grid md:grid-cols-3 grid-cols-1 gap-4">
         <BarChart />
-        <Orders />
+        <Products />
       </div>
     </main>
   );

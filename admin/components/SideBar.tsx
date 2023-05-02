@@ -3,6 +3,7 @@ import { FC, ReactNode } from "react";
 import { RxDashboard, RxHome, RxPerson } from "react-icons/rx";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { FiSettings } from "react-icons/fi";
+import Image from "next/image";
 
 interface SideBarProps {
   children: ReactNode;
@@ -34,9 +35,19 @@ const SideBar: FC<SideBarProps> = ({ children }) => {
               </div>
             </Link>
             {/* shopping */}
-            <Link href="/orders">
+            <Link href="/products">
               <div className="bg-gray-100 text-black hover:bg-gray-200 cursor-pointer my-4 p-3 rounded-lg inline-block">
                 <HiOutlineShoppingBag size={20} />
+              </div>
+            </Link>
+            <Link href="/products">
+              <div className="bg-gray-100 text-black hover:bg-gray-200 cursor-pointer my-4 p-3 rounded-lg inline-block">
+                <Image
+                  src={"https://static.thenounproject.com/png/3022246-200.png"}
+                  alt={"add product icon"}
+                  width={100}
+                  height={100}
+                />
               </div>
             </Link>
             {/* settings */}
