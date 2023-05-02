@@ -1,3 +1,4 @@
+import { IUser } from "@/interfaces/user";
 import axios from "axios";
 import { useRouter } from "next/router";
 import {
@@ -18,7 +19,7 @@ const CurrentUserContext = createContext({});
 
 export const CurrentUserProvider: FC<CurrentUserProviderProps> = (props) => {
   const { children } = props;
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState<IUser>();
   useEffect(() => {
     axios
       .get("http://localhost:8000/currentUser", {

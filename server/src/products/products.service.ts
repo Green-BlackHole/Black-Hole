@@ -32,6 +32,9 @@ export class ProductsService {
   async findOne(id: string) {
     return await this.ProductModel.findOne({ _id: id });
   }
+  async findMyProducts(id: string): Promise<Product[]> {
+    return await this.ProductModel.find({ userId: id });
+  }
 
   update(id: string, updateProductDto: UpdateProductDto) {
     return `This action updates a #${id} product`;
