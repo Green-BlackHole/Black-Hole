@@ -8,4 +8,5 @@ export class CreateProductDto {
   size: string;
   streetAddress: string;
   productImageSrc: string;
+  userId: string;
 }

@@ -18,15 +18,6 @@ const navigation = [
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join("");
 }
-// function login() {
-//   if (typeof localStorage !== "undefined") {
-//     const token = localStorage.getItem("token");
-//     return token ? <Profile /> : <Signin />;
-//   } else {
-//     console.log("localStorage is not available");
-//     return null;
-//   }
-// }
 
 export default function Example() {
   // const [isSticky, setIsSticky] = useState(false);
@@ -69,20 +60,20 @@ export default function Example() {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
                     <a href="/">
-                    <Image
-                      className="block h-10 w-auto lg:hidden"
-                      src="/images/logo.png"
-                      alt="Your Company"
-                      width={100}
-                      height={100}
-                    />
-                    <Image
-                      className="hidden h-10 w-auto lg:block"
-                      src="/images/logo.png"
-                      alt="Your Company"
-                      width={100}
-                      height={100}
-                    />
+                      <Image
+                        className="block h-10 w-auto lg:hidden"
+                        src="/images/logo.png"
+                        alt="Your Company"
+                        width={100}
+                        height={100}
+                      />
+                      <Image
+                        className="hidden h-10 w-auto lg:block"
+                        src="/images/logo.png"
+                        alt="Your Company"
+                        width={100}
+                        height={100}
+                      />
                     </a>
                   </div>
                 </div>

@@ -6,8 +6,13 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 
 export default function Example() {
+  const { currentUser }: { currentUser: any } = useCurrentUser();
+  if (!currentUser) {
+    return <>Ta nevtreegui baina!</>;
+  }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [imageUrl, setImageUrl] = useState("");
-  // const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [addProduct, setAddProduct] = useState({
     productImageSrc: "",
     brand: "",
@@ -18,8 +23,8 @@ export default function Example() {
     streetAddress: "",
     phoneNumber: "",
     price: "",
+    userId: currentUser?._id,
   });
-
   const uploadImg = (e) => {
     const fd = new FormData();
     fd.append("file", e.target.files[0]);
@@ -53,10 +58,7 @@ export default function Example() {
       productImageSrc: imageUrl,
     });
   };
-  const { currentUser } = useCurrentUser();
-  if (!currentUser) {
-    return <>Ta nevtreegui baina!</>;
-  }
+
   return (
     <Layout>
       <div className="container max-w-xl">
@@ -111,44 +113,46 @@ export default function Example() {
                   "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png";
               }}
             /> */}
-           <div
-          style={{
-            width: "100%",
-            height: "100%",
-            backgroundColor: "#ccc",
-            overflow: "hidden",
-            border: "1px solid #f0f0f0",
-            position: "relative",
-          }}
-        >
-          <img
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-            src={imageUrl}
-            alt=""
-            onError={({ currentTarget }) => {
-              currentTarget.onerror = null; // prevents looping
-              currentTarget.src =
-                "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png";
-            }}
-          />
-          <input
-            type="file"
-            onChange={uploadImg}
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              bottom: 0,
-              top: 0,
-              opacity: 0,
-              cursor: "pointer",
-            }}
-          />
-        </div>
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundColor: "#ccc",
+                overflow: "hidden",
+                border: "1px solid #f0f0f0",
+                position: "relative",
+              }}
+            >
+              <Image
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                width={1000}
+                height={100}
+                src={imageUrl}
+                alt="add product image"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.src =
+                    "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png";
+                }}
+              />
+              <input
+                type="file"
+                onChange={uploadImg}
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  top: 0,
+                  opacity: 0,
+                  cursor: "pointer",
+                }}
+              />
+            </div>
 
             <label
               htmlFor="country"

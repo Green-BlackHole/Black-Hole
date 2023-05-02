@@ -10,4 +10,5 @@ export interface IProduct {
   size: string;
   createdAt: string;
   updatedAt: string;
+  userId: any;
 }

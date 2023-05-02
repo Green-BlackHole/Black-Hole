@@ -8,6 +8,8 @@ export class Product {
   @Prop({ default: () => nanoid() })
   _id: string;
   @Prop()
+  userId: string;
+  @Prop()
   about: string;
   @Prop()
   brand: string;

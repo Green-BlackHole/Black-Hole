@@ -101,6 +101,11 @@ export class ProductsController {
       condition,
     );
   }
+  @Get('ids/:id')
+  findMyProducts(@Param('id') id: string): Promise<Product[]> {
+    return this.productsService.findMyProducts(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.productsService.findOne(id);
