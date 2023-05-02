@@ -4,7 +4,7 @@ export interface IProduct {
   name: string;
   href: string;
   category: string;
-  imageSrc: string;
+  about: string;
   imageAlt: string;
   price: string;
   size: string;

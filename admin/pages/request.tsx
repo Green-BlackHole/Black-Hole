@@ -12,7 +12,7 @@ const Orders = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/products/true/true`)
+      .get(`http://localhost:8000/products/false/false`)
       .then((response: { data: any }) => {
         const data = response.data;
         setProducts(data);
@@ -69,17 +69,8 @@ const Orders = () => {
                   >
                     {order.status}
                   </span> */}
-                  <span
-                    className={
-                      "Processing"
-                        ? "bg-green-200 p-2 rounded-lg"
-                        : "Completed"
-                        ? "bg-blue-200 p-2 rounded-lg"
-                        : "bg-yellow-200 p-2 rounded-lg"
-                    }
-                  >
-                    Completed
-                  </span>
+
+                  <input type="checkbox" />
                 </p>
                 <p className=" hidden md:flex">
                   {moment(order.createdAt).fromNow(true)} ago

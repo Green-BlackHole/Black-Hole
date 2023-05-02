@@ -59,7 +59,7 @@ const ProductCard: FC = () => {
                   <Image
                     src={product.productImageSrc}
                     alt={product.name}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    className="h-full w-full object-cover object-center lg:h-full lg:w-full aspect-12/8"
                     width={1000}
                     height={100}
                   />
