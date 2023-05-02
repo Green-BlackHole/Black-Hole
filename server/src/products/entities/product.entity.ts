@@ -10,6 +10,8 @@ export class Product {
   @Prop()
   userId: string;
   @Prop()
+  status: boolean;
+  @Prop()
   about: string;
   @Prop()
   brand: string;

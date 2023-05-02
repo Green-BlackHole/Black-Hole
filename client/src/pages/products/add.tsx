@@ -24,6 +24,7 @@ export default function Example() {
     phoneNumber: "",
     price: "",
     userId: currentUser?._id,
+    status: false,
   });
   const uploadImg = (e) => {
     const fd = new FormData();

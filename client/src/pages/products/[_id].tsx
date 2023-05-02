@@ -20,7 +20,7 @@ const Index: FC = () => {
         console.log(product);
       })
       .catch((error) => console.error(error));
-  }, [_id]);
+  }, [_id, product]);
 
   if (!product) return <>page not found</>;
 
@@ -39,8 +39,9 @@ const Index: FC = () => {
               />
             </div>
             <div>
-              <h2 className="font-bold text-3xl">{product.name}</h2>
-              <div className="text-2xl">{product.price}</div>
+              <h2 className="font-bold text-4xl">{product.name}</h2>
+              <div className="text-3xl">₮{product.price}</div>
+              <div>description: {product.about}</div>
             </div>
           </div>
         </div>

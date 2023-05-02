@@ -40,7 +40,7 @@ const SideBar: FC<SideBarProps> = ({ children }) => {
                 <HiOutlineShoppingBag size={20} />
               </div>
             </Link>
-            <Link href="/products">
+            <Link href="/request">
               <div className="bg-gray-100 text-black hover:bg-gray-200 cursor-pointer my-4 p-3 rounded-lg inline-block">
                 <Image
                   src={"https://static.thenounproject.com/png/3022246-200.png"}

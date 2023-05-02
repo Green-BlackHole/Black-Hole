@@ -35,6 +35,12 @@ export class ProductsService {
   async findMyProducts(id: string): Promise<Product[]> {
     return await this.ProductModel.find({ userId: id });
   }
+  async findFalse(status: boolean): Promise<Product[]> {
+    return await this.ProductModel.find({ status: status });
+  }
+  async findTrue(status: boolean): Promise<Product[]> {
+    return await this.ProductModel.find({ status: status });
+  }
 
   update(id: string, updateProductDto: UpdateProductDto) {
     return `This action updates a #${id} product`;
