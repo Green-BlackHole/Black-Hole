@@ -51,7 +51,7 @@ const ProductCard: FC = () => {
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
+        <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8">
           {products.map((product) => (
             <Link href={`/products/${product._id}`} key={product._id}>
               <div className="group relative">
@@ -72,7 +72,7 @@ const ProductCard: FC = () => {
                         {product.name}
                       </a>
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">{product.size}</p>
+                    {/* <p className="mt-1 text-sm text-gray-500">{product.size}</p> */}
                   </div>
                   <p className="text-sm font-medium text-gray-900">
                     {product.price}

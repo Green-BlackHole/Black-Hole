@@ -62,7 +62,7 @@ export default function Example() {
       <div className="container max-w-xl">
         <form onSubmit={handleSubmit}>
           <div className=" gap-5">
-            <label
+            {/* <label
               htmlFor="cover-photo"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
@@ -110,20 +110,45 @@ export default function Example() {
                 currentTarget.src =
                   "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png";
               }}
-            />
-            {/* <input
-              type="file"
-              onChange={uploadImg}
-              style={{
-                position: "absolute",
-                left: 0,
-                right: 0,
-                bottom: 0,
-                top: 0,
-                opacity: 0,
-                cursor: "pointer",
-              }}
             /> */}
+           <div
+          style={{
+            width: "100%",
+            height: "100%",
+            backgroundColor: "#ccc",
+            overflow: "hidden",
+            border: "1px solid #f0f0f0",
+            position: "relative",
+          }}
+        >
+          <img
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+            src={imageUrl}
+            alt=""
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null; // prevents looping
+              currentTarget.src =
+                "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png";
+            }}
+          />
+          <input
+            type="file"
+            onChange={uploadImg}
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              bottom: 0,
+              top: 0,
+              opacity: 0,
+              cursor: "pointer",
+            }}
+          />
+        </div>
 
             <label
               htmlFor="country"

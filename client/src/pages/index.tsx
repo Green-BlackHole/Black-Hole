@@ -6,8 +6,6 @@ import Footer from "@/components/Footer";
 import ImageCard from "@/components/ImageCard";
 import Reklam from "@/components/Reklam";
 import Category from "@/components/Category";
-import Script from "next/script";
-import { useState } from "react";
 import Layout from "@/components/Layout";
 import Carousel from "@/components/Carousel";
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import Image from "next/image";
 import React, { ChangeEvent, useState } from "react";
 
-export default function signUp() {
+export default function signup() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [user, setUser] = useState({
     email: "",
