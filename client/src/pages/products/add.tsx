@@ -163,6 +163,7 @@ export default function Example() {
             </label>
             <div className="mt-2">
               <select
+                onChange={(e: any) => handleChange(e)}
                 id="country"
                 name="category"
                 autoComplete="country-name"
