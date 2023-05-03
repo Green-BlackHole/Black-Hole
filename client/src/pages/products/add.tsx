@@ -25,6 +25,7 @@ export default function Example() {
     price: "",
     userId: currentUser?._id,
     status: false,
+    productState:""
   });
   const uploadImg = (e) => {
     const fd = new FormData();
@@ -156,7 +157,7 @@ export default function Example() {
             </div>
 
             <label
-              htmlFor="country"
+              htmlFor="category"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               category
@@ -164,14 +165,35 @@ export default function Example() {
             <div className="mt-2">
               <select
                 onChange={(e: any) => handleChange(e)}
-                id="country"
+                id="category"
                 name="category"
-                autoComplete="country-name"
+                autoComplete="category-name"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
+                <option value="">songoh</option>
                 <option value="huvtsas">huvtsas</option>
                 <option value="gutal">gutal</option>
                 <option value="malgai">malgai</option>
+              </select>
+            </div>
+            <label
+              htmlFor="product"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              product state
+            </label>
+            <div className="mt-2">
+              <select
+                onChange={(e: any) => handleChange(e)}
+                id="product"
+                name="category"
+                autoComplete="product-name"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              >
+                <option value="">songoh</option>
+                <option value="100%">shine (100%)</option>
+                <option value="80%">tseverhen hereglesen (80%+)</option>
+                <option value="60%">bolomjiin(60%+)</option>
               </select>
             </div>
             <label

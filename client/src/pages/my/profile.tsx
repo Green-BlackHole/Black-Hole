@@ -43,7 +43,7 @@ export default function Profile() {
       <div>id:{currentUser?._id}</div>
       <div>
         <span className="font-bold">Product </span>
-        {myProducts?.map((myProduct) => (
+        {myProducts?.map((myProduct:IProduct) => (
           <Image
             key={myProduct._id}
             src={myProduct.productImageSrc}
