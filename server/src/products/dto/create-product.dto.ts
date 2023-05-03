@@ -10,4 +10,5 @@ export class CreateProductDto {
   productImageSrc: string;
   userId: string;
   statis: boolean;
+  productState:string;
 }
