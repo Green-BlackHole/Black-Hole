@@ -13,13 +13,15 @@ const Index: FC = () => {
   const { _id } = a.query;
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/products/${_id}`)
-      .then((res) => {
-        setProduct(res.data);
-        console.log(product);
-      })
-      .catch((error) => console.error(error));
+    if (_id) {
+      axios
+        .get(`http://localhost:8000/products/${_id}`)
+        .then((res) => {
+          setProduct(res.data);
+          console.log(product);
+        })
+        .catch((error) => console.error(error));
+    }
   }, [_id, product]);
 
   if (!product) return <>page not found</>;

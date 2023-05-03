@@ -38,23 +38,21 @@ export class AuthService {
     const user = await this.usersService.findOneByEmail(email);
     if (!user)
       throw new HttpException('User not exists', HttpStatus.BAD_REQUEST);
-    console.log('password:', password);
-    console.log('user.password', user.password);
+    // console.log('password:', password);
+    // console.log('user.password', user.password);
+    let passwordMatch = false;
     try {
-      const passwordMatch = bcrypt.compareSync(password, user.password);
-      if (!passwordMatch) {
-        throw new HttpException(
-          'Password not matching',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-      const payload = { sub: user };
-
-      const token = this.jwtService.sign(payload);
-      return [token, user];
+      passwordMatch = bcrypt.compareSync(password, user.password);
     } catch (e) {
-      console.log('bcrypt aldaa:', e);
+      passwordMatch = false;
     }
+    if (!passwordMatch) {
+      throw new HttpException('Password not matching', HttpStatus.BAD_REQUEST);
+    }
+    const payload = { sub: user };
+
+    const token = this.jwtService.sign(payload);
+    return [token, user];
   }
   async createOTP(createOTPDto: CreateOTPDto) {
     const { email } = createOTPDto;

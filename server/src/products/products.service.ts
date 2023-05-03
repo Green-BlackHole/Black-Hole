@@ -49,4 +49,14 @@ export class ProductsService {
   remove(id: number) {
     return `This action removes a #${id} product`;
   }
+
+  async findOneId(id: string) {
+    const result = await this.ProductModel.find().select({ id: 1 });
+    return result.map((movieId) => movieId.id);
+  }
+
+  // findAllMovieIds = async (req: Request, res: Response) => {
+  //   const result = await MovieModel.find().select({ id: 1 });
+  //   res.json(result.map((movieId) => movieId._id));
+  // };
 }

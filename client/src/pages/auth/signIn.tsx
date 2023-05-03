@@ -17,9 +17,13 @@ export default function Signin() {
     axios
       .post("http://localhost:8000/signin", user)
       .then((res) => {
-        router.push("/");
-        // console.log("res data is", res.data);
-        localStorage.setItem("token", res.data[0]);
+        if (status === res.status) {
+          console.log("status", res);
+
+          router.push("/");
+          // console.log("res data is", res.data);
+          localStorage.setItem("token", res.data[0]);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -33,7 +37,7 @@ export default function Signin() {
   };
   return (
     <Layout>
-      <div className="container grid grid-cols-6 flex items-center ">
+      <div className="container grid grid-cols-6  items-center ">
         <div className="col-span-3 max-md:col-span-6">
           <form
             onSubmit={handleSubmit}

@@ -114,9 +114,13 @@ export class ProductsController {
     return this.productsService.findTrue(status);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productsService.findOne(id);
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.productsService.findOne(id);
+  // }
+  @Get(':idm')
+  findOneId(@Param('id') id: string) {
+    return this.productsService.findOneId(id);
   }
 
   @Patch(':id')
