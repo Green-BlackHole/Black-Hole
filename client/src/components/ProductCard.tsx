@@ -9,7 +9,6 @@ interface ProductCardProps {
 }
 
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
-  console.log("value", product);
   // const [products, setProducts] = useState<IProduct[]>([]);
   // const [ordering, setOrdering] = useState<string>("young");
   // const [searchValue, setSearchValue] = useState<string>("");
