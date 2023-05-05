@@ -19,7 +19,17 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join("");
 }
 
-export default function Example() {
+export default function Navbar() {
+  const [search, setSearchTerm] = useState<string>("");
+  const handleSearch = (e): void => {
+    fetch(`http://localhost:8000/products?limit=12&search=${search}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("data", data);
+        console.log("search", search);
+      });
+    setSearchTerm(e.target.value);
+  };
   // const [isSticky, setIsSticky] = useState(false);
 
   // useEffect(() => {
@@ -79,12 +89,16 @@ export default function Example() {
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <TextInput
-                    id="email4"
-                    type="email"
+                    id="text"
+                    type="text"
                     rightIcon={HiSearch}
                     placeholder="haih"
                     required={true}
                     className="w-full mx-3 md:w-96 max-sm:hidden text-black"
+                    value={search}
+                    onChange={(e): void => {
+                      handleSearch(e);
+                    }}
                   />
 
                   <Link href={"/products/add"}>
@@ -118,7 +132,7 @@ export default function Example() {
               <div className="hidden sm:block">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
                       href={item.href}
                       className={classNames(
@@ -134,7 +148,7 @@ export default function Example() {
                         <Dropdown.Divider />
                         <Dropdown.Item>huvtsas</Dropdown.Item>
                       </Dropdown>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
