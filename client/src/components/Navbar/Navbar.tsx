@@ -7,12 +7,38 @@ import Link from "next/link";
 import { Dropdown, TextInput } from "flowbite-react";
 import { HiSearch } from "react-icons/hi";
 import { FiPlusCircle, FiUser, FiHeart } from "react-icons/fi";
+import NavbarDropdown from "../NavbarDropdown";
+import axios from "axios";
 
 const navigation = [
-  { name: "эрэгтэй", href: "#", current: false },
-  { name: "эмэгтэй", href: "#", current: false },
-  { name: "хүүхэд", href: "#", current: false },
-  { name: "бусад", href: "#", current: false },
+  {
+    name: "эрэгтэй",
+    submenu: true,
+    sublinks: [
+      {
+        Head: "",
+        sublinks: [
+          { name: "Өмд", link: "/categories" },
+          {
+            name: "Гутал",
+            link: "/membersPrice",
+          },
+          {
+            name: "Цүнх",
+            link: "/tmz-company",
+          },
+          {
+            name: "Аксессуар",
+            link: "/membersCpta",
+          },
+        ],
+      },
+    ],
+  },
+  { name: "эрэгтэй", href: "/categories", current: false },
+  { name: "эмэгтэй", href: "/categories", current: false },
+  { name: "хүүхэд", href: "/categories", current: false },
+  { name: "бусад", href: "/categories", current: false },
 ];
 
 function classNames(...classes: string[]) {
@@ -21,14 +47,20 @@ function classNames(...classes: string[]) {
 
 export default function Navbar() {
   const [search, setSearchTerm] = useState<string>("");
-  const handleSearch = (e): void => {
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:8000/categories").then((res) => {
+      setCategory(res.data);
+    });
+  }, []);
+  const handleSearch = (e: any) => {
     fetch(`http://localhost:8000/products?limit=12&search=${search}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("data", data);
-        console.log("search", search);
       });
     setSearchTerm(e.target.value);
+    console.log("search", search);
   };
   // const [isSticky, setIsSticky] = useState(false);
 
@@ -129,7 +161,7 @@ export default function Navbar() {
                   </Link>
                 </div>
               </div>
-              <div className="hidden sm:block">
+              {/* <div className="hidden sm:block">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
                     <Link
@@ -143,6 +175,7 @@ export default function Navbar() {
                       )}
                       aria-current={item.current ? "page" : undefined}
                     >
+                      <div>{item.name}</div>
                       <Dropdown label={item.name} inline={true}>
                         <Dropdown.Item>angilal</Dropdown.Item>
                         <Dropdown.Divider />
@@ -151,6 +184,28 @@ export default function Navbar() {
                     </Link>
                   ))}
                 </div>
+              </div> */}
+              <div>
+                <ul className="flex max-w-[1299px] items-center gap-10 mx-auto text-black text-xs-medium py-5 relative">
+                  {navigation.map((link, index) => {
+                    // const isFull = link.sublinks?.length >= 2;
+                    return (
+                      <li
+                        key={`menu-id-${index}`}
+                        className={`flex items-center gap-1 group cursor-pointer`}
+                      >
+                        {link.name}
+                        {link.submenu && (
+                          <NavbarDropdown
+                            links={link.sublinks}
+                            // isFull={isFull}
+                          />
+                        )}
+                        {/* <MdKeyboardArrowDown /> */}
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             </div>
 
