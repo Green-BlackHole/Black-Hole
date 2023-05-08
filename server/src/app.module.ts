@@ -8,6 +8,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { CategoriesModule } from './categories/categories.module';
 dotenv.config();
 
 @Module({
@@ -21,6 +22,7 @@ dotenv.config();
       secret: 'YOUR_SECRET_KEY',
       signOptions: { expiresIn: '1d' },
     }),
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
