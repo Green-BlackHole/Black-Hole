@@ -14,6 +14,8 @@ export class Product {
   @Prop()
   category: string;
   @Prop()
+  option: string;
+  @Prop()
   productState: string;
   @Prop()
   about: string;
