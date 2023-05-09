@@ -15,6 +15,7 @@ import { createContext, useEffect, useState } from "react";
 import { useQuery } from "@/hooks/useQuery";
 import { useRouter } from "next/router";
 import { Select } from "@/components/ui/Select";
+import { Pagination } from "flowbite-react";
 
 const inter = Inter({ subsets: ["latin"] });
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -78,6 +79,12 @@ export default function Home({ data }: { data: IProduct[] }) {
             {products.map((product) => (
               <ProductCard product={product} key={product._id} />
             ))}
+            {/* <Pagination
+              currentPage={45}
+              onPageChange={onPageChange}
+              showIcons={true}
+              totalPages={100}
+            /> */}
           </div>
         </div>
 

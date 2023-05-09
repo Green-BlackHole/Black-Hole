@@ -42,6 +42,10 @@ export class ProductsService {
     return await this.ProductModel.find({ status: status });
   }
 
+  async findAllCount() {
+    return await this.ProductModel.find().count({});
+  }
+
   update(id: string, updateProductDto: UpdateProductDto) {
     return `This action updates a #${id} product`;
   }

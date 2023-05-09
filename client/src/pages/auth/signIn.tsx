@@ -82,7 +82,7 @@ export default function Signin() {
             </div>
             <button
               type="submit"
-              className="bg-indigo-400/100 w-full rounded-2xl py-1 my-2 cursor-pointer my-7"
+              className="bg-indigo-400/100 w-full rounded-2xl py-1 cursor-pointer my-7"
             >
               нэвтрэх
             </button>

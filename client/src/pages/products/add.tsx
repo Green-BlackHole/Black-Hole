@@ -22,58 +22,6 @@ export default function Example() {
     axios.get("http://localhost:8000/categories").then((res) => {
       setCategory(res.data);
     });
-    // if (category === "эрэгтэй") {
-    //   setOptions([
-    //     { name: "Гадуур хувцас", href: "/" },
-    //     { name: "Өмд", href: "/" },
-    //     { name: "Гутал", href: "/" },
-    //     { name: "Малгай, Ороолт, Бээлий", href: "/" },
-    //     { name: "Цүнх", href: "/" },
-    //     { name: "Аксессуар", href: "/" },
-    //     { name: "Үндэсний хувцас", href: "/" },
-    //     { name: "Костьюм пиджак", href: "/" },
-    //     { name: "Цаг", href: "/" },
-    //     { name: "Бусад", href: "/" },
-    //   ]);
-    // }
-    // if (category === "эмэгтэй") {
-    //   setOptions([
-    //     { name: "Гадуур хувцас", href: "/categories" },
-    //     { name: "Өмд", href: "/categories" },
-    //     { name: "Юбка", href: "/categories" },
-    //     { name: "Даашинз", href: "/categories" },
-    //     { name: "Гутал", href: "/categories" },
-    //     { name: "Трико, Оймс", href: "/categories" },
-    //     { name: "Малгай, Ороолт, Бээлий", href: "/categories" },
-    //     { name: "Цүнх", href: "/categories" },
-    //     { name: "Аксессуар", href: "/categories" },
-    //     { name: "Үндэсний хувцас", href: "/categories" },
-    //     { name: "Бусад", href: "/categories" },
-    //   ]);
-    // }
-    // if (category === "хүүхэд") {
-    //   setOptions([
-    //     { name: "Гадуур хувцас", href: "/categories" },
-    //     { name: "Өмд", href: "/categories" },
-    //     { name: "Гутал", href: "/categories" },
-    //     { name: "Малгай, Ороолт, Бээлий", href: "/categories" },
-    //     { name: "Цүнх", href: "/categories" },
-    //     { name: "Сургуулийн хувцас, хэрэглэл", href: "/categories" },
-    //     { name: "Хүүхдийн тоглоом", href: "/categories" },
-    //     { name: "Бусад", href: "/categories" },
-    //   ]);
-    // }
-    // if (category === "бусад") {
-    //   setOptions([
-    //     { name: "Гоо сайхан, Эрүүл мэнд", href: "/categories" },
-    //     { name: "Гар утас, Таблет", href: "/categories" },
-    //     { name: "Электрон бараа", href: "/categories" },
-    //     { name: "Ном, Бичиг хэрэг", href: "/categories" },
-    //     { name: "Спорт", href: "/categories" },
-    //     { name: "Хүүхдийн тоглоом", href: "/categories" },
-    //     { name: "Бусад", href: "/categories" },
-    //   ]);
-    // }
   }, [category, setCategory]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [addProduct, setAddProduct] = useState({
@@ -88,7 +36,7 @@ export default function Example() {
     phoneNumber: "",
     price: "",
     userId: currentUser?._id,
-    status: false,
+    status: true,
     productState: "",
   });
   const uploadImg = (e: any) => {
@@ -213,7 +161,7 @@ export default function Example() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
                 {subCategories.map((item) => (
-                  <option value={item.name} key={item.name}>
+                  <option value={item.sub_id} key={item.sub_id}>
                     {item.name}
                   </option>
                 ))}

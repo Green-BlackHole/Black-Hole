@@ -64,6 +64,7 @@ export class ProductsController {
     @Query('ordering') ordering: string,
     @Query('skip') skip: number,
     @Query('search') search: string,
+    @Query('category') category: string,
   ): Promise<Product[]> {
     let sort = '';
     switch (ordering) {
@@ -86,9 +87,9 @@ export class ProductsController {
 
     const condition: any = {};
 
-    // if (search) {
-    //   condition.category = search;
-    // }
+    if (category) {
+      condition.option = { $regex: new RegExp(`${category}`, 'i') };
+    }
 
     if (search) {
       condition.name = { $regex: new RegExp(`${search}`, 'i') };
@@ -121,6 +122,11 @@ export class ProductsController {
   @Get(':idm/id')
   findOneId(@Param('_id') _id: string) {
     return this.productsService.findOneId(_id);
+  }
+
+  @Get('co/count')
+  async findAllCount() {
+    return await this.productsService.findAllCount();
   }
 
   @Patch(':id')
