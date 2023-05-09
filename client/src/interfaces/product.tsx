@@ -1,4 +1,5 @@
 export interface IProduct {
+  map(arg0: (product: IProduct) => JSX.Element): import("react").ReactNode;
   productImageSrc: string;
   _id: string;
   name: string;
@@ -16,11 +17,13 @@ export interface IProduct {
 export interface IOption {
   name: string;
   href: string;
+  sub_id: number;
 }
 export interface ICategory {
   categoryName: string;
   _id: string;
-  subCategories:string;
-  name:string;
-  href:string;
+  subCategories: string;
+  sub_id: number;
+  name: string;
+  href: string;
 }

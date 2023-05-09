@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { useQuery } from "@/hooks/useQuery";
 import ProductCard from "@/components/ProductCard";
 import { Select } from "@/components/ui/Select";
+import { log } from "console";
 
 // const sortOptions = [
 //   { name: "Most Popular", href: "#", current: true },
@@ -31,52 +32,59 @@ import { Select } from "@/components/ui/Select";
 //   { name: "Hip Bags", href: "#" },
 //   { name: "Laptop Sleeves", href: "#" },
 // ];
-const filters = [
-  {
-    id: "color",
-    name: "Color",
-    options: [
-      { value: "white", label: "White", checked: false },
-      { value: "beige", label: "Beige", checked: false },
-      { value: "blue", label: "Blue", checked: true },
-      { value: "brown", label: "Brown", checked: false },
-      { value: "green", label: "Green", checked: false },
-      { value: "purple", label: "Purple", checked: false },
-    ],
-  },
-  {
-    id: "category",
-    name: "Category",
-    options: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
-    ],
-  },
-  {
-    id: "size",
-    name: "Size",
-    options: [
-      { value: "2l", label: "2L", checked: false },
-      { value: "6l", label: "6L", checked: false },
-      { value: "12l", label: "12L", checked: false },
-      { value: "18l", label: "18L", checked: false },
-      { value: "20l", label: "20L", checked: false },
-      { value: "40l", label: "40L", checked: true },
-    ],
-  },
-];
+// const filters = [
+//   {
+//     id: "color",
+//     name: "Color",
+//     options: [
+//       { value: "white", label: "White", checked: false },
+//       { value: "beige", label: "Beige", checked: false },
+//       { value: "blue", label: "Blue", checked: true },
+//       { value: "brown", label: "Brown", checked: false },
+//       { value: "green", label: "Green", checked: false },
+//       { value: "purple", label: "Purple", checked: false },
+//     ],
+//   },
+//   {
+//     id: "category",
+//     name: "Category",
+//     options: [
+//       { value: "new-arrivals", label: "New Arrivals", checked: false },
+//       { value: "sale", label: "Sale", checked: false },
+//       { value: "travel", label: "Travel", checked: true },
+//       { value: "organization", label: "Organization", checked: false },
+//       { value: "accessories", label: "Accessories", checked: false },
+//     ],
+//   },
+//   {
+//     id: "size",
+//     name: "Size",
+//     options: [
+//       { value: "2l", label: "2L", checked: false },
+//       { value: "6l", label: "6L", checked: false },
+//       { value: "12l", label: "12L", checked: false },
+//       { value: "18l", label: "18L", checked: false },
+//       { value: "20l", label: "20L", checked: false },
+//       { value: "40l", label: "40L", checked: true },
+//     ],
+//   },
+// ];
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { query } = context;
-  const { ordering = "", limit = 25, search = "", page = 0 } = query;
+
+  const {
+    ordering = "",
+    limit = 25,
+    search = "",
+    page = 0,
+    category = "",
+  } = query;
   const response = await axios.get(
-    `http://localhost:8000/products?limit=12&search=${search}&ordering${ordering}`
+    `http://localhost:8000/products?limit=${limit}&search=${search}&ordering=${ordering}&category=${category}`
   );
   const { data } = response;
   return {
@@ -84,25 +92,27 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-
 export default function Category({ data }: { data: IProduct }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [category, setCategory] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const products = data;
   const router = useRouter();
   const { query } = router;
-  const { ordering = "", limit = 25, search = "", page = 0 } = query;
-  console.log(query);
+  const {
+    ordering = "",
+    limit = 25,
+    search = "",
+    page = 0,
+    category = "",
+  } = query;
   const { addQuery } = useQuery();
 
   useEffect(() => {
     axios.get("http://localhost:8000/categories").then((res) => {
-      setCategory(res.data);
+      setCategories(res.data);
     });
   }, []);
-  console.log("category",category)
-
 
   return (
     <Layout>
@@ -168,7 +178,7 @@ export default function Category({ data }: { data: IProduct }) {
                         ))}
                       </ul> */}
 
-                      {filters.map((section) => (
+                      {categories.map((section: any) => (
                         <Disclosure
                           as="div"
                           key={section.id}
@@ -179,7 +189,7 @@ export default function Category({ data }: { data: IProduct }) {
                               <h3 className="-mx-2 -my-3 flow-root">
                                 <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
                                   <span className="font-medium text-gray-900">
-                                    {section.name}
+                                    {section.categoryName}
                                   </span>
                                   <span className="ml-6 flex items-center">
                                     {open ? (
@@ -198,25 +208,17 @@ export default function Category({ data }: { data: IProduct }) {
                               </h3>
                               <Disclosure.Panel className="pt-6">
                                 <div className="space-y-6">
-                                  {section.options.map((option, optionIdx) => (
+                                  {section.subCategories.map((option: any) => (
                                     <div
                                       key={option.value}
                                       className="flex items-center"
                                     >
-                                      <input
-                                        id={`filter-mobile-${section.id}-${optionIdx}`}
-                                        name={`${section.id}[]`}
-                                        defaultValue={option.value}
-                                        type="checkbox"
-                                        defaultChecked={option.checked}
-                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                      />
-                                      <label
-                                        htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                        className="ml-3 min-w-0 flex-1 text-gray-500"
+                                      <a
+                                        className="pl-5 focus:text-black text-[rgba(0,0,0,.5)] hover:text-black"
+                                        href="#"
                                       >
-                                        {option.label}
-                                      </label>
+                                        {option.name}
+                                      </a>
                                     </div>
                                   ))}
                                 </div>
@@ -242,8 +244,8 @@ export default function Category({ data }: { data: IProduct }) {
                 <Select
                   items={[
                     { value: "", label: "Sort..." },
-                    { value: "name", label: "Oldest" },
-                    { value: "releasedDesc", label: "Newest" },
+                    { value: "old", label: "Oldest" },
+                    { value: "young", label: "Newest" },
                     { value: "imdbRatingDesc", label: "Most popular" },
                     { value: "titleAsc", label: "A-Z" },
                     { value: "titleDesc", label: "Z-A" },
@@ -255,6 +257,14 @@ export default function Category({ data }: { data: IProduct }) {
                   itemValue={"value"}
                   itemLabel={"label"}
                 />
+                <button
+                  type="button"
+                  className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
+                  onClick={() => setMobileFiltersOpen(true)}
+                >
+                  <span className="sr-only">Filters</span>
+                  <FunnelIcon className="h-5 w-5" aria-hidden="true" />
+                </button>
               </div>
             </div>
 
@@ -278,7 +288,7 @@ export default function Category({ data }: { data: IProduct }) {
                     ))}
                   </ul> */}
 
-                  {category.map((section:any) => (
+                  {categories.map((section: any) => (
                     <Disclosure
                       as="div"
                       key={section._id}
@@ -308,12 +318,24 @@ export default function Category({ data }: { data: IProduct }) {
                           </h3>
                           <Disclosure.Panel className="pt-6">
                             <div className="space-y-4">
-                              {section.subCategories.map((option:any) => (
+                              {section.subCategories.map((option: any) => (
                                 <div
-                                  key={option.name}
+                                  key={option.sub_id}
                                   className="flex items-center"
                                 >
-                                    <a className="pl-5 focus:text-violet-500 text-[rgba(0,0,0,.5)] hover:text-black" href="#">{option.name}</a>
+                                  <a
+                                    className="pl-5 focus:text-black text-[rgba(0,0,0,.5)] hover:text-black"
+                                    href="#"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      console.log("target", option.name);
+                                      addQuery({
+                                        category: option.sub_id,
+                                      });
+                                    }}
+                                  >
+                                    {option.name}
+                                  </a>
                                 </div>
                               ))}
                             </div>
@@ -327,7 +349,7 @@ export default function Category({ data }: { data: IProduct }) {
                 {/* Product grid */}
                 <div className="lg:col-span-3">
                   <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3  xl:grid-cols-4 xl:gap-x-8">
-                    {products.map((product) => (
+                    {products.map((product: IProduct) => (
                       <ProductCard product={product} key={product._id} />
                     ))}
                   </div>
