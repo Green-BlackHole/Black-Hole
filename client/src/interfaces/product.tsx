@@ -17,3 +17,10 @@ export interface IOption {
   name: string;
   href: string;
 }
+export interface ICategory {
+  categoryName: string;
+  _id: string;
+  subCategories:string;
+  name:string;
+  href:string;
+}

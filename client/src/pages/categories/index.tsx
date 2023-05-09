@@ -1,18 +1,4 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
@@ -23,21 +9,28 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import Layout from "@/components/Layout";
+import { GetServerSidePropsContext } from "next";
+import axios from "axios";
+import { IProduct } from "@/interfaces/product";
+import { useRouter } from "next/router";
+import { useQuery } from "@/hooks/useQuery";
+import ProductCard from "@/components/ProductCard";
+import { Select } from "@/components/ui/Select";
 
-const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
-];
-const subCategories = [
-  { name: "Totes", href: "#" },
-  { name: "Backpacks", href: "#" },
-  { name: "Travel Bags", href: "#" },
-  { name: "Hip Bags", href: "#" },
-  { name: "Laptop Sleeves", href: "#" },
-];
+// const sortOptions = [
+//   { name: "Most Popular", href: "#", current: true },
+//   { name: "Best Rating", href: "#", current: false },
+//   { name: "Newest", href: "#", current: false },
+//   { name: "Price: Low to High", href: "#", current: false },
+//   { name: "Price: High to Low", href: "#", current: false },
+// ];
+// const subCategories = [
+//   { name: "Totes", href: "#" },
+//   { name: "Backpacks", href: "#" },
+//   { name: "Travel Bags", href: "#" },
+//   { name: "Hip Bags", href: "#" },
+//   { name: "Laptop Sleeves", href: "#" },
+// ];
 const filters = [
   {
     id: "color",
@@ -79,9 +72,37 @@ const filters = [
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { query } = context;
+  const { ordering = "", limit = 25, search = "", page = 0 } = query;
+  const response = await axios.get(
+    `http://localhost:8000/products?limit=12&search=${search}&ordering${ordering}`
+  );
+  const { data } = response;
+  return {
+    props: { data },
+  };
+}
 
-export default function Example() {
+
+export default function Category({ data }: { data: IProduct }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [category, setCategory] = useState([]);
+
+  const products = data;
+  const router = useRouter();
+  const { query } = router;
+  const { ordering = "", limit = 25, search = "", page = 0 } = query;
+  console.log(query);
+  const { addQuery } = useQuery();
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/categories").then((res) => {
+      setCategory(res.data);
+    });
+  }, []);
+  console.log("category",category)
+
 
   return (
     <Layout>
@@ -134,7 +155,7 @@ export default function Example() {
                     {/* Filters */}
                     <form className="mt-4 border-t border-gray-200">
                       <h3 className="sr-only">Categories</h3>
-                      <ul
+                      {/* <ul
                         role="list"
                         className="px-2 py-3 font-medium text-gray-900"
                       >
@@ -145,7 +166,7 @@ export default function Example() {
                             </a>
                           </li>
                         ))}
-                      </ul>
+                      </ul> */}
 
                       {filters.map((section) => (
                         <Disclosure
@@ -212,76 +233,32 @@ export default function Example() {
           </Transition.Root>
 
           <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
                 New Arrivals
               </h1>
 
               <div className="flex items-center">
-                <Menu as="div" className="relative inline-block text-left">
-                  <div>
-                    <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                      Sort
-                      <ChevronDownIcon
-                        className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                        aria-hidden="true"
-                      />
-                    </Menu.Button>
-                  </div>
-
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <div className="py-1">
-                        {sortOptions.map((option) => (
-                          <Menu.Item key={option.name}>
-                            {({ active }) => (
-                              <a
-                                href={option.href}
-                                className={classNames(
-                                  option.current
-                                    ? "font-medium text-gray-900"
-                                    : "text-gray-500",
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm"
-                                )}
-                              >
-                                {option.name}
-                              </a>
-                            )}
-                          </Menu.Item>
-                        ))}
-                      </div>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-
-                <button
-                  type="button"
-                  className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
-                >
-                  <span className="sr-only">View grid</span>
-                  <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
-                </button>
-                <button
-                  type="button"
-                  className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
-                  onClick={() => setMobileFiltersOpen(true)}
-                >
-                  <span className="sr-only">Filters</span>
-                  <FunnelIcon className="h-5 w-5" aria-hidden="true" />
-                </button>
+                <Select
+                  items={[
+                    { value: "", label: "Sort..." },
+                    { value: "name", label: "Oldest" },
+                    { value: "releasedDesc", label: "Newest" },
+                    { value: "imdbRatingDesc", label: "Most popular" },
+                    { value: "titleAsc", label: "A-Z" },
+                    { value: "titleDesc", label: "Z-A" },
+                  ]}
+                  onChange={(e) => {
+                    addQuery({ ordering: e.target.value });
+                  }}
+                  value={ordering + ""}
+                  itemValue={"value"}
+                  itemLabel={"label"}
+                />
               </div>
             </div>
 
-            <section aria-labelledby="products-heading" className="pb-24 pt-6">
+            <section aria-labelledby="products-heading" className="pb-24 ">
               <h2 id="products-heading" className="sr-only">
                 Products
               </h2>
@@ -290,7 +267,7 @@ export default function Example() {
                 {/* Filters */}
                 <form className="hidden lg:block">
                   <h3 className="sr-only">Categories</h3>
-                  <ul
+                  {/* <ul
                     role="list"
                     className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900"
                   >
@@ -299,12 +276,12 @@ export default function Example() {
                         <a href={category.href}>{category.name}</a>
                       </li>
                     ))}
-                  </ul>
+                  </ul> */}
 
-                  {filters.map((section) => (
+                  {category.map((section:any) => (
                     <Disclosure
                       as="div"
-                      key={section.id}
+                      key={section._id}
                       className="border-b border-gray-200 py-6"
                     >
                       {({ open }) => (
@@ -312,7 +289,7 @@ export default function Example() {
                           <h3 className="-my-3 flow-root">
                             <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
                               <span className="font-medium text-gray-900">
-                                {section.name}
+                                {section.categoryName}
                               </span>
                               <span className="ml-6 flex items-center">
                                 {open ? (
@@ -331,25 +308,12 @@ export default function Example() {
                           </h3>
                           <Disclosure.Panel className="pt-6">
                             <div className="space-y-4">
-                              {section.options.map((option, optionIdx) => (
+                              {section.subCategories.map((option:any) => (
                                 <div
-                                  key={option.value}
+                                  key={option.name}
                                   className="flex items-center"
                                 >
-                                  <input
-                                    id={`filter-${section.id}-${optionIdx}`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type="checkbox"
-                                    defaultChecked={option.checked}
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                  />
-                                  <label
-                                    htmlFor={`filter-${section.id}-${optionIdx}`}
-                                    className="ml-3 text-sm text-gray-600"
-                                  >
-                                    {option.label}
-                                  </label>
+                                    <a className="pl-5 focus:text-violet-500 text-[rgba(0,0,0,.5)] hover:text-black" href="#">{option.name}</a>
                                 </div>
                               ))}
                             </div>
@@ -361,7 +325,13 @@ export default function Example() {
                 </form>
 
                 {/* Product grid */}
-                <div className="lg:col-span-3">{/* Your content */}</div>
+                <div className="lg:col-span-3">
+                  <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3  xl:grid-cols-4 xl:gap-x-8">
+                    {products.map((product) => (
+                      <ProductCard product={product} key={product._id} />
+                    ))}
+                  </div>
+                </div>
               </div>
             </section>
           </main>

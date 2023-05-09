@@ -22,12 +22,13 @@ export const Select: FC<SelectProps> = ({
 
   return (
     <select
+    className="rounded-2xl"
       value={value}
       onChange={onChange}
       // className={twMerge(baseClass, className)}
     >
       {items.map((item) => (
-        <option key={nanoid()} value={item[itemValue]}>
+        <option key={nanoid()} value={item[itemValue]} >
           {item[itemLabel]}
         </option>
       ))}

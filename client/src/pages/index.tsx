@@ -17,7 +17,6 @@ import { useRouter } from "next/router";
 import { Select } from "@/components/ui/Select";
 
 const inter = Inter({ subsets: ["latin"] });
-// export const DataContext = createContext("");
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { query } = context;
   const { ordering = "", limit = 25, search = "", page = 0 } = query;
