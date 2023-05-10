@@ -88,7 +88,7 @@ export class ProductsController {
     const condition: any = {};
 
     if (category) {
-      condition.option = { $regex: new RegExp(`${category}`, 'i') };
+      condition.option = category;
     }
 
     if (search) {

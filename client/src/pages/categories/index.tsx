@@ -17,6 +17,9 @@ import { useQuery } from "@/hooks/useQuery";
 import ProductCard from "@/components/ProductCard";
 import { Select } from "@/components/ui/Select";
 import { log } from "console";
+import { useRecoilState } from "recoil";
+import { useContext } from "react";
+import { MyContext } from "@/components/context/Searchcontext";
 
 // const sortOptions = [
 //   { name: "Most Popular", href: "#", current: true },
@@ -73,40 +76,50 @@ import { log } from "console";
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { query } = context;
+// export async function getServerSideProps(context: GetServerSidePropsContext) {
+//   const { query } = context;
 
-  const {
-    ordering = "",
-    limit = 25,
-    search = "",
-    page = 0,
-    category = "",
-  } = query;
-  const response = await axios.get(
-    `http://localhost:8000/products?limit=${limit}&search=${search}&ordering=${ordering}&category=${category}`
-  );
-  const { data } = response;
-  return {
-    props: { data },
-  };
-}
+//   const {
+//     ordering = "",
+//     limit = 25,
+//     search = "",
+//     page = 0,
+//     category = "",
+//   } = query;
+//   const response = await axios.get(
+//     `http://localhost:8000/products?limit=${limit}&search=${search}&ordering=${ordering}&category=${category}`
+//   );
+//   const { data } = response;
+//   return {
+//     props: { data },
+//   };
+// }
 
 export default function Category({ data }: { data: IProduct }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-
-  const products = data;
+  const { searchValue, setSearchValue } = useContext(MyContext);
+  // const products = data;
+  const [products, setProducts] = useState([]);
   const router = useRouter();
   const { query } = router;
   const {
     ordering = "",
     limit = 25,
-    search = "",
+    search = searchValue,
     page = 0,
     category = "",
   } = query;
   const { addQuery } = useQuery();
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8000/products?limit=${limit}&search=${search}&ordering=${ordering}&category=${category}`
+      )
+      .then((res) => {
+        setProducts(res.data);
+      });
+  }, [category, limit, ordering, search]);
 
   useEffect(() => {
     axios.get("http://localhost:8000/categories").then((res) => {
