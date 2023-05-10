@@ -44,7 +44,7 @@ export default function Home({ data }: { data: IProduct[] }) {
       <Layout>
         <Carousel slideInterval={3000} />
         <div className="bg-white">
-          <Select
+          {/* <Select
             items={[
               { value: "", label: "Sort..." },
               { value: "name", label: "Oldest" },
@@ -74,7 +74,7 @@ export default function Home({ data }: { data: IProduct[] }) {
             value={limit + ""}
             itemValue={"value"}
             itemLabel={"label"}
-          />
+          /> */}
           <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8">
             {products.map((product) => (
               <ProductCard product={product} key={product._id} />
