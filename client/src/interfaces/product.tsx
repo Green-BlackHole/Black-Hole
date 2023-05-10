@@ -27,3 +27,7 @@ export interface ICategory {
   name: string;
   href: string;
 }
+export interface IMyContext {
+  search: string;
+  setSearch: string;
+}

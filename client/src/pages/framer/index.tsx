@@ -6,29 +6,33 @@ import {
   useScroll,
   useSpring,
   useTransform,
-  MotionValue
+  MotionValue,
 } from "framer-motion";
 import Layout from "@/components/Layout";
 
 function useParallax(value: MotionValue<number>, distance: number) {
-  return useTransform(value, [0, 1], [-distance, distance]);
+  return useTransform(value, [0, 1.5], [-distance, distance]);
 }
 
 function Image({ id }: { id: number }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref });
-  const y = useParallax(scrollYProgress, 300);
+  const y = useParallax(scrollYProgress, 400);
 
   return (
     <>
-    <section className="text-[rgb(255,255,0)] font-bold text-4xl">
-      <div ref={ref}>
-        <img src={`https://www.fonewalls.com/wp-content/uploads/1536x2048-Background-HD-Wallpaper-006-300x400.jpg`} alt="A London skyscraper" className="m-2"/>
-      </div>
-      <motion.h2 style={{ y }}>{`#00${id}`}</motion.h2>
-    </section>
+      <section className="text-[rgb(0,255,255)] font-bold text-4xl">
+        <div ref={ref}>
+          <img
+            src={`https://www.fonewalls.com/wp-content/uploads/1536x2048-Background-HD-Wallpaper-006-300x400.jpg`}
+            alt="A London skyscraper"
+            className="m-2"
+          />
+        </div>
+        <motion.h2 style={{ y }}>{`#00${id}`}</motion.h2>
+      </section>
+      <div className="h-[30rem]"></div>
     </>
-
   );
 }
 
@@ -37,17 +41,19 @@ export default function App() {
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 1000,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   return (
     <>
-    <Layout>
-      {[1, 2, 3, 4, 5].map((image) => (
-        <Image id={image} />
-      ))}
-      <div className="h-screen"></div>
-      <motion.div className="progress" style={{ scaleX }} />
+      <Layout>
+        {[1, 2, 3, 4, 5].map((image) => (
+          <>
+            <Image id={image} key={image} alt={image} />
+          </>
+        ))}
+        <div className="h-screen"></div>
+        <motion.div className="progress" style={{ scaleX }} />
       </Layout>
     </>
   );

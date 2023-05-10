@@ -9,6 +9,10 @@ import { HiSearch } from "react-icons/hi";
 import { FiPlusCircle, FiUser, FiHeart } from "react-icons/fi";
 import NavbarDropdown from "../NavbarDropdown";
 import axios from "axios";
+import { value } from "@/atoms/atoms";
+// import { useRecoilState } from "recoil";
+import { useContext } from "react";
+import { MyContext } from "../context/Searchcontext";
 
 const navigation = [
   {
@@ -46,7 +50,8 @@ function classNames(...classes: string[]) {
 }
 
 export default function Navbar() {
-  const [search, setSearchTerm] = useState<string>("");
+  // const [search, setSearchTerm] = useRecoilState<any>(value);
+  const { searchValue, setSearchValue } = useContext(MyContext);
   const [category, setCategory] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:8000/categories").then((res) => {
@@ -54,13 +59,13 @@ export default function Navbar() {
     });
   }, []);
   const handleSearch = (e: any) => {
-    fetch(`http://localhost:8000/products?limit=12&search=${search}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("data", data);
-      });
-    setSearchTerm(e.target.value);
-    console.log("search", search);
+    // fetch(`http://localhost:8000/products?limit=12&search=${search}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log("data", data);
+    //   });
+    setSearchValue(e.target.value);
+    console.log("search", searchValue);
   };
   // const [isSticky, setIsSticky] = useState(false);
 
@@ -127,7 +132,7 @@ export default function Navbar() {
                     placeholder="haih"
                     required={true}
                     className="w-full mx-3 md:w-96 max-sm:hidden text-black"
-                    value={search}
+                    value={searchValue}
                     onChange={(e): void => {
                       handleSearch(e);
                     }}
