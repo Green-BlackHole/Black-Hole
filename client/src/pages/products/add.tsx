@@ -3,7 +3,8 @@ import Layout from "@/components/Layout";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { IOption } from "@/interfaces/product";
 
 export default function Example() {
   const { currentUser }: { currentUser: any } = useCurrentUser();
@@ -13,10 +14,21 @@ export default function Example() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [imageUrl, setImageUrl] = useState("");
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [category, setCategory] = useState([]);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [subCategories, setSubCategories] = useState<IOption[]>([]);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    axios.get("http://localhost:8000/categories").then((res) => {
+      setCategory(res.data);
+    });
+  }, [category, setCategory]);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [addProduct, setAddProduct] = useState({
     productImageSrc: "",
     brand: "",
     category: "",
+    option: "",
     size: "",
     name: "",
     about: "",
@@ -24,9 +36,10 @@ export default function Example() {
     phoneNumber: "",
     price: "",
     userId: currentUser?._id,
-    status: false,
+    status: true,
+    productState: "",
   });
-  const uploadImg = (e) => {
+  const uploadImg = (e: any) => {
     const fd = new FormData();
     fd.append("file", e.target.files[0]);
     axios
@@ -58,62 +71,20 @@ export default function Example() {
       [e.target.name]: e.target.value,
       productImageSrc: imageUrl,
     });
+    if (e.target.name === "category") {
+      const subCategory = category.find(
+        (cat: any) => cat.categoryName == e.target.value
+      ) || { subCategories };
+      setSubCategories(subCategory.subCategories);
+    }
   };
+  console.log("sub categorie:", subCategories);
 
   return (
     <Layout>
       <div className="container max-w-xl">
         <form onSubmit={handleSubmit}>
           <div className=" gap-5">
-            {/* <label
-              htmlFor="cover-photo"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Cover photo
-            </label>
-            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-              <div className="text-center">
-                <PhotoIcon
-                  className="mx-auto h-12 w-12 text-gray-300"
-                  aria-hidden="true"
-                />
-                <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                  <label
-                    htmlFor="file-upload"
-                    className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                  >
-                    <span>Upload a file</span>
-                    <input
-                      onChange={uploadImg}
-                      id="file-upload"
-                      name="imageUpload"
-                      type="file"
-                      className="sr-only required:border-red-500"
-                    />
-                  </label>
-                  <p className="pl-1">or drag and drop</p>
-                </div>
-                <p className="text-xs leading-5 text-gray-600">
-                  PNG, JPG, GIF up to 10MB
-                </p>
-              </div>
-            </div>
-            <Image
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-              src={imageUrl}
-              alt="image"
-              width={100}
-              height={100}
-              onError={({ currentTarget }) => {
-                currentTarget.onerror = null; // prevents looping
-                currentTarget.src =
-                  "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png";
-              }}
-            /> */}
             <div
               style={{
                 width: "100%",
@@ -132,17 +103,16 @@ export default function Example() {
                 }}
                 width={1000}
                 height={100}
-                src={imageUrl}
+                src={
+                  imageUrl ||
+                  "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png"
+                }
                 alt="add product image"
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null; // prevents looping
-                  currentTarget.src =
-                    "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png";
-                }}
               />
               <input
                 type="file"
                 onChange={uploadImg}
+                multiple
                 style={{
                   position: "absolute",
                   left: 0,
@@ -156,21 +126,66 @@ export default function Example() {
             </div>
 
             <label
-              htmlFor="country"
+              htmlFor="category"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               category
             </label>
             <div className="mt-2">
               <select
-                id="country"
+                onChange={(e: any) => handleChange(e)}
+                id="category"
                 name="category"
-                autoComplete="country-name"
+                autoComplete="category-name"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option value="huvtsas">huvtsas</option>
-                <option value="gutal">gutal</option>
-                <option value="malgai">malgai</option>
+                {category.map((c: any) => (
+                  <option value={c.categoryName} key={c._id}>
+                    {c.categoryName}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <label
+              htmlFor="option"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              second category
+            </label>
+            <div className="mt-2">
+              <select
+                onChange={(e: any) => handleChange(e)}
+                id="option"
+                name="option"
+                autoComplete="option-name"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              >
+                {subCategories.map((item) => (
+                  <option value={item.sub_id} key={item.sub_id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <label
+              htmlFor="productState"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              product state
+            </label>
+            <div className="mt-2">
+              <select
+                onChange={(e: any) => handleChange(e)}
+                id="productState"
+                name="productState"
+                autoComplete="productState"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              >
+                <option value="songoh">сонгох</option>
+                <option value="100%">shine (100%)</option>
+                <option value="80%">tseverhen hereglesen (80%+)</option>
+                <option value="60%">bolomjiin(60%+)</option>
               </select>
             </div>
             <label

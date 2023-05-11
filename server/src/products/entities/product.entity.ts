@@ -12,6 +12,12 @@ export class Product {
   @Prop()
   status: boolean;
   @Prop()
+  category: string;
+  @Prop()
+  option: string;
+  @Prop()
+  productState: string;
+  @Prop()
   about: string;
   @Prop()
   brand: string;

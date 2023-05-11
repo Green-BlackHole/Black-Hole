@@ -2,6 +2,7 @@ export class CreateProductDto {
   about: string;
   brand: string;
   category: string;
+  option: string;
   name: string;
   phoneNumber: string;
   price: string;
@@ -10,4 +11,5 @@ export class CreateProductDto {
   productImageSrc: string;
   userId: string;
   statis: boolean;
+  productState: string;
 }

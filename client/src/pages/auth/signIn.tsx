@@ -21,6 +21,7 @@ export default function Signin() {
     axios
       .post("http://localhost:8000/signin", user)
       .then((res) => {
+<<<<<<< HEAD
         router.push("/");
         // console.log("res data is", res.data);
         localStorage.setItem("token", res.data[0]);
@@ -38,6 +39,14 @@ export default function Signin() {
             theme: "light",
           });
           router.push("/");
+=======
+        if (status === res.status) {
+          console.log("status", res);
+
+          router.push("/");
+          // console.log("res data is", res.data);
+          localStorage.setItem("token", res.data[0]);
+>>>>>>> 5dd3e667e84d76356364f5d7ed68f25d3ec342c7
         }
       })
       .catch((err) => {
@@ -62,7 +71,7 @@ export default function Signin() {
   };
   return (
     <Layout>
-      <div className="container grid grid-cols-6 flex items-center ">
+      <div className="container grid grid-cols-6  items-center ">
         <div className="col-span-3 max-md:col-span-6">
           <form
             onSubmit={handleSubmit}
@@ -220,8 +229,29 @@ export default function Signin() {
                 </form>
               </div>
             </div>
+<<<<<<< HEAD
           </div>
         </section>
+=======
+            <button
+              type="submit"
+              className="bg-indigo-400/100 w-full rounded-2xl py-1 cursor-pointer my-7"
+            >
+              нэвтрэх
+            </button>
+          </form>
+        </div>
+        <div className="col-span-3 max-md:col-span-6">
+          <Image
+            src={
+              "https://scribie.com/assets/front/illustrations/Welcome-to-scribie-512x391.svg"
+            }
+            alt={"signup imaged"}
+            width={1000}
+            height={100}
+          />
+        </div>
+>>>>>>> 5dd3e667e84d76356364f5d7ed68f25d3ec342c7
       </div>
     </div>
   );

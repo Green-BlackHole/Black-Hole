@@ -29,8 +29,8 @@ export class ProductsService {
       .exec();
   }
 
-  async findOne(id: string) {
-    return await this.ProductModel.findOne({ _id: id });
+  async findOne(_id: string) {
+    return await this.ProductModel.findOne({ _id });
   }
   async findMyProducts(id: string): Promise<Product[]> {
     return await this.ProductModel.find({ userId: id });
@@ -42,6 +42,10 @@ export class ProductsService {
     return await this.ProductModel.find({ status: status });
   }
 
+  async findAllCount() {
+    return await this.ProductModel.find().count({});
+  }
+
   update(id: string, updateProductDto: UpdateProductDto) {
     return `This action updates a #${id} product`;
   }
@@ -49,4 +53,17 @@ export class ProductsService {
   remove(id: number) {
     return `This action removes a #${id} product`;
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async findOneId(_id: string) {
+    const result = await this.ProductModel.find().select({ _id: 1 });
+
+    return result.map((movieId) => movieId._id);
+    console.log(result);
+  }
+
+  // findAllMovieIds = async (req: Request, res: Response) => {
+  //   const result = await MovieModel.find().select({ id: 1 });
+  //   res.json(result.map((movieId) => movieId._id));
+  // };
 }
