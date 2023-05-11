@@ -7,7 +7,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { IOption } from "@/interfaces/product";
 
 export default function Example() {
-  const { currentUser }: { currentUser: any } = useCurrentUser();
+  const { currentUser } = useCurrentUser();
   if (!currentUser) {
     return <>Ta nevtreegui baina!</>;
   }

@@ -9,6 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <CurrentUserProvider>
       <Component {...pageProps} />
+      <ToastContainer />
     </CurrentUserProvider>
   );
 }
