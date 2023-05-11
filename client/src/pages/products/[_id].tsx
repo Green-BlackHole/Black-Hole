@@ -73,37 +73,38 @@ const Index: FC<Props> = ({ data }) => {
                 alt="product"
                 width={1000}
                 height={100}
-              />
-            </div> s
+              /> */}
+            </div> 
             <div className="bg-[rgba(246,246,246)] rounded-2xl px-5">
               <h2 className="font-bold text-4xl my-3">Усний сав</h2>
-              <div className="text-3xl my-3">₮12000</div>
+              <div className="text-3xl my-3">₮{product.price}</div>
               <div className="grid grid-cols-2">
                 <div className="col-span-1">category:</div>
-                <div className="col-span-1"> ger ahui</div>
+                <div className="col-span-1">{product.category}</div>
                 <div className="col-span-1">size:</div>
-                <div className="col-span-1"> M</div>
+                <div className="col-span-1"> {product.size}</div>
                 <div className="col-span-1">baraanii tolov:</div>
-                <div className="col-span-1"> 100%</div>
+                <div className="col-span-1"> {product.productState}</div>
                 <div className="col-span-1">zar oruulsan ognoo:</div>
-                <div className="col-span-1"> 2023 5-1</div>
+                <div className="col-span-1"> {product.createdAt}</div>
                 <div className="col-span-1">hurgeltiin une:</div>
                 <div className="col-span-1"> 5000</div>
                 <div className="col-span-2 bg-white rounded-2xl py-3 px-1">
                   description:
                   <p className="pl-10">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Phasellus sed condimentum tellus, ut iaculis neque. Mauris
-                    vitae sagittis orci. Sed id convallis mi, in finibus lectus.{" "}
+                    vitae sagittis orci. Sed id convallis mi, in finibus lectus. */}
+                    {product.about}
                   </p>
                 </div>
               </div>
               <button
                 type="button"
-                className="rounded-2xl bg-blue-600 w-full py-2 my-5 b-0"
+                className="rounded-2xl bg-[#1cb7d6] w-full py-2 my-5 b-0"
               >
                 hudaldaj avah
-              </button> */}
+              </button>
             </div>
           </div>
         </div>

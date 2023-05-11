@@ -35,46 +35,14 @@ export default function Home({ data }: { data: IProduct[] }) {
   const router = useRouter();
   const { query } = router;
   const { ordering = "", limit = 25, search = "", page = 0 } = query;
-  console.log(query);
   const { addQuery } = useQuery();
+  
 
   return (
     <>
-      {/* <DataContext.Provider value={search}> */}
       <Layout>
         <Carousel slideInterval={3000} />
         <div className="bg-white">
-          {/* <Select
-            items={[
-              { value: "", label: "Sort..." },
-              { value: "name", label: "Oldest" },
-              { value: "releasedDesc", label: "Newest" },
-              { value: "imdbRatingDesc", label: "Most popular" },
-              { value: "titleAsc", label: "A-Z" },
-              { value: "titleDesc", label: "Z-A" },
-            ]}
-            onChange={(e) => {
-              addQuery({ ordering: e.target.value });
-            }}
-            value={ordering + ""}
-            itemValue={"value"}
-            itemLabel={"label"}
-          />
-
-          <Select
-            items={[
-              { value: "6", label: "6" },
-              { value: "12", label: "12" },
-              { value: "24", label: "24" },
-              { value: "48", label: "48" },
-            ]}
-            onChange={(e) => {
-              addQuery({ limit: e.target.value });
-            }}
-            value={limit + ""}
-            itemValue={"value"}
-            itemLabel={"label"}
-          /> */}
           <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8">
             {products.map((product) => (
               <ProductCard product={product} key={product._id} />
@@ -88,10 +56,9 @@ export default function Home({ data }: { data: IProduct[] }) {
           </div>
         </div>
 
-        <ImageCard />
-        <Reklam />
+        {/* <ImageCard /> */}
+        {/* <Reklam /> */}
       </Layout>
-      {/* </DataContext.Provider> */}
     </>
   );
 }
