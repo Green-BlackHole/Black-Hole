@@ -8,18 +8,27 @@ import { Sidebar } from "flowbite-react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser } from "react-icons/hi";
+import {
+  HiArrowSmRight,
+  HiChartPie,
+  HiInbox,
+  HiShoppingBag,
+  HiTable,
+  HiUser,
+} from "react-icons/hi";
 
 export default function Profile() {
   const [myProducts, setMyProducts] = useState<IProduct | undefined>();
   const router = useRouter();
 
   const { currentUser } = useCurrentUser();
+
   // if (!currentUser) {
   //   router.push('/auth/signin');
   //   return <>nevtreegu bna</>; // or any loading indicator
   // }
-  React.useEffect(() => {
+  useEffect(() => {
+    console.log("user:", currentUser);
     if (!currentUser) {
       router.push("/auth/signin");
     }
@@ -58,63 +67,50 @@ export default function Profile() {
       </div> */}
       {/* <MobileSidebar/> */}
       <div className="flex bg-[rgb(0,0,0,.1)] gap-10 p-2">
-      <div className="w-fit rounded-2xl">
-  <Sidebar aria-label="Sidebar with multi-level dropdown example p-0">
-    <Sidebar.Items>
-      <Sidebar.ItemGroup>
-        <Sidebar.Item
-          href="#"
-          icon={HiChartPie}
-        >
-          Dashboard
-        </Sidebar.Item>
-        <Sidebar.Item
-          icon={HiShoppingBag}
-          // label="E-commerce"
-          href="#"
-        >
-          {/* <Sidebar.Item href="#">
+        <div className="w-fit rounded-2xl">
+          <Sidebar aria-label="Sidebar with multi-level dropdown example p-0">
+            <Sidebar.Items>
+              <Sidebar.ItemGroup>
+                <Sidebar.Item href="#" icon={HiChartPie}>
+                  Dashboard
+                </Sidebar.Item>
+                <Sidebar.Item
+                  icon={HiShoppingBag}
+                  // label="E-commerce"
+                  href="#"
+                >
+                  {/* <Sidebar.Item href="#">
             Products
           </Sidebar.Item> */}
-          E-commerce
-        </Sidebar.Item>
-        <Sidebar.Item
-          href="#"
-          icon={HiInbox}
-        >
-          Inbox
-        </Sidebar.Item>
-        <Sidebar.Item
-          href="#"
-          icon={HiUser}
-        >
-          Users
-        </Sidebar.Item>
-        <Sidebar.Item
-          href="#"
-          icon={HiShoppingBag}
-        >
-          Products
-        </Sidebar.Item>
-        <Sidebar.Item
-          href="#"
-          icon={HiArrowSmRight}
-        >
-          Sign In
-        </Sidebar.Item>
-        <Sidebar.Item
-          href="/"
-          icon={HiTable}
-        >
-          Sign Out
-        </Sidebar.Item>
-      </Sidebar.ItemGroup>
-    </Sidebar.Items>
-  </Sidebar>
-</div>
-<div className="h-wull w-full bg-white">board</div>
-</div>
-      
+                  E-commerce
+                </Sidebar.Item>
+                <Sidebar.Item href="#" icon={HiInbox}>
+                  Inbox
+                </Sidebar.Item>
+                <Sidebar.Item href="#" icon={HiUser}>
+                  Users
+                </Sidebar.Item>
+                <Sidebar.Item href="#" icon={HiShoppingBag}>
+                  Products
+                </Sidebar.Item>
+                <Sidebar.Item href="#" icon={HiArrowSmRight}>
+                  Sign In
+                </Sidebar.Item>
+                <Sidebar.Item
+                  href="/"
+                  icon={HiTable}
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                  }}
+                >
+                  Sign Out
+                </Sidebar.Item>
+              </Sidebar.ItemGroup>
+            </Sidebar.Items>
+          </Sidebar>
+        </div>
+        <div className="h-wull w-full bg-white">board</div>
+      </div>
     </Layout>
   );
 }

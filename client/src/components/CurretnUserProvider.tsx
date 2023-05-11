@@ -15,11 +15,17 @@ interface CurrentUserProviderProps {
   children: ReactNode;
 }
 
-const CurrentUserContext = createContext({});
+const CurrentUserContext = createContext<{
+  currentUser?: IUser;
+  setCurrentUser?: React.Dispatch<React.SetStateAction<IUser | undefined>>;
+}>({
+  currentUser: undefined,
+  setCurrentUser: undefined,
+});
 
 export const CurrentUserProvider: FC<CurrentUserProviderProps> = (props) => {
   const { children } = props;
-  const [currentUser, setCurrentUser] = useState<IUser>();
+  const [currentUser, setCurrentUser] = useState<IUser | undefined>();
   useEffect(() => {
     axios
       .get("http://localhost:8000/currentUser", {
@@ -29,6 +35,7 @@ export const CurrentUserProvider: FC<CurrentUserProviderProps> = (props) => {
       })
       .then((res) => {
         setCurrentUser(res.data);
+        console.log("user-iig set hiilee..", res.data);
       })
       .catch((e) => {
         console.error(e);

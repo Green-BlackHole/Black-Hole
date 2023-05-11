@@ -5,10 +5,16 @@ export const useQuery = () => {
   const addQuery = (param: any) => {
     router.push({ query: { ...router.query, ...param } });
   };
+  const addCategoryQuery = (param: any) => {
+    router.push({
+      pathname: "/categories",
+      query: { ...router.query, ...param },
+    });
+  };
   const removeQuery = (key: string) => {
     const query = router.query;
     delete query[key];
     router.push({ query });
   };
-  return { addQuery, removeQuery };
+  return { addQuery, removeQuery, addCategoryQuery };
 };

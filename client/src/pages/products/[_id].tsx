@@ -5,6 +5,7 @@ import { IProduct } from "@/interfaces/product";
 import axios from "axios";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useEffect, useState } from "react";
 
@@ -36,7 +37,6 @@ interface Props {
 }
 const Index: FC<Props> = ({ data }) => {
   const product = data;
-  console.log("product", product);
 
   // const a = useRouter();
   // const { _id } = a.query;
@@ -74,7 +74,7 @@ const Index: FC<Props> = ({ data }) => {
                 width={1000}
                 height={100}
               /> */}
-            </div> 
+            </div>
             <div className="bg-[rgba(246,246,246)] rounded-2xl px-5">
               <h2 className="font-bold text-4xl my-3">Усний сав</h2>
               <div className="text-3xl my-3">₮{product.price}</div>
@@ -99,12 +99,14 @@ const Index: FC<Props> = ({ data }) => {
                   </p>
                 </div>
               </div>
-              <button
-                type="button"
-                className="rounded-2xl bg-[#1cb7d6] w-full py-2 my-5 b-0"
-              >
-                hudaldaj avah
-              </button>
+              <Link href={`/orders/${product._id}`} key={product._id}>
+                <button
+                  type="button"
+                  className="rounded-2xl bg-[#1cb7d6] w-full py-2 my-5 b-0"
+                >
+                  hudaldaj avah
+                </button>
+              </Link>
             </div>
           </div>
         </div>
