@@ -56,7 +56,7 @@ export default function Home({ data }: { data: IProduct[] }) {
           </div>
         </div>
 
-        {/* <ImageCard /> */}
+        <ImageCard />
         {/* <Reklam /> */}
       </Layout>
     </>

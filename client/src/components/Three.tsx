@@ -6,7 +6,7 @@ import Footer from "./Footer";
 export default function Three() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="grid grid-cols-2 items-center bg-slate-300">
         <div className="col-span-1">hello</div>
         <div className="col-span-1">
@@ -15,7 +15,7 @@ export default function Three() {
           </Suspense>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

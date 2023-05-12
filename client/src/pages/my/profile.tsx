@@ -1,4 +1,5 @@
 import { useCurrentUser } from "@/components/CurretnUserProvider";
+import Drawer from "@/components/Drawer";
 import Layout from "@/components/Layout";
 import MobileSidebar from "@/components/MobileSidebar";
 import { IProduct } from "@/interfaces/product";
@@ -76,12 +77,9 @@ export default function Profile() {
                 </Sidebar.Item>
                 <Sidebar.Item
                   icon={HiShoppingBag}
-                  // label="E-commerce"
                   href="#"
                 >
-                  {/* <Sidebar.Item href="#">
-            Products
-          </Sidebar.Item> */}
+
                   E-commerce
                 </Sidebar.Item>
                 <Sidebar.Item href="#" icon={HiInbox}>
@@ -111,6 +109,7 @@ export default function Profile() {
         </div>
         <div className="h-wull w-full bg-white">board</div>
       </div>
+      {/* <Drawer/> */}
     </Layout>
   );
 }
