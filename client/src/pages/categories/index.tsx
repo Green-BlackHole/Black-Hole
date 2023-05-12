@@ -66,9 +66,15 @@ export default function Category({ data }: { data: IProduct }) {
       )
       .then((res) => {
         setProducts(res.data);
-        console.log("products",products)
       });
-  }, [category, limit, ordering, search]);
+  }, [category, limit, ordering, products, search]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/products?search=ki&limit=1`)
+      .then((res) => {
+        console.log("category data", res.data);
+      });
+  }, []);
 
   useEffect(() => {
     axios.get("http://localhost:8000/categories").then((res) => {

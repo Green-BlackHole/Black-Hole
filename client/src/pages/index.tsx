@@ -36,7 +36,9 @@ export default function Home({ data }: { data: IProduct[] }) {
   const { query } = router;
   const { ordering = "", limit = 25, search = "", page = 0 } = query;
   const { addQuery } = useQuery();
-  
+  {
+    console.log(products);
+  }
 
   return (
     <>
