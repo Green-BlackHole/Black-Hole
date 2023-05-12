@@ -35,8 +35,7 @@ export default function signup() {
         <div className="col-span-3 max-md:col-span-6">
           <form
             onSubmit={handleSubmit}
-            className="w-2/3 mx-auto border rounded-2xl p-5
-       shadow-2xl"
+            className="w-2/3 mx-auto border rounded-2xl p-5 shadow-2xl"
           >
             <div className="sm:col-span-4">
               <label

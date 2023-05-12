@@ -8,8 +8,10 @@ import { ToastContainer } from "react-toastify";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <CurrentUserProvider>
-      <Component {...pageProps} />
-      <ToastContainer />
+      <Searchcontext>
+        <Component {...pageProps} />
+        <ToastContainer />
+      </Searchcontext>
     </CurrentUserProvider>
   );
 }

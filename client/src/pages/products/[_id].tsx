@@ -61,12 +61,12 @@ const Index: FC<Props> = ({ data }) => {
         <div className="container">
           <Breadcrumd />
           <div className="grid grid-cols-2 gap-10 max-md:grid-cols-1 ">
-            <div>
+            <div className=" relative w-full items-stretch">
               <Image
                 src={product.productImageSrc}
                 alt={product.imageAlt}
-                width={1000}
-                height={100}
+                fill
+                className=" aspect-square h-full"
               />
               {/* <Image
                 src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"

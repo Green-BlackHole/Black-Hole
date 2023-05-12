@@ -67,15 +67,9 @@ export default function Navbar() {
   useEffect(() => {
     axios.get("http://localhost:8000/categories").then((res) => {
       setCategory(res.data);
-      console.log("category", category);
     });
-  }, []);
+  }, [category]);
   const handleSearch = (e: any) => {
-    // fetch(`http://localhost:8000/products?limit=12&search=${search}`)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log("data", data);
-    //   });
     setSearchValue(e.target.value);
     console.log("search", searchValue);
   };
@@ -150,14 +144,14 @@ export default function Navbar() {
                     onChange={(e): void => {
                       handleSearch(e);
                     }}
-                    onKeyDown={(
-                      e: React.KeyboardEvent<HTMLInputElement>
-                    ): void => {
-                      if (e.key === "Enter") {
-                        router.push("/categories");
-                        addCategoryQuery({ search: e.currentTarget.value });
-                      }
-                    }}
+                    // onKeyDown={(
+                    //   e: React.KeyboardEvent<HTMLInputElement>
+                    // ): void => {
+                    //   if (e.key === "Enter") {
+                    //     router.push("/categories");
+                    //     addCategoryQuery({ search: e.currentTarget.value });
+                    //   }
+                    // }}
                   />
 
                   <Link href={"/products/add"}>
