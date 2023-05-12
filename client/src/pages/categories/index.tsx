@@ -66,6 +66,7 @@ export default function Category({ data }: { data: IProduct }) {
       )
       .then((res) => {
         setProducts(res.data);
+        console.log("products",products)
       });
   }, [category, limit, ordering, search]);
 

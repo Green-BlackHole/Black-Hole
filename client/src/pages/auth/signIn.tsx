@@ -13,6 +13,7 @@ export default function Signin() {
   const { currentUser, setCurrentUser } = useCurrentUser();
   const router = useRouter();
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [user, setUser] = useState({
     email: "",
     password: "",
