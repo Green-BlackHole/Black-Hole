@@ -20,7 +20,7 @@ export default function Three() {
       <spotLight position={[10, 10, 10]} angle={20} penumbra={1} />
       <pointLight position={[-1, -1, -1]} />
       <OrbitControls enableZoom={false} />
-      <primitive object={scene} scale={4} />
+      <primitive object={scene} scale={6} />
     </Canvas>
   );
 }

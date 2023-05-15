@@ -3,9 +3,26 @@ import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar/Navbar";
 import Three from "@/components/Three";
 import MyThreeComponent from "@/components/Three/three.dynamic";
-import React, { Suspense } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import React, { Suspense, useEffect, useState } from "react";
 
 export default function Order() {
+  const a = useRouter();
+  const { _id } = a.query;
+  const [order,setOrder]=useState('')
+
+  useEffect(() => {
+    if (_id) {
+      axios
+        .get(`http://localhost:8000/products/${_id}`)
+        .then((res) => {
+          setOrder(res.data);
+          console.log(order);
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [_id, ]);
   return (
     <>
       <Layout>
@@ -88,27 +105,6 @@ export default function Order() {
                       />
                     </div>
                   </div>
-
-                  {/* <div className="sm:col-span-3">
-                    <label
-                      htmlFor="country"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Country
-                    </label>
-                    <div className="mt-2">
-                      <select
-                        id="country"
-                        name="country"
-                        autoComplete="country-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                      >
-                        <option>United States</option>
-                        <option>Canada</option>
-                        <option>Mexico</option>
-                      </select>
-                    </div>
-                  </div> */}
                   <h2 className="text-base font-semibold leading-7 text-gray-900 col-span-2">
                     Хүргэлтийн хаяг
                   </h2>
@@ -187,22 +183,31 @@ export default function Order() {
                 </div>
               </div>
             </form>
-            <div>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1514.5093842106644!2d106.93261703569452!3d47.92237577211769!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2smn!4v1683875661714!5m2!1sen!2smn"
-                width="600"
-                height="450"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
+          </div>
+          <div className="col-span-1 p-5 ">
+            <h2>Төлбөрийн мэдээлэл</h2>
+            <div className="grid grid-cols-2 shadow-lg">
+            <div className="col-span-1">huleen avagch</div>
+                <div className="col-span-1">Трифт shop</div>
+                <div className="col-span-1"> dans</div>
+                <div className="col-span-1">504809876</div>
+                <div className="col-span-1">une</div>
+                <div className="col-span-1">12345</div>
+                <div className="col-span-1"> hurgelt</div>
+                <div className="col-span-1">500</div>
+                <div className="col-span-1"> niit une</div>
+                <div className="col-span-1">12845</div>
+                
+                </div>
+                <button className="bg-[#15d2d3] rounded-3xl py-3 w-full">hudaldan avah</button>
+                <button className="bg-[#ff598f] rounded-3xl py-3 w-full">butsah</button>
+
           </div>
         </div>
         {/* <Navbar /> */}
-        <div>order</div>
         {/* <Three/> */}
         {/* <Footer /> */}
+       
       </Layout>
     </>
   );
