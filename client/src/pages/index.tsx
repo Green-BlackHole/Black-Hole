@@ -16,6 +16,8 @@ import { useQuery } from "@/hooks/useQuery";
 import { useRouter } from "next/router";
 import { Select } from "@/components/ui/Select";
 import { Pagination } from "flowbite-react";
+import Three from "@/components/Three";
+import HomeNavbar from "@/components/Homepage/HomeNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -43,7 +45,9 @@ export default function Home({ data }: { data: IProduct[] }) {
   return (
     <>
       <Layout>
-        <Carousel slideInterval={3000} />
+      {/* <HomeNavbar />
+      <Three />
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8"> */}
         <div className="bg-white">
           <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8">
             {products.map((product) => (
@@ -59,7 +63,9 @@ export default function Home({ data }: { data: IProduct[] }) {
         </div>
 
         <ImageCard />
-        {/* <Reklam /> */}
+      {/* </div>
+      <Footer /> */}
+      {/* <Reklam /> */}
       </Layout>
     </>
   );

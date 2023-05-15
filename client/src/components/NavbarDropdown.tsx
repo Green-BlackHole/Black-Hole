@@ -1,3 +1,4 @@
+import { useQuery } from "@/hooks/useQuery";
 import Link from "next/link";
 import React, { FC } from "react";
 
@@ -17,6 +18,8 @@ interface NavbarDropdownProps {
 }
 
 const NavbarDropdown: FC<NavbarDropdownProps> = ({ links, isFull }) => {
+  const { addCategoryQuery } = useQuery();
+
   return (
     <>
       <div>
@@ -29,8 +32,8 @@ const NavbarDropdown: FC<NavbarDropdownProps> = ({ links, isFull }) => {
             {/* <div className="w-4 h-4 left-3 absolute mt-1 bg-white rotate-45" /> */}
           </div>
           <div className="bg-white text-head p-3.5 shadow-shadow-1 ">
-            <ul className="flex justify-around gap-6 ">
-              {links.map((mysublinks, index) => (
+            <ul className="flex flex-col justify-around">
+              {links.map((mysublinks:any, index) => (
                 <div
                   key={`dropdown-${index}`}
                   className="flex flex-col items-start gap-5 whitespace-nowrap"
@@ -38,19 +41,25 @@ const NavbarDropdown: FC<NavbarDropdownProps> = ({ links, isFull }) => {
                   <h1 className="hover:text-white/70 uppercase text-xl w-full ">
                     {mysublinks.Head}
                   </h1>
-                  {mysublinks.sublinks.map((slink, index) => (
+                  {/* {mysublinks.sublinks.map((slink, index) => ( */}
                     <li
                       className="hover:duration-300 text-md-medium "
                       key={`mysublinks-${index}`}
                     >
-                      <Link
-                        href={slink.link}
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          addCategoryQuery({
+                            category: mysublinks.sub_id,
+                          });
+                        }}
                         className="w-full text-[rgba(0,0,0,.5)] normal-case hover:text-md hover:text-black hover:transition hover:duration-300 hover:ease-in-out"
                       >
-                        {slink.name}
-                      </Link>
+                        {mysublinks.name}
+                      </a>
                     </li>
-                  ))}
+                  {/* ))} */}
                 </div>
               ))}
             </ul>

@@ -7,7 +7,7 @@ import {
   PlusIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import styles from "./navbar.module.css";
+import styles from "../Navbar/navbar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { Dropdown, TextInput } from "flowbite-react";
@@ -22,42 +22,13 @@ import { MyContext } from "../context/Searchcontext";
 import { useRouter } from "next/router";
 import { useQuery } from "@/hooks/useQuery";
 
-const navigation = [
-  {
-    name: "эрэгтэй",
-    submenu: true,
-    sublinks: [
-      {
-        Head: "",
-        sublinks: [
-          { name: "Өмд", link: "/categories" },
-          {
-            name: "Гутал",
-            link: "/membersPrice",
-          },
-          {
-            name: "Цүнх",
-            link: "/tmz-company",
-          },
-          {
-            name: "Аксессуар",
-            link: "/membersCpta",
-          },
-        ],
-      },
-    ],
-  },
-  { name: "эрэгтэй", href: "/categories", current: false },
-  { name: "эмэгтэй", href: "/categories", current: false },
-  { name: "хүүхэд", href: "/categories", current: false },
-  { name: "бусад", href: "/categories", current: false },
-];
+
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join("");
 }
 
-export default function Navbar() {
+export default function HomeNavbar() {
   const { addCategoryQuery } = useQuery();
   const router = useRouter();
   // const [search, setSearchTerm] = useRecoilState<any>(value);
@@ -74,27 +45,27 @@ export default function Navbar() {
     console.log("search", searchValue);
   };
 
-  // const [isSticky, setIsSticky] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setIsSticky(window.scrollY > 0);
-  //   };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 0);
+    };
 
-  //   window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   // className={`fixed w-full ${isSticky ? styles.sticky : ""}`}
 
   return (
     <>
       <Disclosure
         as="nav"
-        className={`z-10 sticky top-0 w-full bg-white`}
-        // className={`z-10 fixed w-full bg-[rgba(255,255,255,.3)] ${isSticky ? styles.sticky : ""} `}
+        // className={`z-10 sticky top-0 w-full bg-white`}
+        className={`z-10 fixed w-full ${isSticky ? styles.sticky : ""} `}
       >
         {({ open }) => (
           <>
