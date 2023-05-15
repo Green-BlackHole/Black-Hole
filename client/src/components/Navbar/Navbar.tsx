@@ -172,7 +172,7 @@ export default function Navbar() {
                   </Link>
 
                   {/* Profile dropdown */}
-                  <Link href={"/my/profile"}>
+                  <Link href={"/my/info"}>
                     <button
                       type="button"
                       className="rounded-full text-black hover:pb-5 text-lg p-3"
@@ -185,7 +185,7 @@ export default function Navbar() {
 
               <div>
                 <ul className="flex max-w-[1299px] items-center gap-10 mx-auto text-black text-xs-medium py-5 relative">
-                  {category.map((link:any, index) => {
+                  {category.map((link: any, index) => {
                     // const isFull = link.sublinks?.length >= 2;
                     return (
                       <li

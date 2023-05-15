@@ -45,7 +45,7 @@ export default function Home({ data }: { data: IProduct[] }) {
   return (
     <>
       <Layout>
-      {/* <HomeNavbar />
+        {/* <HomeNavbar />
       <Three />
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8"> */}
         <div className="bg-white">
@@ -63,9 +63,9 @@ export default function Home({ data }: { data: IProduct[] }) {
         </div>
 
         <ImageCard />
-      {/* </div>
+        {/* </div>
       <Footer /> */}
-      {/* <Reklam /> */}
+        {/* <Reklam /> */}
       </Layout>
     </>
   );
