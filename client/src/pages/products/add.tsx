@@ -78,7 +78,6 @@ export default function Example() {
       setSubCategories(subCategory.subCategories);
     }
   };
-  console.log("sub categorie:", subCategories);
 
   return (
     <Layout>
