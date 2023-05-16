@@ -10,7 +10,7 @@ import axios from "axios";
 import ProductCard from "@/components/ProductCard";
 
 const Info = () => {
-  const [myProducts, setMyProducts] = useState<IProduct | undefined>();
+  const [myProducts, setMyProducts] = useState<IProduct | []>([]);
   const router = useRouter();
 
   const { currentUser } = useCurrentUser();
@@ -18,7 +18,7 @@ const Info = () => {
   useEffect(() => {
     console.log("user:", currentUser);
     if (!currentUser) {
-      router.push("/auth/signin");
+      router.push("/auth/signIn");
     }
     // if (currentUser) {
     //   router.push;
@@ -36,7 +36,20 @@ const Info = () => {
         console.log(err);
       });
   }, []);
-  console.log("product", myProducts);
+  const deleteProduct = (productId: string) => {
+    axios
+      .delete(`http://localhost:8000/products/${productId}`)
+      .then((response) => {
+        console.log("Product deleted successfully:", response);
+        const filteredProducts = myProducts.filter(
+          (product: any) => product._id !== productId
+        );
+        setMyProducts(filteredProducts);
+      })
+      .catch((error) => {
+        console.error("Error deleting product:", error);
+      });
+  };
   return (
     <Aside>
       <>
@@ -59,7 +72,7 @@ const Info = () => {
                 Хувийн мэдээлэл
               </div>
               <Link href="update">
-                <p className="text-sm">shinechleh</p>
+                <p className="text-sm cursor-pointer">shinechleh</p>
               </Link>
             </div>
 
@@ -76,58 +89,48 @@ const Info = () => {
 
         <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8">
           {myProducts?.map((product) => (
-            //           <Link href={`/products/${product._id}`} key={product._id}>
-            //   <div className="group relative">
-            //     <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
-            //       <Image
-            //         src={product.productImageSrc}
-            //         alt={product.name}
-            //         className="h-full w-full object-cover object-center lg:h-full lg:w-full aspect-12/8"
-            //         width={1000}
-            //         height={100}
-            //       />
-            //     </div>
-            //     <div className="mt-4 flex justify-between">
-            //       <div>
-            //         <h3 className="text-sm text-gray-700">
-            //           {/* <a href={product.href}> */}
-            //           <span aria-hidden="true" className="absolute inset-0" />
-            //           {product.name}
-            //           {/* </a> */}
-            //         </h3>
-            //       </div>
-            //       <p className="text-sm font-medium text-gray-900">{product.price}</p>
-            //     </div>
-            //   </div>
-            // </Link>
+            // eslint-disable-next-line react/jsx-key
             <div>
               <Link href={`/products/${product._id}`} key={product._id}>
-
-              <Image
-                src={product.productImageSrc}
-                alt="image"
-                width={1000}
-                height={100}
-                className="h-36 object-cover rounded-lg"
-              />
+                <Image
+                  src={product.productImageSrc}
+                  alt="image"
+                  width={1000}
+                  height={100}
+                  className="h-36 object-cover rounded-lg cursor-pointer"
+                />
               </Link>
-                <div className="mt-4 flex justify-between ">
-                  <div>
-                    <h3 className="text-sm text-gray-700">
-                      {/* <a href={product.href}> */}
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {product.name}
-                      {/* </a> */}
-                    </h3>
-                  </div>
-                  <p className="text-sm font-medium text-gray-900">
-                    {product.price}
-                  </p>
+              <div className="mt-4 flex justify-between ">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    {/* <a href={product.href}> */}
+                    <span aria-hidden="true" />
+                    {product.name}
+                    {/* </a> */}
+                  </h3>
                 </div>
-                <div className="flex items-center justify-between">
-                <button className="bg-[#ff598f] px-4 rounded-md" type="button">zasah</button>
-                <button className="bg-[#15d2d3] px-4 rounded-md" type="button">ustgah</button>
-                </div>
+                <p className="text-sm font-medium text-gray-900">
+                  {product.price}
+                </p>
+              </div>
+              <div className="flex items-center justify-between">
+                <Link href={`/products/put/${product._id}`} key={product._id}>
+                  <button
+                    className="bg-[#ff598f] px-4 rounded-md"
+                    type="button"
+                  >
+                    zasah
+                  </button>
+                </Link>
+
+                <button
+                  className="bg-[rgba(0,0,0,.2)] px-4 rounded-md cursor-pointer"
+                  type="button"
+                  onClick={() => deleteProduct(product._id)}
+                >
+                  delete
+                </button>
+              </div>
             </div>
           ))}
         </div>

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -46,12 +46,33 @@ export class ProductsService {
     return await this.ProductModel.find().count({});
   }
 
-  update(id: string, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  // update(id: string, updateProductDto: UpdateProductDto) {
+  //   return `This action updates a #${id} product`;
+  // }
+  async update(
+    id: string,
+    updateProductDto: UpdateProductDto,
+  ): Promise<Product> {
+    const updatedProduct = await this.ProductModel.findByIdAndUpdate(
+      id,
+      updateProductDto,
+      {
+        new: true, // Return the updated document
+      },
+    ).exec();
+
+    if (!updatedProduct) {
+      throw new NotFoundException(`Product with ID ${id} not found`);
+    }
+
+    return updatedProduct;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  // async remove(_id: string) {
+  //   return await this.ProductModel.find({ where: { _id } });
+  // }
+  async remove(_id: string) {
+    return await this.ProductModel.findByIdAndRemove(_id);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
