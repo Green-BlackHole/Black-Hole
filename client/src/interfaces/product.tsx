@@ -1,10 +1,12 @@
 export interface IProduct {
   map(arg0: (product: IProduct) => JSX.Element): import("react").ReactNode;
   productImageSrc: string;
+  brand: string;
   _id: string;
   name: string;
   href: string;
   category: string;
+  option: string;
   about: string;
   imageAlt: string;
   price: string;
@@ -13,6 +15,8 @@ export interface IProduct {
   updatedAt: string;
   userId: any;
   productState: string;
+  streetAddress: string;
+  phoneNumber: string;
 }
 export interface IOption {
   name: string;

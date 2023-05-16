@@ -38,21 +38,6 @@ interface Props {
 const Index: FC<Props> = ({ data }) => {
   const product = data;
 
-  // const a = useRouter();
-  // const { _id } = a.query;
-
-  // useEffect(() => {
-  //   if (_id) {
-  //     axios
-  //       .get(`http://localhost:8000/products/${_id}`)
-  //       .then((res) => {
-  //         setProduct(res.data);
-  //         console.log(product);
-  //       })
-  //       .catch((error) => console.error(error));
-  //   }
-  // }, [_id, product]);
-
   if (!product) return <>page not found</>;
 
   return (

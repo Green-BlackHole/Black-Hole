@@ -134,8 +134,9 @@ export class ProductsController {
     return this.productsService.update(id, updateProductDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productsService.remove(+id);
+  @Delete(':_id')
+  remove(@Param('_id') _id: string) {
+    console.log('delet', _id);
+    return this.productsService.remove(_id);
   }
 }
