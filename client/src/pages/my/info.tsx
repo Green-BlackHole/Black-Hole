@@ -1,93 +1,48 @@
 import Image from "next/image";
 import Aside from "./profile";
+import { CgLock, CgProfile } from "react-icons/cg";
+import Link from "next/link";
 
 const Info = () => {
   return (
     <Aside>
-      <>
-        <div className="flex flex-col items-center">
-          <div>
+        <section className=" rounded-lg grid grid-cols-2 gap-5">
+          <div className="col-span-1 rounded-lg p-5 bg-white">
             <Image
               width={150}
               height={150}
               alt="profile"
-              src="/login.png"
-              className="rounded-full"
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              className="rounded-full mx-auto"
             />
-          </div>
-          <div className="py-5 flex flex-col items-center text-gray-800 font-semibold">
-            <p>Hatake Kakashi</p>
-            <p>kakashi@gmail.com</p>
-          </div>
-        </div>
-        <section className=" bg-white rounded-lg">
-          <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-            <h2 className="mb-4 text-xl font-bold text-gray-900 ">
-              Хувийн мэдээлэл
-            </h2>
-            <form action="#">
-              <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                <div className="w-full">
-                  <label className="block mb-2 text-sm font-medium text-gray-900">
-                    Нэр
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder="tani ner"
-                  />
+            <h2 className="font-bold">email</h2>
+            <button>zurag shinechleh</button>
+            </div>
+            <div className="col-span-1 flex flex-col rounded-lg gap-5">
+              <div className="bg-white h-1/2 p-5 rounded-lg flex items-center justify-between">
+
+                <div className="font-bold">
+                <CgProfile size={30} className="min-w-max pr-2 mb-2" />
+                Хувийн мэдээлэл
                 </div>
-                <div className="w-full">
-                  <label className="block mb-2 text-sm font-medium text-gray-900">
-                    Email
-                  </label>
-                  <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    placeholder="tani email"
-                  />
+              <Link href="update">
+
+                <p className="text-sm">shinechleh</p>
+                </Link>
+
                 </div>
 
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900">
-                    Хүйс
-                  </label>
-                  <select
-                    id="gender"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-                  >
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
+                <div className="bg-white h-1/2 p-5 rounded-lg flex items-center justify-between">
+                <div className="font-bold">
+                <CgLock size={30} className="min-w-max pr-2 mb-2" />
+                Цахим хаяг
                 </div>
+                <p className="text-sm">batalgaajsan</p>
 
-                <div className="w-full">
-                  <label className="block mb-2 text-sm font-medium text-gray-900">
-                    Password
-                  </label>
-                  <input
-                    type="text"
-                    name="password"
-                    id="password"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder="password"
-                  />
                 </div>
-              </div>
-              <button
-                type="submit"
-                className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-gray-100 bg-slate-600 rounded-lg hover:bg-slate-800"
-              >
-                Add product
-              </button>
-            </form>
-          </div>
+            </div>
+        
         </section>
-      </>
     </Aside>
   );
 };

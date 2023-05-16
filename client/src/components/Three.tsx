@@ -12,7 +12,8 @@ export default function Three() {
         <div className="col-span-1 flex justify-center items-center">
           <div className="flex flex-col max-w-lg">
             <h2 className="font-semi-bold text-8xl my-5 text-[#ff598f]">
-              <Typewriter words={["new collection"]} loop={false} />
+              new summer
+              <Typewriter words={[" cd"," ab"]} loop={false} />
             </h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
