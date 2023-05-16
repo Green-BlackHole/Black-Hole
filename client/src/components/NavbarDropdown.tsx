@@ -24,7 +24,7 @@ const NavbarDropdown: FC<NavbarDropdownProps> = ({ links, isFull }) => {
     <>
       <div>
         <div
-          className={`absolute top-30 invisible opacity-0 group-hover:visible group-hover:opacity-100 hover:block left-0 z-[999] transition-all duration-300 ease-linear         ${
+          className={`absolute top-30 invisible opacity-0 group-hover:visible group-hover:opacity-100 hover:block ml-[-65px] z-[999] transition-all duration-300 ease-linear         ${
             isFull && "right-0"
           }`}
         >

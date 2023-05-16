@@ -124,7 +124,7 @@ export class ProductsController {
     return this.productsService.findOneId(_id);
   }
 
-  @Get('co/count')
+  @Get('all/count')
   async findAllCount() {
     return await this.productsService.findAllCount();
   }

@@ -64,6 +64,13 @@ export default function Navbar() {
   const { searchValue, setSearchValue } = useContext(MyContext);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [category, setCategory] = useState([]);
+  const [count,setCount] = useState('');
+  const placeholder = `Гадуур хувцас, Үндэсний хувцас г.м ${count} бараа байна`;
+  useEffect(() => {
+    axios.get("http://localhost:8000/products/all/count").then((res) => {
+      setCount(res.data);
+    });
+  }, [count]);
   useEffect(() => {
     axios.get("http://localhost:8000/categories").then((res) => {
       setCategory(res.data);
@@ -137,7 +144,7 @@ export default function Navbar() {
                     id="text"
                     type="text"
                     rightIcon={HiSearch}
-                    placeholder="haih"
+                    placeholder={placeholder}
                     required={true}
                     className="w-full mx-3 md:w-96 max-sm:hidden text-black"
                     value={searchValue}
