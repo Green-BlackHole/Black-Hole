@@ -41,9 +41,9 @@ export class ProductsController {
   @UseInterceptors(
     FileInterceptor('file', {
       storage: multer.diskStorage({
-        destination: (req, file, cb) => {
-          cb(null, '/tmp');
-        },
+        // destination: (req, file, cb) => {
+        //   cb(null, '/AppData/Local/Temp/');
+        // },
         filename: (req, file, cb) => {
           const fileName = nanoid();
           const splittedPath = file.originalname.split('.');

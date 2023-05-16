@@ -19,32 +19,7 @@ interface AsideBarProps {
 
 const Aside: FC<AsideBarProps> = ({ children }) => {
   const [open, setOpen] = useState(true);
-  const [myProducts, setMyProducts] = useState<IProduct | undefined>();
-  const router = useRouter();
 
-  const { currentUser } = useCurrentUser();
-
-  useEffect(() => {
-    console.log("user:", currentUser);
-    if (!currentUser) {
-      router.push("/auth/signin");
-    }
-    // if (currentUser) {
-    //   router.push;
-    // }
-  }, [currentUser, router]);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8000/products/ids/${currentUser?._id}`)
-      .then((res) => {
-        setMyProducts(res.data);
-        console.log("my product", myProducts);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
   const removeToken=()=>{
     localStorage.removeItem("token");
   }
@@ -52,10 +27,10 @@ const Aside: FC<AsideBarProps> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <div className="h-screen flex  bg-[rgba(0,0,0,.05)] text-slate-600">
+      <div className=" flex  bg-[rgba(0,0,0,.05)] text-slate-600">
         <div
           className={` ${open ? "w-16 sm:w-auto" : "w-16"}
-         bg-[rgb(255,255,255)] h-screen relative duration-500 m-4 rounded-lg`}
+         bg-[rgb(255,255,255)]  relative duration-500 m-4 rounded-lg`}
         >
           {/* little menu */}
           <div className={`flex justify-end p-3 cursor-pointer`}>
@@ -109,7 +84,7 @@ const Aside: FC<AsideBarProps> = ({ children }) => {
         {/* Profile */}
         <main className="m-4 w-full">{children}</main>
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 };
