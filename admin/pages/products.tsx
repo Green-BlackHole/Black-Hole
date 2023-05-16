@@ -18,6 +18,7 @@ const Orders = () => {
         setProducts(data);
       })
       .catch((err: any) => {
+        3;
         console.log(err);
       });
   }, [products]);

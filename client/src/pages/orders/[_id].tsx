@@ -1,32 +1,88 @@
+import { useCurrentUser } from "@/components/CurretnUserProvider";
 import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar/Navbar";
 import Three from "@/components/Three";
 import MyThreeComponent from "@/components/Three/three.dynamic";
+import { IProduct } from "@/interfaces/product";
 import axios from "axios";
+import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { ChangeEvent, FC, Suspense, useEffect, useState } from "react";
 
-export default function Order() {
-  const a = useRouter();
-  const { _id } = a.query;
-  const [order,setOrder]=useState('')
+export const getStaticPaths = async () => {
+  const response = await fetch("http://localhost:8000/products/idm/id");
+  const data = await response.json();
 
-  useEffect(() => {
-    if (_id) {
-      axios
-        .get(`http://localhost:8000/products/${_id}`)
-        .then((res) => {
-          setOrder(res.data);
-          console.log(order);
-        })
-        .catch((error) => console.error(error));
-    }
-  }, [_id, ]);
+  const paths = data.map((_id: string) => ({
+    params: {
+      _id,
+    },
+  }));
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
+  const response = await fetch(`http://localhost:8000/products/${params?._id}`);
+  const data = await response.json();
+
+  return {
+    props: { data },
+  };
+};
+interface Props {
+  data: IProduct;
+}
+
+export default function Order({ data }: { data: any }) {
+  const { currentUser } = useCurrentUser();
+  const order = data;
+  const [addOrder, setAddOrder] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    streetAddress: "",
+    city: "",
+    region: "",
+    category: "",
+    userId: currentUser?._id,
+    productId: order?._id,
+    status: true,
+  });
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    console.log(addOrder);
+    axios
+      .post("http://localhost:8000/orders/add", addOrder)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setAddOrder({
+      ...addOrder,
+      [e.target.name]: e.target.value,
+      // productImageSrc: imageUrl,
+    });
+    // if (e.target.name === "category") {
+    //   const subCategory = category.find(
+    //     (cat: any) => cat.categoryName == e.target.value
+    //   ) || { subCategories };
+    //   setSubCategories(subCategory.subCategories);
+    // }
+  };
+
   return (
     <>
       <Layout>
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div className="col-span-2">
             <form action="">
               <div className="border-b border-gray-900/10 pb-12">
@@ -44,8 +100,9 @@ export default function Order() {
                     </label>
                     <div className="mt-2">
                       <input
+                        onChange={(e: any) => handleChange(e)}
                         type="text"
-                        name="first-name"
+                        name="firstName"
                         id="first-name"
                         autoComplete="given-name"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -62,8 +119,9 @@ export default function Order() {
                     </label>
                     <div className="mt-2">
                       <input
+                        onChange={(e: any) => handleChange(e)}
                         type="text"
-                        name="last-name"
+                        name="lastName"
                         id="last-name"
                         autoComplete="family-name"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -80,6 +138,7 @@ export default function Order() {
                     </label>
                     <div className="mt-2">
                       <input
+                        onChange={(e: any) => handleChange(e)}
                         id="email"
                         name="email"
                         type="email"
@@ -97,6 +156,7 @@ export default function Order() {
                     </label>
                     <div className="mt-2">
                       <input
+                        onChange={(e: any) => handleChange(e)}
                         id="phoneNumber"
                         name="phoneNumber"
                         type="number"
@@ -118,8 +178,9 @@ export default function Order() {
                     </label>
                     <div className="mt-2">
                       <input
+                        onChange={(e: any) => handleChange(e)}
                         type="text"
-                        name="street-address"
+                        name="streetAddress"
                         id="street-address"
                         autoComplete="street-address"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -136,6 +197,7 @@ export default function Order() {
                     </label>
                     <div className="mt-2">
                       <input
+                        onChange={(e: any) => handleChange(e)}
                         type="text"
                         name="city"
                         id="city"
@@ -154,6 +216,7 @@ export default function Order() {
                     </label>
                     <div className="mt-2">
                       <input
+                        onChange={(e: any) => handleChange(e)}
                         type="text"
                         name="region"
                         id="region"
@@ -165,49 +228,66 @@ export default function Order() {
 
                   <div className="sm:col-span-2">
                     <label
-                      htmlFor="postal-code"
+                      htmlFor="category"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
-                      ZIP / Postal code
+                      haygiin ner
                     </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="postal-code"
-                        id="postal-code"
-                        autoComplete="postal-code"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
+                    <select
+                      onChange={(e: any) => handleChange(e)}
+                      id="category"
+                      name="category"
+                      autoComplete="category-name"
+                      className="mt-1.5  block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    >
+                      <option value="home" key="home">
+                        home
+                      </option>
+                      <option value="job" key="job">
+                        job
+                      </option>
+                      <option value="other" key="other">
+                        other
+                      </option>
+                    </select>
                   </div>
                 </div>
               </div>
             </form>
           </div>
-          <div className="col-span-1 p-5 ">
-            <h2>Төлбөрийн мэдээлэл</h2>
-            <div className="grid grid-cols-2 shadow-lg">
-            <div className="col-span-1">huleen avagch</div>
-                <div className="col-span-1">Трифт shop</div>
-                <div className="col-span-1"> dans</div>
-                <div className="col-span-1">504809876</div>
-                <div className="col-span-1">une</div>
-                <div className="col-span-1">12345</div>
-                <div className="col-span-1"> hurgelt</div>
-                <div className="col-span-1">500</div>
-                <div className="col-span-1"> niit une</div>
-                <div className="col-span-1">12845</div>
-                
-                </div>
-                <button className="bg-[#15d2d3] rounded-3xl py-3 w-full">hudaldan avah</button>
-                <button className="bg-[#ff598f] rounded-3xl py-3 w-full">butsah</button>
-
+          <div className="col-span-1 gap-3">
+            <h2 className="text-base font-semibold leading-7 text-gray-900">
+              Төлбөрийн мэдээлэл
+            </h2>
+            <div className="grid grid-cols-2 shadow-lg p-5 rounded-3xl border-2 gap-5 mt-16">
+              <div className="col-span-1">huleen avagch</div>
+              <div className="col-span-1 font-semibold">Трифт shop</div>
+              <div className="col-span-1"> dans</div>
+              <div className="col-span-1 font-semibold">504809876</div>
+              <div className="col-span-1">une</div>
+              <div className="col-span-1 font-semibold">12345</div>
+              <div className="col-span-1"> hurgelt</div>
+              <div className="col-span-1 font-semibold">500</div>
+              <div className="col-span-2 border-t-2 grid grid-cols-2 pt-3">
+                <div className="col-span-1 font-semibold"> niit une</div>
+                <div className="col-span-1 font-bold">12845</div>
+              </div>
+            </div>
+            <button
+              className="bg-[#15d2d3] rounded-3xl py-3 w-full my-5"
+              type="button"
+              onClick={handleSubmit}
+            >
+              hudaldan avah
+            </button>
+            <button className="bg-[#ff598f] rounded-3xl py-3 w-full">
+              butsah
+            </button>
           </div>
         </div>
         {/* <Navbar /> */}
         {/* <Three/> */}
         {/* <Footer /> */}
-       
       </Layout>
     </>
   );

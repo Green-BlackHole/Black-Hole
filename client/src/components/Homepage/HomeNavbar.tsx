@@ -143,7 +143,7 @@ export default function HomeNavbar() {
                   </Link>
 
                   {/* Profile dropdown */}
-                  <Link href={"/my/profile"}>
+                  <Link href={"/my/info"}>
                     <button
                       type="button"
                       className="rounded-full text-black hover:pb-5 text-lg p-3"

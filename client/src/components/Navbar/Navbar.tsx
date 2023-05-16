@@ -64,6 +64,13 @@ export default function Navbar() {
   const { searchValue, setSearchValue } = useContext(MyContext);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [category, setCategory] = useState([]);
+  const [count,setCount] = useState('');
+  const placeholder = `Гадуур хувцас, Үндэсний хувцас г.м ${count} бараа байна`;
+  useEffect(() => {
+    axios.get("http://localhost:8000/products/all/count").then((res) => {
+      setCount(res.data);
+    });
+  }, [count]);
   useEffect(() => {
     axios.get("http://localhost:8000/categories").then((res) => {
       setCategory(res.data);
@@ -137,7 +144,7 @@ export default function Navbar() {
                     id="text"
                     type="text"
                     rightIcon={HiSearch}
-                    placeholder="haih"
+                    placeholder={placeholder}
                     required={true}
                     className="w-full mx-3 md:w-96 max-sm:hidden text-black"
                     value={searchValue}
@@ -172,7 +179,7 @@ export default function Navbar() {
                   </Link>
 
                   {/* Profile dropdown */}
-                  <Link href={"/my/profile"}>
+                  <Link href={"/my/info"}>
                     <button
                       type="button"
                       className="rounded-full text-black hover:pb-5 text-lg p-3"
@@ -185,7 +192,7 @@ export default function Navbar() {
 
               <div>
                 <ul className="flex max-w-[1299px] items-center gap-10 mx-auto text-black text-xs-medium py-5 relative">
-                  {category.map((link:any, index) => {
+                  {category.map((link: any, index) => {
                     // const isFull = link.sublinks?.length >= 2;
                     return (
                       <li

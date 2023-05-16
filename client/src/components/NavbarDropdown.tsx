@@ -24,7 +24,7 @@ const NavbarDropdown: FC<NavbarDropdownProps> = ({ links, isFull }) => {
     <>
       <div>
         <div
-          className={`absolute top-30 invisible opacity-0 group-hover:visible group-hover:opacity-100 hover:block left-0 z-[999] transition-all duration-300 ease-linear         ${
+          className={`absolute top-30 invisible opacity-0 group-hover:visible group-hover:opacity-100 hover:block ml-[-65px] z-[999] transition-all duration-300 ease-linear         ${
             isFull && "right-0"
           }`}
         >
@@ -33,7 +33,7 @@ const NavbarDropdown: FC<NavbarDropdownProps> = ({ links, isFull }) => {
           </div>
           <div className="bg-white text-head p-3.5 shadow-shadow-1 ">
             <ul className="flex flex-col justify-around">
-              {links.map((mysublinks:any, index) => (
+              {links.map((mysublinks: any, index) => (
                 <div
                   key={`dropdown-${index}`}
                   className="flex flex-col items-start gap-5 whitespace-nowrap"
@@ -42,23 +42,23 @@ const NavbarDropdown: FC<NavbarDropdownProps> = ({ links, isFull }) => {
                     {mysublinks.Head}
                   </h1>
                   {/* {mysublinks.sublinks.map((slink, index) => ( */}
-                    <li
-                      className="hover:duration-300 text-md-medium "
-                      key={`mysublinks-${index}`}
+                  <li
+                    className="hover:duration-300 text-md-medium "
+                    key={`mysublinks-${index}`}
+                  >
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        addCategoryQuery({
+                          category: mysublinks.sub_id,
+                        });
+                      }}
+                      className="w-full text-[rgba(0,0,0,.5)] normal-case hover:text-md hover:text-black hover:transition hover:duration-300 hover:ease-in-out"
                     >
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          addCategoryQuery({
-                            category: mysublinks.sub_id,
-                          });
-                        }}
-                        className="w-full text-[rgba(0,0,0,.5)] normal-case hover:text-md hover:text-black hover:transition hover:duration-300 hover:ease-in-out"
-                      >
-                        {mysublinks.name}
-                      </a>
-                    </li>
+                      {mysublinks.name}
+                    </a>
+                  </li>
                   {/* ))} */}
                 </div>
               ))}
