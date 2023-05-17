@@ -152,9 +152,6 @@ export default function update() {
               <select
                 value={product?.category}
                 onChange={(e: any) => handleChange(e)}
-                // onChange={(e) =>
-                //   setProduct({ ...product, name: e.target.value })
-                // }
                 id="category"
                 name="category"
                 autoComplete="category-name"

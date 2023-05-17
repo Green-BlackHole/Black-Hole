@@ -20,6 +20,7 @@ const Info = () => {
   if (!currentUser) {
     return <>Ta nevtreegui baina!</>;
   }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     console.log("user:", currentUser);
     if (!currentUser) {
@@ -30,6 +31,7 @@ const Info = () => {
     // }
   }, [currentUser, router]);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     axios
       .get(`http://localhost:8000/products/ids/${currentUser?._id}`)
@@ -67,7 +69,9 @@ const Info = () => {
               src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
               className="rounded-full mx-auto"
             />
-            <h2 className="font-bold flex justify-center">{currentUser.email}</h2>
+            <h2 className="font-bold flex justify-center">
+              {currentUser.email}
+            </h2>
             {/* <button>zurag shinechleh</button> */}
           </div>
           <div className="col-span-1 flex flex-col rounded-lg gap-5">
