@@ -10,10 +10,10 @@ export default function Three() {
       {/* <Navbar /> */}
       <div className="grid grid-cols-1 items-center bg-[#15d2d3] md:grid-cols-2">
         <div className="col-span-1 flex justify-end items-center">
-          <div className="flex flex-col max-w-lg mt-36 md:mt-0">
+          <div className="flex flex-col max-w-lg mt-36 md:mt-0 md:mb-64">
             <h2 className="font-semi-bold text-8xl my-5 text-[#ff598f]">
-              new summer
-              <Typewriter words={[" cd"," ab"]} loop={false} />
+              new collection
+              <Typewriter words={[" cd", " ab"]} loop={false} />
             </h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
