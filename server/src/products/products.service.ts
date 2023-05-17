@@ -68,9 +68,6 @@ export class ProductsService {
     return updatedProduct;
   }
 
-  // async remove(_id: string) {
-  //   return await this.ProductModel.find({ where: { _id } });
-  // }
   async remove(_id: string) {
     return await this.ProductModel.findByIdAndRemove(_id);
   }
@@ -82,9 +79,4 @@ export class ProductsService {
     return result.map((movieId) => movieId._id);
     console.log(result);
   }
-
-  // findAllMovieIds = async (req: Request, res: Response) => {
-  //   const result = await MovieModel.find().select({ id: 1 });
-  //   res.json(result.map((movieId) => movieId._id));
-  // };
 }

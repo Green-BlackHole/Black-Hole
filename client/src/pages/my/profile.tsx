@@ -1,7 +1,11 @@
 import { FC, ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { HiOutlineShoppingBag, HiMenuAlt3,HiChevronRight } from "react-icons/hi";
+import {
+  HiOutlineShoppingBag,
+  HiMenuAlt3,
+  HiChevronRight,
+} from "react-icons/hi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { MdExitToApp } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
@@ -19,10 +23,12 @@ interface AsideBarProps {
 
 const Aside: FC<AsideBarProps> = ({ children }) => {
   const [open, setOpen] = useState(true);
+  const { currentUser, setCurrentUser }: any = useCurrentUser();
 
-  const removeToken=()=>{
+  const removeToken = () => {
     localStorage.removeItem("token");
-  }
+    setCurrentUser(null);
+  };
 
   return (
     <>
@@ -44,8 +50,8 @@ const Aside: FC<AsideBarProps> = ({ children }) => {
             >
               <div className=" flex items-center  pl-1 hover:text-gray-900 whitespace-pre gap-1 font-medium overflow-x-hidden">
                 <CgProfile size={30} className="min-w-max pr-2" />
-                Хувийн мэдээлэл 
-                <HiChevronRight size={30} className="min-w-max pr-2 ml-10"/>
+                Хувийн мэдээлэл
+                <HiChevronRight size={30} className="min-w-max pr-2 ml-10" />
               </div>
             </Link>
             <Link
@@ -55,8 +61,7 @@ const Aside: FC<AsideBarProps> = ({ children }) => {
               <div className=" flex items-center  pl-1 hover:text-gray-900 whitespace-pre gap-1 font-medium overflow-x-hidden">
                 <HiOutlineShoppingBag size={30} className="min-w-max pr-2" />
                 Миний захиалгууд
-                <HiChevronRight size={30} className="min-w-max pr-2 ml-10"/>
-
+                <HiChevronRight size={30} className="min-w-max pr-2 ml-10" />
               </div>
             </Link>
             <Link
@@ -66,15 +71,17 @@ const Aside: FC<AsideBarProps> = ({ children }) => {
               <div className=" flex items-center  pl-1 hover:text-gray-900 whitespace-pre gap-1 font-medium overflow-x-hidden">
                 <AiOutlineHeart size={30} className="min-w-max pr-2" />
                 Таны хадгалсан
-                <HiChevronRight size={30} className="min-w-max pr-2 ml-10"/>
-
+                <HiChevronRight size={30} className="min-w-max pr-2 ml-10" />
               </div>
             </Link>
             <Link
               href="/"
               className="p-3 flex rounded-md gap-6 items-center md:cursor-pointer cursor-default duration-300 font-medium"
             >
-              <button className=" flex items-center  pl-1 hover:text-gray-900 whitespace-pre gap-1 font-medium overflow-x-hidden" onClick={removeToken}>
+              <button
+                className=" flex items-center  pl-1 hover:text-gray-900 whitespace-pre gap-1 font-medium overflow-x-hidden"
+                onClick={removeToken}
+              >
                 <MdExitToApp size={30} className="min-w-max pr-2" />
                 Гарах
               </button>
@@ -84,7 +91,7 @@ const Aside: FC<AsideBarProps> = ({ children }) => {
         {/* Profile */}
         <main className="m-4 w-full">{children}</main>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

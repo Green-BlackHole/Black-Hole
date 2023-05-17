@@ -6,7 +6,8 @@ import React, { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function signup() {
-  const router = useRouter()
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const router = useRouter();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [user, setUser] = useState({
     email: "",
@@ -15,36 +16,48 @@ export default function signup() {
     name: "",
     phoneNumber: "",
   });
+
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:8000/signup", user)
-      .then((res) => {
-        console.log(res.data);
-        router.push('/auth/signin')
-        toast.success("Amjilttai burtgelee", {
-          position: "top-right",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+
+    axios.post("http://localhost:8000/otp/signin", user.email).then((res) => {
+      const otp = window.prompt("Your OTP?");
+      axios
+        .post("http://localhost:8000/otp/signin/verify", (user.email, otp))
+        .then((res) => {
+          localStorage.setItem("token", res.data);
+          toast.success("Амжилттай нэвтэрлээ!");
+          router.replace("/");
         });
-      })
-      .catch((err) => {
-        toast.error("huselt aldaatai baina", {
-          position: "top-right",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      });
+    });
+    // axios
+    //   .post("http://localhost:8000/signup", user)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     router.push("/auth/signin");
+    //     toast.success("Amjilttai burtgelee", {
+    //       position: "top-right",
+    //       autoClose: 4000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //       theme: "light",
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     toast.error("huselt aldaatai baina", {
+    //       position: "top-right",
+    //       autoClose: 4000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //       theme: "light",
+    //     });
+    //   });
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({

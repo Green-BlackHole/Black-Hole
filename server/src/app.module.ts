@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { CategoriesModule } from './categories/categories.module';
 import { OrdersModule } from './orders/orders.module';
+import { WishlistModule } from './wishlist/wishlist.module';
 dotenv.config();
 
 @Module({
@@ -25,6 +26,7 @@ dotenv.config();
     }),
     CategoriesModule,
     OrdersModule,
+    WishlistModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -49,6 +49,8 @@ export default function Order({ data }: { data: any }) {
     city: "",
     region: "",
     category: "",
+    productImageSrc: order?.productImageSrc,
+    price: order?.price,
     userId: currentUser?._id,
     productId: order?._id,
     status: true,
@@ -265,12 +267,12 @@ export default function Order({ data }: { data: any }) {
               <div className="col-span-1"> dans</div>
               <div className="col-span-1 font-semibold">504809876</div>
               <div className="col-span-1">une</div>
-              <div className="col-span-1 font-semibold">12345</div>
+              <div className="col-span-1 font-semibold">{order.price}</div>
               <div className="col-span-1"> hurgelt</div>
-              <div className="col-span-1 font-semibold">500</div>
+              <div className="col-span-1 font-semibold">5000</div>
               <div className="col-span-2 border-t-2 grid grid-cols-2 pt-3">
                 <div className="col-span-1 font-semibold"> niit une</div>
-                <div className="col-span-1 font-bold">12845</div>
+                <div className="col-span-1 font-bold">111111</div>
               </div>
             </div>
             <button

@@ -6,6 +6,7 @@ import { CreateOTPDto } from './dto/createOTP.dto';
 import { CheckOTPDto } from './dto/checkOTP.dto';
 import { CurrentUser } from './current-user.decorator';
 import { Secured } from './secured.decorator';
+import { log } from 'console';
 
 @Controller()
 export class AuthController {
@@ -32,6 +33,8 @@ export class AuthController {
   }
   @Post('/otp/signin')
   siginOTP(@Body() createOTPDto: CreateOTPDto) {
+    console.log(createOTPDto);
+
     return this.authService.createOTP(createOTPDto);
   }
 

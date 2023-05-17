@@ -6,7 +6,8 @@ const env = {
   MONGO_URL: process.env.MONGO_URL,
   JWT_SECRET: process.env.JWT_SECRET,
   EMAIL_ADDRESS: process.env.EMAIL_ADDRESS,
-  EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
+  // EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
+  OTP_PASSWORD: process.env.OTP_PASSWORD,
 };
 
 export default env;

@@ -32,10 +32,9 @@ export default function update() {
       .get(`http://localhost:8000/products/${_id}`)
       .then((res) => {
         setProduct(res.data);
-        console.log(product);
       })
       .catch((error) => console.error(error));
-  }, [_id, product]);
+  }, []);
   // eslint-disable-next-line react-hooks/rules-of-hooks
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -44,22 +43,7 @@ export default function update() {
       setCategory(res.data);
     });
   }, [category, setCategory]);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  // const [addProduct, setAddProduct] = useState({
-  //   productImageSrc: "",
-  //   brand: "",
-  //   category: "",
-  //   option: "",
-  //   size: "",
-  //   name: "",
-  //   about: "",
-  //   streetAddress: "",
-  //   phoneNumber: "",
-  //   price: "",
-  //   userId: currentUser?._id,
-  //   status: true,
-  //   productState: "",
-  // });
+
   const uploadImg = (e: any) => {
     const fd = new FormData();
     fd.append("file", e.target.files[0]);
@@ -76,13 +60,16 @@ export default function update() {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    console.log("product:", product);
     axios
       .patch(`http://localhost:8000/products/${product._id}`, product)
       .then((res) => {
         console.log("Product updated successfully:", res.data);
+        toast.success("amjilttai shinechillee");
       })
       .catch((err) => {
         console.error("Error updating product:", err);
+        toast.success("shinechlehed aldaa garlaa");
       });
   };
 
@@ -317,7 +304,12 @@ export default function update() {
             </label>
             <div className="mt-2">
               <input
-                onChange={(e) => handleChange(e)}
+                onChange={(e) =>
+                  setProduct({
+                    ...product,
+                    price: e.target.value,
+                  })
+                }
                 value={product?.price}
                 type="text"
                 name="price"
