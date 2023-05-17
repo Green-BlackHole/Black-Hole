@@ -14,7 +14,12 @@ const Info = () => {
   const router = useRouter();
 
   const { currentUser } = useCurrentUser();
-
+  // if (!currentUser) {
+  //   router.push("/auth/signIn");
+  // }
+  if (!currentUser) {
+    return <>Ta nevtreegui baina!</>;
+  }
   useEffect(() => {
     console.log("user:", currentUser);
     if (!currentUser) {
@@ -62,8 +67,8 @@ const Info = () => {
               src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
               className="rounded-full mx-auto"
             />
-            <h2 className="font-bold">email</h2>
-            <button>zurag shinechleh</button>
+            <h2 className="font-bold flex justify-center">{currentUser.email}</h2>
+            {/* <button>zurag shinechleh</button> */}
           </div>
           <div className="col-span-1 flex flex-col rounded-lg gap-5">
             <div className="bg-white h-1/2 p-5 rounded-lg flex items-center justify-between">

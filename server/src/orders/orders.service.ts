@@ -23,6 +23,9 @@ export class OrdersService {
   findOne(id: number) {
     return `This action returns a #${id} order`;
   }
+  async findMyOrders(id: string): Promise<Order[]> {
+    return await this.OrderModel.find({ userId: id });
+  }
 
   update(id: number, updateOrderDto: UpdateOrderDto) {
     return `This action updates a #${id} order`;

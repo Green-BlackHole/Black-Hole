@@ -39,7 +39,7 @@ export default function HomeNavbar() {
     axios.get("http://localhost:8000/categories").then((res) => {
       setCategory(res.data);
     });
-  }, [category]);
+  }, []);
   const handleSearch = (e: any) => {
     setSearchValue(e.target.value);
     console.log("search", searchValue);
@@ -161,7 +161,7 @@ export default function HomeNavbar() {
                     return (
                       <li
                         key={`menu-id-${index}`}
-                        className={`flex items-center gap-1 group cursor-pointer mx-2`}
+                        className={`flex items-center gap-1 group cursor-pointer mx-2 max-md:mx-0`}
                       >
                         {link.categoryName}
                         {true && (

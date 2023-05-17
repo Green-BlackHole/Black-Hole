@@ -1,7 +1,10 @@
 import Image from "next/image";
 import Aside from "./profile";
+import { useCurrentUser } from "@/components/CurretnUserProvider";
 
 const Info = () => {
+  const { currentUser } = useCurrentUser();
+
   return (
     <Aside>
       <section className=" rounded-lg gap-5 bg-white p-5">
@@ -16,8 +19,8 @@ const Info = () => {
             />
           </div>
           <div className="py-5 flex flex-col items-center text-gray-800 font-semibold">
-            <p>Hatake Kakashi</p>
-            <p>kakashi@gmail.com</p>
+            <p>{currentUser?.name}</p>
+            <p>{currentUser?.email}</p>
           </div>
         </div>
         <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
@@ -34,6 +37,7 @@ const Info = () => {
                   type="text"
                   name="name"
                   id="name"
+                  value={currentUser?.name}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="tani ner"
                 />
@@ -46,22 +50,24 @@ const Info = () => {
                   type="text"
                   name="email"
                   id="email"
+                  value={currentUser?.email}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="tani email"
                 />
               </div>
 
-              <div>
+              <div className="w-full">
                 <label className="block mb-2 text-sm font-medium text-gray-900">
-                  Хүйс
+                  phone number
                 </label>
-                <select
-                  id="gender"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-                >
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
+                <input
+                  type="number"
+                  name="number"
+                  id="number"
+                  value={currentUser?.phoneNumber}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  placeholder="tani utasnii dugaar"
+                />
               </div>
 
               <div className="w-full">
