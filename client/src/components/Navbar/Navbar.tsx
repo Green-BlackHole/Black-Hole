@@ -75,7 +75,7 @@ export default function Navbar() {
     axios.get("http://localhost:8000/categories").then((res) => {
       setCategory(res.data);
     });
-  }, [category]);
+  }, []);
   const handleSearch = (e: any) => {
     setSearchValue(e.target.value);
     console.log("search", searchValue);

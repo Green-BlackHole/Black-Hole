@@ -35,3 +35,18 @@ export interface IMyContext {
   search: string;
   setSearch: string;
 }
+export interface IOrder{
+  _id: string,
+firstName: string,
+lastName:string,
+email:string,
+phoneNumber: string,
+streetAddress:string,
+city: string,
+region:string,
+userId:string,
+productId: string,
+status: boolean,
+createdAt: string,
+updatedAt: string,
+}

@@ -21,6 +21,7 @@ function Image({ id }: { id: number }) {
 
   return (
     <>
+    <div className="flex items-center justify-center">
       <section className="text-[rgb(0,255,255)] font-bold text-4xl">
         <div ref={ref}>
           <img
@@ -29,9 +30,10 @@ function Image({ id }: { id: number }) {
             className="m-2"
           />
         </div>
-        <motion.h2 style={{ y }}>{`#00${id}`}</motion.h2>
+        <motion.h2 style={{ y }} className="ml-48">{`#00${id}`}</motion.h2>
       </section>
       <div className="h-[30rem]"></div>
+      </div>
     </>
   );
 }
@@ -47,7 +49,7 @@ export default function App() {
   return (
     <>
       <Layout>
-        {[1, 2, 3, 4, 5].map((image) => (
+        {[1, 2].map((image) => (
           <>
             <Image id={image} key={image} alt={image} />
           </>

@@ -31,7 +31,7 @@ const NavbarDropdown: FC<NavbarDropdownProps> = ({ links, isFull }) => {
           <div className="py-3">
             {/* <div className="w-4 h-4 left-3 absolute mt-1 bg-white rotate-45" /> */}
           </div>
-          <div className="bg-white text-head p-3.5 shadow-shadow-1 ">
+          <div className="bg-white text-head px-4 pb-4 shadow-shadow-1 rounded-lg">
             <ul className="flex flex-col justify-around">
               {links.map((mysublinks: any, index) => (
                 <div

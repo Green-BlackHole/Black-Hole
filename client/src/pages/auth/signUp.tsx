@@ -1,9 +1,12 @@
 import Layout from "@/components/Layout";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { ChangeEvent, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function signup() {
+  const router = useRouter()
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [user, setUser] = useState({
     email: "",
@@ -18,9 +21,29 @@ export default function signup() {
       .post("http://localhost:8000/signup", user)
       .then((res) => {
         console.log(res.data);
+        router.push('/auth/signin')
+        toast.success("Amjilttai burtgelee", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       })
       .catch((err) => {
-        console.log(err);
+        toast.error("huselt aldaatai baina", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
