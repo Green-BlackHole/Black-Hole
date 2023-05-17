@@ -5,6 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
 import { IOption } from "@/interfaces/product";
+import { toast } from "react-toastify";
 
 export default function Example() {
   const { currentUser } = useCurrentUser();
@@ -59,9 +60,11 @@ export default function Example() {
       .post("http://localhost:8000/products/add", addProduct)
       .then((res) => {
         console.log(res.data);
+        toast.success("amjilttai nemegdlee");
       })
       .catch((err) => {
         console.log(err);
+        toast.error("baraa nemehed aldaa garlaa");
       });
   };
 

@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useCurrentUser } from "@/components/CurretnUserProvider";
 import axios from "axios";
 import ProductCard from "@/components/ProductCard";
+import { toast } from "react-toastify";
 
 const Info = () => {
   const [myProducts, setMyProducts] = useState<IProduct | []>([]);
@@ -20,16 +21,6 @@ const Info = () => {
   if (!currentUser) {
     return <>Ta nevtreegui baina!</>;
   }
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    console.log("user:", currentUser);
-    if (!currentUser) {
-      router.push("/auth/signIn");
-    }
-    // if (currentUser) {
-    //   router.push;
-    // }
-  }, [currentUser, router]);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -47,6 +38,8 @@ const Info = () => {
     axios
       .delete(`http://localhost:8000/products/${productId}`)
       .then((response) => {
+        toast.success("amjilttai ustgalaa");
+
         console.log("Product deleted successfully:", response);
         const filteredProducts = myProducts.filter(
           (product: any) => product._id !== productId
@@ -54,13 +47,14 @@ const Info = () => {
         setMyProducts(filteredProducts);
       })
       .catch((error) => {
+        toast.success("ustgahad aldaa garlaa ");
         console.error("Error deleting product:", error);
       });
   };
   return (
     <Aside>
       <>
-        <section className=" rounded-lg grid grid-cols-2 gap-5">
+        <section className=" rounded-lg grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="col-span-1 rounded-lg p-5 bg-white">
             <Image
               width={150}
@@ -70,7 +64,7 @@ const Info = () => {
               className="rounded-full mx-auto"
             />
             <h2 className="font-bold flex justify-center">
-              {currentUser.email}
+              {currentUser?.email}
             </h2>
             {/* <button>zurag shinechleh</button> */}
           </div>

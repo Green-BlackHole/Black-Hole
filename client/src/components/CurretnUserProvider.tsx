@@ -16,11 +16,13 @@ interface CurrentUserProviderProps {
 }
 
 const CurrentUserContext = createContext<{
+  _id: any;
   currentUser?: IUser;
   setCurrentUser?: React.Dispatch<React.SetStateAction<IUser | undefined>>;
 }>({
   currentUser: undefined,
   setCurrentUser: undefined,
+  _id: undefined,
 });
 
 export const CurrentUserProvider: FC<CurrentUserProviderProps> = (props) => {

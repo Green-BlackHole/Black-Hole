@@ -20,6 +20,10 @@ export class Order {
   @Prop()
   region: string;
   @Prop()
+  productImageSrc: string;
+  @Prop()
+  price: string;
+  @Prop()
   userId: string;
   @Prop()
   productId: string;

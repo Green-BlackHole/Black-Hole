@@ -21,37 +21,7 @@ import { useContext } from "react";
 import { MyContext } from "../context/Searchcontext";
 import { useRouter } from "next/router";
 import { useQuery } from "@/hooks/useQuery";
-
-const navigation = [
-  {
-    name: "эрэгтэй",
-    submenu: true,
-    sublinks: [
-      {
-        Head: "",
-        sublinks: [
-          { name: "Өмд", link: "/categories" },
-          {
-            name: "Гутал",
-            link: "/membersPrice",
-          },
-          {
-            name: "Цүнх",
-            link: "/tmz-company",
-          },
-          {
-            name: "Аксессуар",
-            link: "/membersCpta",
-          },
-        ],
-      },
-    ],
-  },
-  { name: "эрэгтэй", href: "/categories", current: false },
-  { name: "эмэгтэй", href: "/categories", current: false },
-  { name: "хүүхэд", href: "/categories", current: false },
-  { name: "бусад", href: "/categories", current: false },
-];
+import { useCurrentUser } from "../CurretnUserProvider";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join("");
@@ -64,8 +34,9 @@ export default function Navbar() {
   const { searchValue, setSearchValue } = useContext(MyContext);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [category, setCategory] = useState([]);
-  const [count,setCount] = useState('');
-  const placeholder = `Гадуур хувцас, Үндэсний хувцас г.м ${count} бараа байна`;
+  const [count, setCount] = useState("");
+  const { currentuser }: any = useCurrentUser();
+  const placeholder = ` ${count} бараа байна`;
   useEffect(() => {
     axios.get("http://localhost:8000/products/all/count").then((res) => {
       setCount(res.data);
@@ -184,7 +155,8 @@ export default function Navbar() {
                       type="button"
                       className="rounded-full text-black hover:pb-5 text-lg p-3"
                     >
-                      <FiUser />
+                      {/* <FiUser /> */}
+                      {!currentuser ? <FiUser /> : <p>signin</p>}
                     </button>
                   </Link>
                 </div>
