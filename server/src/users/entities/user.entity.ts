@@ -15,6 +15,8 @@ export class User {
   name: string;
   @Prop()
   phoneNumber: number;
+  @Prop()
+  profileImage: string;
 
   createdAt: Date;
   updatedAt: Date;

@@ -15,6 +15,7 @@ module.exports = {
       },
       aspectRatio: {
         '12/8': '12/8',
+        '5/5':'5/5',
       },
     },
     container: {

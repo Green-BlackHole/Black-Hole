@@ -7,7 +7,7 @@ export class CreateOrderDto {
   city: string;
   region: string;
   productImageSrc: string;
-  price: string;
+  price: number;
   userId: string;
   productId: string;
   status: boolean;

@@ -24,7 +24,7 @@ export class Product {
   @Prop()
   name: string;
   @Prop()
-  price: string;
+  price: number;
   @Prop()
   productImageSrc: string;
   @Prop()

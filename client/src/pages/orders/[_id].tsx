@@ -55,6 +55,8 @@ export default function Order({ data }: { data: any }) {
     productId: order?._id,
     status: true,
   });
+  const [orderPrice,setOrderPrice] =useState(order.price+order.price/20+5000);
+
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     console.log(addOrder);
@@ -272,7 +274,7 @@ export default function Order({ data }: { data: any }) {
               <div className="col-span-1 font-semibold">5000</div>
               <div className="col-span-2 border-t-2 grid grid-cols-2 pt-3">
                 <div className="col-span-1 font-semibold"> niit une</div>
-                <div className="col-span-1 font-bold">111111</div>
+                <div className="col-span-1 font-bold">{orderPrice}</div>
               </div>
             </div>
             <button
