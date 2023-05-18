@@ -40,7 +40,7 @@ export default function Example() {
     status: true,
     productState: "",
   });
-    const uploadImg = (e: any) => {
+  const uploadImg = (e: any) => {
     const fd = new FormData();
     fd.append("file", e.target.files[0]);
     axios
@@ -56,8 +56,12 @@ export default function Example() {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
     axios
-      .post("http://localhost:8000/products/add", addProduct)
+      .post("http://localhost:8000/products/add", {
+        ...addProduct,
+        price: Number(addProduct.price) + Number(addProduct.price / 10),
+      })
       .then((res) => {
         console.log(res.data);
         toast.success("amjilttai nemegdlee");
@@ -295,12 +299,17 @@ export default function Example() {
               <input
                 onChange={(e) => handleChange(e)}
                 type="text"
-                name="price"
                 id="street-address"
+                name="price"
                 autoComplete="street-address"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
-              <p>site deer zaragdah une: <span className="font-bold">{Number(addProduct.price)+Number(addProduct.price/10)} </span></p>
+              <p>
+                site deer zaragdah une:{" "}
+                <span className="font-bold">
+                  {Number(addProduct.price) + Number(addProduct.price / 10)}{" "}
+                </span>
+              </p>
             </div>
             {/* <p className="flex justify-center py-3 mb-2">or</p>
             <button className="w-full bg-[#fff900] rounded-lg py-2">unegui ogno</button> */}

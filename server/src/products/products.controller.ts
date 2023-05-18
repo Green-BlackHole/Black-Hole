@@ -106,6 +106,10 @@ export class ProductsController {
   findMyProducts(@Param('id') id: string): Promise<Product[]> {
     return this.productsService.findMyProducts(id);
   }
+  @Get('mycount/:id')
+  findMyProductsCount(@Param('id') id: string): Promise<number> {
+    return this.productsService.findMyProductsCount(id);
+  }
   @Get('false/:id')
   findFalse(@Param('id') status: boolean): Promise<Product[]> {
     return this.productsService.findFalse(status);

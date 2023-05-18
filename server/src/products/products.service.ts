@@ -35,6 +35,9 @@ export class ProductsService {
   async findMyProducts(id: string): Promise<Product[]> {
     return await this.ProductModel.find({ userId: id });
   }
+  async findMyProductsCount(id: string): Promise<number> {
+    return await this.ProductModel.find({ userId: id }).count({});
+  }
   async findFalse(status: boolean): Promise<Product[]> {
     return await this.ProductModel.find({ status: status });
   }
