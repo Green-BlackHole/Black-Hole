@@ -9,7 +9,7 @@ export interface IProduct {
   option: string;
   about: string;
   imageAlt: string;
-  price: string;
+  price: number;
   size: string;
   createdAt: string;
   updatedAt: string;
@@ -42,6 +42,7 @@ lastName:string,
 email:string,
 phoneNumber: string,
 streetAddress:string,
+price:number;
 city: string,
 region:string,
 userId:string,

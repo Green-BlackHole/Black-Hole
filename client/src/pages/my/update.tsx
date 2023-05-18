@@ -9,6 +9,8 @@ import { IUser } from "@/interfaces/user";
 const Info = () => {
   const { currentUser, setCurrentUser } = useCurrentUser();
   const [user, setUser] = useState<IUser | any>([]);
+  const [imageUrl, setImageUrl] = useState("");
+
 
   useEffect(() => {
     axios
@@ -20,6 +22,20 @@ const Info = () => {
         console.log(err);
       });
   }, []);
+
+  const uploadImg = (e: any) => {
+    const fd = new FormData();
+    fd.append("file", e.target.files[0]);
+    axios
+      .post("http://localhost:8000/products/upload", fd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        setImageUrl(res.data.secure_url);
+      });
+  };
 
   const handleChange = (e: any) => {
     const modifiedUser = {
@@ -44,14 +60,76 @@ const Info = () => {
     <Aside>
       <section className=" rounded-lg gap-5 bg-white p-5">
         <div className="flex flex-col items-center">
-          <div>
+        {/* <div
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundColor: "#ccc",
+                overflow: "hidden",
+                border: "1px solid #f0f0f0",
+                position: "relative",
+              }}
+            >
+              <Image
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                width={1000}
+                height={100}
+                src={
+                  imageUrl ||
+                  "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png"
+                }
+                alt="add product image"
+              />
+              <input
+                type="file"
+                onChange={uploadImg}
+                multiple
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  top: 0,
+                  opacity: 0,
+                  cursor: "pointer",
+                }}
+              />
+            </div> */}
+          <div 
+           style={{
+                maxWidth: "150px",
+                maxHeight: "150px",
+                backgroundColor: "#ccc",
+                overflow: "hidden",
+                border: "1px solid #f0f0f0",
+                position: "relative",
+                borderRadius:"50%"
+              }}>
             <Image
               width={150}
               height={150}
               alt="profile"
-              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-              className="rounded-full"
+              src={imageUrl || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
+              className="rounded-full object-cover w-full h-full aspect-5/5"
             />
+            <input
+                type="file"
+                onChange={uploadImg}
+                multiple
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  top: 0,
+                  opacity: 0,
+                  cursor: "pointer",
+                }}
+              />
           </div>
           <div className="py-5 flex flex-col items-center text-gray-800 font-semibold">
             <p>{user?.name}</p>

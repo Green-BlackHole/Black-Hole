@@ -5,7 +5,7 @@ export class CreateProductDto {
   option: string;
   name: string;
   phoneNumber: string;
-  price: string;
+  price: number;
   size: string;
   streetAddress: string;
   productImageSrc: string;

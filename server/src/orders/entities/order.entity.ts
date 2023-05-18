@@ -22,7 +22,7 @@ export class Order {
   @Prop()
   productImageSrc: string;
   @Prop()
-  price: string;
+  price: number;
   @Prop()
   userId: string;
   @Prop()
