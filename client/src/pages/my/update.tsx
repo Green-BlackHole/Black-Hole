@@ -41,6 +41,7 @@ const Info = () => {
     const modifiedUser = {
       ...user,
       [e.target.name]: e.target.value,
+      profileImage:imageUrl,
     };
     setUser(modifiedUser);
   };
@@ -113,7 +114,7 @@ const Info = () => {
               width={150}
               height={150}
               alt="profile"
-              src={imageUrl || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
+              src={user?.profileImage || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
               className="rounded-full object-cover w-full h-full aspect-5/5"
             />
             <input
