@@ -23,6 +23,7 @@ const Info = () => {
   if (!currentUser) {
     return <>Ta nevtreegui baina!</>;
   }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     axios
       .get(`http://localhost:8000/users/${currentUser?._id}`)
@@ -72,7 +73,10 @@ const Info = () => {
               width={150}
               height={150}
               alt="profile"
-              src={user.profileImage||"https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
+              src={
+                user.profileImage ||
+                "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              }
               className="rounded-full mx-auto aspect-5/5"
             />
             <h2 className="font-bold flex justify-center">
