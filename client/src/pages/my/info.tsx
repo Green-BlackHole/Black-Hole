@@ -9,9 +9,11 @@ import { useCurrentUser } from "@/components/CurretnUserProvider";
 import axios from "axios";
 import ProductCard from "@/components/ProductCard";
 import { toast } from "react-toastify";
+import { IUser } from "@/interfaces/user";
 
 const Info = () => {
   const [myProducts, setMyProducts] = useState<IProduct | []>([]);
+  const [user, setUser] = useState<IUser | any>([]);
   const router = useRouter();
 
   const { currentUser } = useCurrentUser();
@@ -21,6 +23,16 @@ const Info = () => {
   if (!currentUser) {
     return <>Ta nevtreegui baina!</>;
   }
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/users/${currentUser?._id}`)
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -60,8 +72,8 @@ const Info = () => {
               width={150}
               height={150}
               alt="profile"
-              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-              className="rounded-full mx-auto"
+              src={user.profileImage||"https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
+              className="rounded-full mx-auto aspect-5/5"
             />
             <h2 className="font-bold flex justify-center">
               {currentUser?.email}
