@@ -46,7 +46,7 @@ const NavbarDropdown: FC<NavbarDropdownProps> = ({ links, isFull }) => {
                     className="hover:duration-300 text-md-medium "
                     key={`mysublinks-${index}`}
                   >
-                    <a
+                    <Link
                       href="#"
                       onClick={(e) => {
                         e.preventDefault();
@@ -57,7 +57,7 @@ const NavbarDropdown: FC<NavbarDropdownProps> = ({ links, isFull }) => {
                       className="w-full text-[rgba(0,0,0,.5)] normal-case hover:text-md hover:text-black hover:transition hover:duration-300 hover:ease-in-out"
                     >
                       {mysublinks.name}
-                    </a>
+                    </Link>
                   </li>
                   {/* ))} */}
                 </div>
