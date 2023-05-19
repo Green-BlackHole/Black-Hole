@@ -85,7 +85,7 @@ export default function HomeNavbar() {
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
-                    <Link href="/">
+                    <Link href={"/"}>
                       <Image
                         className="block h-10 w-auto lg:hidden"
                         src="/images/logo.png"

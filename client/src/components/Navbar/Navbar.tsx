@@ -298,7 +298,7 @@ export default function Navbar() {
                                 >
                                   <Link
                                     className="pl-5 focus:text-black text-[rgba(0,0,0,.5)] hover:text-black"
-                                    href="#"
+                                    href={"#"}
                                     onClick={(e) => {
                                       e.preventDefault();
                                       console.log("target", option.name);
