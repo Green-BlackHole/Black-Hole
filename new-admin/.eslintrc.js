@@ -78,6 +78,9 @@
 //     ],
 //   },
 // };
-{
-  "extends": "next/core-web-vitals";
-}
+module.exports = {
+  extends: ["react-app"],
+  // Other ESLint configurations or rules
+};
+
+

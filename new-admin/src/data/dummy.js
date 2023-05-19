@@ -42,8 +42,9 @@ import product4 from "./product4.jpg";
 import product5 from "./product5.jpg";
 import product6 from "./product6.jpg";
 import product7 from "./product7.jpg";
-import product8 from "./product8.jpg";
+// import product8 from "./product8.jpg";
 import moment from "moment";
+import { MdDelete,MdRestartAlt } from "react-icons/md";
 
 export const gridOrderImage = (props) => (
   <div className="flex justify-center">
@@ -59,6 +60,39 @@ export const gridOrderCreated = (props) => (
     {moment(props.createdAt).fromNow(true)} ago
   </div>
 );
+export const handleDelete = (id) => {
+  // Perform delete operation based on the ID
+  // For example:
+  const updatedData = ordersData.filter((item) => item._id !== id);
+  // Update the data source or perform any other necessary actions
+  ordersData = updatedData;
+};
+
+export const handleUpdate = (id) => {
+  // Perform update operation based on the ID
+  // For example:
+  const updatedItem = ordersData.find((item) => item._id === id);
+  // Perform the update logic or navigate to the update page with the item data
+  console.log("Updating item:", updatedItem);
+};
+const updateButton = (props) => {
+  return (
+    <div className=" gap-2">
+      <button
+        className="btn-update"
+        onClick={() => handleUpdate(props.data._id)}
+      >
+        <MdRestartAlt/>
+      </button>
+      <button
+        className="btn-delete"
+        onClick={() => handleDelete(props.data._id)}
+      >
+        <MdDelete/>
+      </button>
+    </div>
+  );
+};
 
 export const gridOrderStatus = (props) => (
   <button
@@ -1005,6 +1039,11 @@ export const productsGrid = [
     width: "150",
     textAlign: "Center",
   },
+  {
+  headerText:"Actions",
+            template:updateButton,
+            width:"120",
+            textAlign:"Center",}
 ];
 
 export const customersData = [

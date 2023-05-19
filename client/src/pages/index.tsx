@@ -7,7 +7,7 @@ import ImageCard from "@/components/ImageCard";
 import Reklam from "@/components/Reklam";
 import Category from "@/components/Category";
 import Layout from "@/components/Layout";
-import Carousel from "@/components/Carousel";
+import Carousel from "@/components/SpecialCategory";
 import axios from "axios";
 import { GetServerSidePropsContext } from "next";
 import { IProduct } from "@/interfaces/product";
@@ -18,6 +18,7 @@ import { Select } from "@/components/ui/Select";
 import { Pagination } from "flowbite-react";
 import Three from "@/components/Three";
 import HomeNavbar from "@/components/Homepage/HomeNavbar";
+import SpecialCategory from "@/components/SpecialCategory";
 
 const inter = Inter({ subsets: ["latin"] });
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -48,7 +49,11 @@ export default function Home({ data }: { data: IProduct[] }) {
         {/* <HomeNavbar />
       <Three />
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8"> */}
+      <SpecialCategory/>
+
         <div className="bg-white">
+        <h2 className="font-bold text-2xl">Сүүлд нэмэгдсэн</h2>
+
           <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8">
             {products.map((product) => (
               <ProductCard product={product} key={product._id} />
