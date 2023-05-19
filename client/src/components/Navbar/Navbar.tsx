@@ -36,12 +36,12 @@ export default function Navbar() {
   const { currentuser }: any = useCurrentUser();
   const placeholder = ` ${count} бараа байна`;
   useEffect(() => {
-    axios.get("http://localhost:8000/products/all/count").then((res) => {
+    axios.get(process.env.API_URL + "/products/all/count").then((res) => {
       setCount(res.data);
     });
   }, [count]);
   useEffect(() => {
-    axios.get("http://localhost:8000/categories").then((res) => {
+    axios.get(process.env.API_URL + "/categories").then((res) => {
       setCategory(res.data);
     });
   }, []);

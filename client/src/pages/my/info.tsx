@@ -26,7 +26,7 @@ const Info = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/users/${currentUser?._id}`)
+      .get(process.env.API_URL + `/users/${currentUser?._id}`)
       .then((res) => {
         setUser(res.data);
       })
@@ -38,7 +38,7 @@ const Info = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/products/ids/${currentUser?._id}`)
+      .get(process.env.API_URL + `/products/ids/${currentUser?._id}`)
       .then((res) => {
         setMyProducts(res.data);
         console.log("my product", myProducts);
@@ -49,7 +49,7 @@ const Info = () => {
   }, []);
   const deleteProduct = (productId: string) => {
     axios
-      .delete(`http://localhost:8000/products/${productId}`)
+      .delete(process.env.API_URL + `/products/${productId}`)
       .then((response) => {
         toast.success("amjilttai ustgalaa");
 

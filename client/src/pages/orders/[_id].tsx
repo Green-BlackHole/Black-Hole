@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import React, { ChangeEvent, FC, Suspense, useEffect, useState } from "react";
 
 export const getStaticPaths = async () => {
-  const response = await fetch("http://localhost:8000/products/idm/id");
+  const response = await fetch(process.env.API_URL + "/products/idm/id");
   const data = await response.json();
 
   const paths = data.map((_id: string) => ({
@@ -26,7 +26,9 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
-  const response = await fetch(`http://localhost:8000/products/${params?._id}`);
+  const response = await fetch(
+    process.env.API_URL + `/products/${params?._id}`
+  );
   const data = await response.json();
 
   return {
@@ -55,13 +57,15 @@ export default function Order({ data }: { data: any }) {
     productId: order?._id,
     status: true,
   });
-  const [orderPrice,setOrderPrice] =useState(order.price+order.price/20+5000);
+  const [orderPrice, setOrderPrice] = useState(
+    order.price + order.price / 20 + 5000
+  );
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     console.log(addOrder);
     axios
-      .post("http://localhost:8000/orders/add", addOrder)
+      .post(process.env.API_URL + "/orders/add", addOrder)
       .then((res) => {
         console.log(res.data);
       })
