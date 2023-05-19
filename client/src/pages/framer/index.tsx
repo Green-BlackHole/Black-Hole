@@ -9,30 +9,33 @@ import {
   MotionValue,
 } from "framer-motion";
 import Layout from "@/components/Layout";
+import Image from "next/image";
 
 function useParallax(value: MotionValue<number>, distance: number) {
   return useTransform(value, [0, 1.5], [-distance, distance]);
 }
 
-function Image({ id }: { id: number }) {
+function Zurag({ id }: { id: number }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref });
   const y = useParallax(scrollYProgress, 400);
 
   return (
     <>
-    <div className="flex items-center justify-center">
-      <section className="text-[rgb(0,255,255)] font-bold text-4xl">
-        <div ref={ref}>
-          <img
-            src={`https://www.fonewalls.com/wp-content/uploads/1536x2048-Background-HD-Wallpaper-006-300x400.jpg`}
-            alt="A London skyscraper"
-            className="m-2"
-          />
-        </div>
-        <motion.h2 style={{ y }} className="ml-48">{`#00${id}`}</motion.h2>
-      </section>
-      <div className="h-[30rem]"></div>
+      <div className="flex items-center justify-center">
+        <section className="text-[rgb(0,255,255)] font-bold text-4xl">
+          <div ref={ref}>
+            <Image
+              width={1000}
+              height={100}
+              src={`https://www.fonewalls.com/wp-content/uploads/1536x2048-Background-HD-Wallpaper-006-300x400.jpg`}
+              alt="A London skyscraper"
+              className="m-2"
+            />
+          </div>
+          <motion.h2 style={{ y }} className="ml-48">{`#00${id}`}</motion.h2>
+        </section>
+        <div className="h-[30rem]"></div>
       </div>
     </>
   );
@@ -51,7 +54,7 @@ export default function App() {
       <Layout>
         {[1, 2].map((image) => (
           <>
-            <Image id={image} key={image} alt={image} />
+            <Zurag id={image} key={image} alt={image} />
           </>
         ))}
         <div className="h-screen"></div>

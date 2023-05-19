@@ -20,6 +20,7 @@ import { log } from "console";
 import { useRecoilState } from "recoil";
 import { useContext } from "react";
 import { MyContext } from "@/components/context/Searchcontext";
+import Link from "next/link";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -181,7 +182,7 @@ export default function Category({ data }: { data: IProduct }) {
                                       key={option.value}
                                       className="flex items-center"
                                     >
-                                      <a
+                                      <Link
                                         className="pl-5 focus:text-black text-[rgba(0,0,0,.5)] hover:text-black"
                                         href="#"
                                         onClick={(e) => {
@@ -193,7 +194,7 @@ export default function Category({ data }: { data: IProduct }) {
                                         }}
                                       >
                                         {option.name}
-                                      </a>
+                                      </Link>
                                     </div>
                                   ))}
                                 </div>
@@ -298,7 +299,7 @@ export default function Category({ data }: { data: IProduct }) {
                                   key={option.sub_id}
                                   className="flex items-center"
                                 >
-                                  <a
+                                  <Link
                                     className="pl-5 focus:text-black text-[rgba(0,0,0,.5)] hover:text-black"
                                     href="#"
                                     onClick={(e) => {
@@ -310,7 +311,7 @@ export default function Category({ data }: { data: IProduct }) {
                                     }}
                                   >
                                     {option.name}
-                                  </a>
+                                  </Link>
                                 </div>
                               ))}
                             </div>

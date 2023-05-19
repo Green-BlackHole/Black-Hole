@@ -1,4 +1,5 @@
 import { Accordion } from "flowbite-react";
+import Link from "next/link";
 import React from "react";
 
 export default function Category() {
@@ -10,20 +11,16 @@ export default function Category() {
           <Accordion.Content>
             <ul className="px-3">
               <li>
-            <a href="">huvtsas</a>
-
+                <Link href="">huvtsas</Link>
               </li>
               <li>
-            <a href="">gutal</a>
-
+                <Link href="">gutal</Link>
               </li>
               <li>
-            <a href="">omd</a>
-
+                <Link href="">omd</Link>
               </li>
               <li>
-            <a href="">tsamts</a>
-
+                <Link href="">tsamts</Link>
               </li>
             </ul>
           </Accordion.Content>
@@ -38,12 +35,12 @@ export default function Category() {
             </p>
             <p className="text-gray-500 dark:text-gray-400">
               Check out the
-              <a
+              <Link
                 href="https://flowbite.com/figma/"
                 className="text-blue-600 hover:underline dark:text-blue-500"
               >
                 Figma design system
-              </a>
+              </Link>
               based on the utility classes from Tailwind CSS and components from
               Flowbite.
             </p>
@@ -69,21 +66,21 @@ export default function Category() {
             </p>
             <ul className="list-disc pl-5 text-gray-500 dark:text-gray-400">
               <li>
-                <a
+                <Link
                   href="https://flowbite.com/pro/"
                   className="text-blue-600 hover:underline dark:text-blue-500"
                 >
                   Flowbite Pro
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="https://tailwindui.com/"
                   rel="nofollow"
                   className="text-blue-600 hover:underline dark:text-blue-500"
                 >
                   Tailwind UI
-                </a>
+                </Link>
               </li>
             </ul>
           </Accordion.Content>

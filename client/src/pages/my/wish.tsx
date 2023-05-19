@@ -1,4 +1,6 @@
+import Link from "next/link";
 import Aside from "./profile";
+import Image from "next/image";
 
 const Wish = () => {
   const products = [
@@ -27,7 +29,9 @@ const Wish = () => {
               {products.map((product) => (
                 <div key={product.id} className="group relative">
                   <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                    <img
+                    <Image
+                      width={1000}
+                      height={100}
                       src={product.imageSrc}
                       alt={product.imageAlt}
                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"
@@ -36,13 +40,13 @@ const Wish = () => {
                   <div className="mt-4 flex justify-between">
                     <div>
                       <h3 className="text-sm text-gray-700">
-                        <a href={product.href}>
+                        <Link href={product.href}>
                           <span
                             aria-hidden="true"
                             className="absolute inset-0"
                           />
                           {product.name}
-                        </a>
+                        </Link>
                       </h3>
                       <p className="mt-1 text-sm text-gray-500">
                         {product.color}

@@ -11,18 +11,18 @@ const Footer = () => {
             {/* Logo */}
             <div className="flex justify-between">
               <div className="mb-6 md:mb-0">
-                <a href="https://flowbite.com" className="flex items-center">
+                <Link href="/" className="flex items-center">
                   <Image
                     width={50}
                     height={50}
-                    src="https://flowbite.com/docs/images/logo.svg"
-                    className="mr-3 h-8"
+                    src="/images/logo2.png"
+                    className="mr-3 h-8 rounded-full"
                     alt="logo"
                   />
                   <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                     So-goos
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -61,8 +61,18 @@ const Footer = () => {
                   <ul className=" text-gray-600 dark:text-gray-400">
                     <li className="mb-4">+976 99112233</li>
                     <li className="flex  mt-4 space-x-6  sm:mt-0">
-                      <BsFacebook />
-                      <BsInstagram />
+                      <Link
+                        href="https://www.facebook.com/profile.php?id=100092222750593"
+                        target="https://www.facebook.com/profile.php?id=100092222750593"
+                      >
+                        <BsFacebook />
+                      </Link>
+                      <Link
+                        href="https://www.instagram.com/"
+                        target="https://www.instagram.com/"
+                      >
+                        <BsInstagram />
+                      </Link>
                       <Link
                         href="https://www.youtube.com/"
                         target="https://www.youtube.com/"
@@ -83,9 +93,9 @@ const Footer = () => {
           <div className="text-center">
             <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
               © 2023{" "}
-              <a href="#" className="hover:underline">
+              <Link href="#" className="hover:underline">
                 So-goos™
-              </a>
+              </Link>
               . All Rights Reserved.
             </span>
           </div>
