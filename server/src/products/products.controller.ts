@@ -140,7 +140,6 @@ export class ProductsController {
 
   @Delete(':_id')
   remove(@Param('_id') _id: string) {
-    console.log('delet', _id);
     return this.productsService.remove(_id);
   }
 }

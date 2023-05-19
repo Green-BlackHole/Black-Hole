@@ -106,18 +106,27 @@ const Info = () => {
         </section>
         <h2 className="font-bold text-3xl mt-10">my product</h2>
 
-        <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8">
+        <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 xl:gap-x-8">
           {myProducts?.map((product) => (
             // eslint-disable-next-line react/jsx-key
             <div>
               <Link href={`/products/${product._id}`} key={product._id}>
-                <Image
+                {/* <Image
                   src={product.productImageSrc}
                   alt="image"
                   width={1000}
                   height={100}
-                  className="h-36 object-cover rounded-lg cursor-pointer"
-                />
+                  className=" object-cover rounded-lg cursor-pointer aspect-5/5"
+                /> */}
+                <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
+                  <Image
+                    src={product.productImageSrc}
+                    alt={product.name}
+                    className="h-full w-full object-cover object-center lg:h-full lg:w-full aspect-12/8"
+                    width={1000}
+                    height={100}
+                  />
+                </div>
               </Link>
               <div className="mt-4 flex justify-between ">
                 <div>
