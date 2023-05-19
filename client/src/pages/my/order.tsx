@@ -7,7 +7,7 @@ import ProductCard from "@/components/ProductCard";
 import { IOrder } from "@/interfaces/product";
 
 const Order = () => {
-  const [myOrders, setMyOrders] = useState<IOrder | []>([]);
+  const [myOrders, setMyOrders] = useState<IOrder[] | []>([]);
   const { currentUser } = useCurrentUser();
   useEffect(() => {
     axios

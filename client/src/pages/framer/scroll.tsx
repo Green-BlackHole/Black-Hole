@@ -1,13 +1,8 @@
 import Layout from "@/components/Layout";
 import Image from "next/image";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { useEffect } from "react";
 
 export default function Scroll() {
-  useEffect(() => {
-    AOS.init({ duration: 2000 });
-  });
   return (
     <>
       <Layout>

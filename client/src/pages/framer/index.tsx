@@ -54,7 +54,7 @@ export default function App() {
       <Layout>
         {[1, 2].map((image) => (
           <>
-            <Zurag id={image} key={image} alt={image} />
+            <Zurag id={image} key={image} />
           </>
         ))}
         <div className="h-screen"></div>

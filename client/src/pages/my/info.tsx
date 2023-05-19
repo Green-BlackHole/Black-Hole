@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { IUser } from "@/interfaces/user";
 
 const Info = () => {
-  const [myProducts, setMyProducts] = useState<IProduct | []>([]);
+  const [myProducts, setMyProducts] = useState<IProduct[] | []>([]);
   const [user, setUser] = useState<IUser | any>([]);
   const router = useRouter();
 

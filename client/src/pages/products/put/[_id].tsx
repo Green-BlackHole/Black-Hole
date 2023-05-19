@@ -21,7 +21,7 @@ export default function update() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [subCategories, setSubCategories] = useState<IOption[]>([]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [product, setProduct] = useState<IProduct>([]);
+  const [product, setProduct] = useState<IProduct>({} as IProduct);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const a = useRouter();
@@ -307,7 +307,7 @@ export default function update() {
                 onChange={(e) =>
                   setProduct({
                     ...product,
-                    price: e.target.value,
+                    price: Number(e.target.value),
                   })
                 }
                 value={product?.price}

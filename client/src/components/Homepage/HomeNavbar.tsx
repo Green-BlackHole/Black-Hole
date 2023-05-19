@@ -15,8 +15,6 @@ import { HiSearch } from "react-icons/hi";
 import { FiPlusCircle, FiUser, FiHeart } from "react-icons/fi";
 import NavbarDropdown from "../NavbarDropdown";
 import axios from "axios";
-import { value } from "@/atoms/atoms";
-// import { useRecoilState } from "recoil";
 import { useContext } from "react";
 import { MyContext } from "../context/Searchcontext";
 import { useRouter } from "next/router";

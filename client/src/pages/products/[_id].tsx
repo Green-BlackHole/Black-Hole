@@ -55,12 +55,14 @@ interface Props {
 
 const Index: FC<Props> = ({ data }) => {
   const product = data;
-  const [category, setCategory] = useState<IProduct>([]);
+  const [category, setCategory] = useState<IProduct>({} as IProduct);
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
   useEffect(() => {
     axios
       .get(`http://localhost:8000/products?category=${product.option}`)
       .then((res) => {
         setCategory(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -68,7 +70,7 @@ const Index: FC<Props> = ({ data }) => {
   }, []);
 
   if (!product) return <>page not found</>;
-
+  if (isLoading) return;
   return (
     <>
       <Layout>
