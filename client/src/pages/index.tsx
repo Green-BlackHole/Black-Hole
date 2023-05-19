@@ -49,10 +49,10 @@ export default function Home({ data }: { data: IProduct[] }) {
         {/* <HomeNavbar />
       <Three />
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8"> */}
-      <SpecialCategory/>
+        {/* <SpecialCategory/> */}
 
         <div className="bg-white">
-        <h2 className="font-bold text-2xl">Сүүлд нэмэгдсэн</h2>
+          <h2 className="font-bold text-2xl">Сүүлд нэмэгдсэн</h2>
 
           <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8">
             {products.map((product) => (
