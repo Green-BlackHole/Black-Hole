@@ -85,23 +85,21 @@ export default function HomeNavbar() {
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
-                    <Link href="/">
-                      <a>
-                        <Image
-                          className="block h-10 w-auto lg:hidden"
-                          src="/images/logo.png"
-                          alt="Your Company"
-                          width={100}
-                          height={100}
-                        />
-                        <Image
-                          className="hidden h-10 w-auto lg:block"
-                          src="/images/logo.png"
-                          alt="Your Company"
-                          width={100}
-                          height={100}
-                        />
-                      </a>
+                    <Link href={"/"}>
+                      <Image
+                        className="block h-10 w-auto lg:hidden"
+                        src="/images/logo.png"
+                        alt="Your Company"
+                        width={100}
+                        height={100}
+                      />
+                      {/* <Image
+                        className="hidden h-10 w-auto lg:block"
+                        src="/images/logo.png"
+                        alt="Your Company"
+                        width={100}
+                        height={100}
+                      /> */}
                     </Link>
                   </div>
                 </div>
