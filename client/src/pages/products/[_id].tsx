@@ -55,13 +55,13 @@ interface Props {
 
 const Index: FC<Props> = ({ data }) => {
   const product = data;
-  const [category, setCategory] = useState<IProduct>({} as IProduct);
+  const [categoryProducts, setCategoryProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   useEffect(() => {
     axios
       .get(`http://localhost:8000/products?category=${product.option}`)
       .then((res) => {
-        setCategory(res.data);
+        setCategoryProducts(res.data);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -69,8 +69,8 @@ const Index: FC<Props> = ({ data }) => {
       });
   }, []);
 
-  if (!product) return <>page not found</>;
-  if (isLoading) return;
+  if (!product && !isLoading) return <>page not found</>;
+
   return (
     <>
       <Layout>
@@ -176,7 +176,7 @@ const Index: FC<Props> = ({ data }) => {
         <h2 className="font-bold text-2xl">Төстэй бараанууд</h2>
 
         <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8">
-          {category.map((product) => (
+          {categoryProducts.map((product) => (
             <ProductCard product={product} key={product._id} />
           ))}
         </div>
