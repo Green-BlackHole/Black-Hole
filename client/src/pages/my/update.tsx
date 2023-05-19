@@ -11,10 +11,9 @@ const Info = () => {
   const [user, setUser] = useState<IUser | any>([]);
   const [imageUrl, setImageUrl] = useState("");
 
-
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/users/${currentUser?._id}`)
+      .get(process.env.API_URL + `/users/${currentUser?._id}`)
       .then((res) => {
         setUser(res.data);
       })
@@ -27,7 +26,7 @@ const Info = () => {
     const fd = new FormData();
     fd.append("file", e.target.files[0]);
     axios
-      .post("http://localhost:8000/products/upload", fd, {
+      .post(process.env.API_URL + "/products/upload", fd, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -41,7 +40,7 @@ const Info = () => {
     const modifiedUser = {
       ...user,
       [e.target.name]: e.target.value,
-      profileImage:imageUrl,
+      profileImage: imageUrl,
     };
     setUser(modifiedUser);
   };
@@ -49,7 +48,7 @@ const Info = () => {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     axios
-      .patch(`http://localhost:8000/users/${currentUser?._id}`, user)
+      .patch(process.env.API_URL + `/users/${currentUser?._id}`, user)
       .then((res) => {
         toast.success("amjilttai shinechillee");
       })
@@ -61,7 +60,7 @@ const Info = () => {
     <Aside>
       <section className=" rounded-lg gap-5 bg-white p-5">
         <div className="flex flex-col items-center">
-        {/* <div
+          {/* <div
               style={{
                 width: "100%",
                 height: "100%",
@@ -100,37 +99,41 @@ const Info = () => {
                 }}
               />
             </div> */}
-          <div 
-           style={{
-                maxWidth: "150px",
-                maxHeight: "150px",
-                backgroundColor: "#ccc",
-                overflow: "hidden",
-                border: "1px solid #f0f0f0",
-                position: "relative",
-                borderRadius:"50%"
-              }}>
+          <div
+            style={{
+              maxWidth: "150px",
+              maxHeight: "150px",
+              backgroundColor: "#ccc",
+              overflow: "hidden",
+              border: "1px solid #f0f0f0",
+              position: "relative",
+              borderRadius: "50%",
+            }}
+          >
             <Image
               width={150}
               height={150}
               alt="profile"
-              src={user?.profileImage || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
+              src={
+                user?.profileImage ||
+                "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              }
               className="rounded-full object-cover w-full h-full aspect-5/5"
             />
             <input
-                type="file"
-                onChange={uploadImg}
-                multiple
-                style={{
-                  position: "absolute",
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  top: 0,
-                  opacity: 0,
-                  cursor: "pointer",
-                }}
-              />
+              type="file"
+              onChange={uploadImg}
+              multiple
+              style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                bottom: 0,
+                top: 0,
+                opacity: 0,
+                cursor: "pointer",
+              }}
+            />
           </div>
           <div className="py-5 flex flex-col items-center text-gray-800 font-semibold">
             <p>{user?.name}</p>

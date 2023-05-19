@@ -20,7 +20,7 @@ export default function Example() {
   const [subCategories, setSubCategories] = useState<IOption[]>([]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    axios.get("http://localhost:8000/categories").then((res) => {
+    axios.get(process.env.API_URL + "/categories").then((res) => {
       setCategory(res.data);
     });
   }, [category, setCategory]);
@@ -44,7 +44,7 @@ export default function Example() {
     const fd = new FormData();
     fd.append("file", e.target.files[0]);
     axios
-      .post("http://localhost:8000/products/upload", fd, {
+      .post(process.env.API_URL + "/products/upload", fd, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -58,7 +58,7 @@ export default function Example() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8000/products/add", {
+      .post(process.env.API_URL + "/products/add", {
         ...addProduct,
         price: Number(addProduct.price) + Number(addProduct.price / 10),
       })

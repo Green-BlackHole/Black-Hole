@@ -29,7 +29,7 @@ export default function update() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/products/${_id}`)
+      .get(process.env.API_URL + `/products/${_id}`)
       .then((res) => {
         setProduct(res.data);
       })
@@ -39,7 +39,7 @@ export default function update() {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    axios.get("http://localhost:8000/categories").then((res) => {
+    axios.get(process.env.API_URL + "/categories").then((res) => {
       setCategory(res.data);
     });
   }, [category, setCategory]);
@@ -48,7 +48,7 @@ export default function update() {
     const fd = new FormData();
     fd.append("file", e.target.files[0]);
     axios
-      .post("http://localhost:8000/products/upload", fd, {
+      .post(process.env.API_URL + "/products/upload", fd, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -62,7 +62,7 @@ export default function update() {
     e.preventDefault();
     console.log("product:", product);
     axios
-      .patch(`http://localhost:8000/products/${product._id}`, product)
+      .patch(process.env.API_URL + `/products/${product._id}`, product)
       .then((res) => {
         console.log("Product updated successfully:", res.data);
         toast.success("amjilttai shinechillee");

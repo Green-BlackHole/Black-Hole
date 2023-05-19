@@ -6,7 +6,7 @@ export const useData = () => {
     async function getServerSideProps(context: GetServerSidePropsContext) {
       const { query } = context;
       const { ordering = "", limit = 25, search = "", page = 0 } = query;
-      const response = await axios.get(`http://localhost:8000?${path}`);
+      const response = await axios.get(process.env.API_URL + `?${path}`);
       console.log("path", path);
     }
   };

@@ -25,7 +25,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { query } = context;
   const { ordering = "", limit = 25, search = "", page = 0 } = query;
   const response = await axios.get(
-    `http://localhost:8000/products?limit=12&search=${search}&ordering${ordering}`
+    process.env.API_URL +
+      `/products?limit=12&search=${search}&ordering${ordering}`
   );
   const { data } = response;
   return {
