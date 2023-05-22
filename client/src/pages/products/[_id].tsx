@@ -28,9 +28,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
-  const response = await fetch(
-    process.env.API_URL + `/products/${params?._id}`
-  );
+  const response = await fetch(process.env.API_URL + `/products/${params?._id}`);
   const data = await response.json();
 
   return {
@@ -61,9 +59,24 @@ const Index: FC<Props> = ({ data }) => {
   const removeWishlist =
     "https://cdn.icon-icons.com/icons2/3553/PNG/512/wishlist_favorites_favorite_heart_like_ecommerce_icon_224938.png";
   const [wishlist, setWishlist] = useState(true);
+  // useEffect(()=>{
+  //    //product ni wishlisted bgaa esehiig shalgaj bgaa
+  //    axios
+  //    .get(process.env.API_URL + `/wishlist/${product._id}`, {
+  //      data: { userId: product.userId },
+  //    })
+  //    .then((response) => {
+  //     console.log("res",response)
+
+  //      return setWishlist(false);
+  //    })
+  //    .catch((error) => {
+  //      console.error("Error deleting product:", error);
+  //    });
+  // },[])
   function handleWishlist(product: any) {
+    //productiig wishliisted bhguu bol nemeed zurgiine solino
     setWishlist(!wishlist);
-    console.log(wishlist);
     wishlist &&
       axios
         .post(process.env.API_URL + "/wishlist", product)
@@ -73,6 +86,8 @@ const Index: FC<Props> = ({ data }) => {
         .catch((err) => {
           console.log(err);
         });
+    //productiig wishliisted bgaa bol hasaad zurgiine solino
+
     !wishlist && deleteWishlist(product._id);
   }
   const deleteWishlist = (productId: string) => {
@@ -80,12 +95,8 @@ const Index: FC<Props> = ({ data }) => {
       .delete(process.env.API_URL + `/wishlist/${productId}`, {
         data: { userId: product.userId },
       })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error deleting product:", error);
-      });
+      .then((response) => {})
+      .catch((error) => {});
   };
 
   const [categoryProducts, setCategoryProducts] = useState<IProduct[]>([]);

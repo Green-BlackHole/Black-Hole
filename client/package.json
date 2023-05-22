@@ -46,6 +46,7 @@
     "react-globe": "^5.0.2",
     "react-globe.gl": "^2.24.1",
     "react-icons": "^4.8.0",
+    "react-parallax-tilt": "^1.7.140",
     "react-responsive-carousel": "^3.2.23",
     "react-simple-typewriter": "^5.0.1",
     "react-three-fiber": "^6.0.13",
@@ -60,5 +61,8 @@
     "three-stdlib": "^2.21.11",
     "typescript": "5.0.4",
     "typewriter-effect": "^2.19.0"
+  },
+  "devDependencies": {
+    "@types/aos": "^3.0.4"
   }
 }

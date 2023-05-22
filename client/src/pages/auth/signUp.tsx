@@ -1,11 +1,18 @@
+import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
+import Navbar from "@/components/Navbar/Navbar";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ChangeEvent, useState } from "react";
+import { BsFacebook } from "react-icons/bs";
+import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
+import Tilt from "react-parallax-tilt";
+import { kMaxLength } from "buffer";
 
-export default function signup() {
+export default function Signup() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -34,7 +41,7 @@ export default function signup() {
       .post(process.env.API_URL + "/signup", user)
       .then((res) => {
         console.log(res.data);
-        router.push("/auth/signin");
+        router.push("/auth/login");
         toast.success("Amjilttai burtgelee", {
           position: "top-right",
           autoClose: 4000,
@@ -66,122 +73,99 @@ export default function signup() {
     });
   };
   return (
-    <Layout>
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 grid grid-cols-6 items-center ">
-        <div className="col-span-3 max-md:col-span-6">
-          <form
-            onSubmit={handleSubmit}
-            className="w-2/3 mx-auto border rounded-2xl p-5 shadow-2xl"
-          >
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                нэр
-              </label>
-              <div className="mt-2">
-                <input
-                  onChange={(e) => handleChange(e)}
-                  id="name"
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="phoneNumber"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Утасны дугаар
-              </label>
-              <div className="mt-2">
-                <input
-                  onChange={(e) => handleChange(e)}
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  type="number"
-                  autoComplete="phoneNumber"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  onChange={(e) => handleChange(e)}
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Password
-              </label>
-              <div className="mt-2">
-                <input
-                  onChange={(e) => handleChange(e)}
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="repassword"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                repessword
-              </label>
-              <div className="mt-2">
-                <input
-                  onChange={(e) => handleChange(e)}
-                  id="repassword"
-                  name="repassword"
-                  type="password"
-                  autoComplete="repassword"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="bg-indigo-400/100 w-full rounded-2xl py-1 cursor-pointer my-7"
-            >
-              бүртгүүлэх
-            </button>
-          </form>
-        </div>
-        <div className="col-span-3 max-md:col-span-6">
-          <Image
-            src={
-              "https://scribie.com/assets/front/illustrations/Welcome-to-scribie-512x391.svg"
-            }
-            alt={"signup imaged"}
+    <>
+      <Navbar />
+      <div className="grid grid-cols-1 sm:grid-cols-2 h-screen w-full">
+        <div className="hidden sm:block">
+          <img
+            className="w-full h-full object-cover bg-cover"
+            src="/images/login.png"
+            alt="login"
             width={1000}
             height={100}
           />
         </div>
+        <div className="bg-gray-50 flex flex-col justify-center">
+          <Tilt transitionSpeed={10000}>
+            <form
+              className="max-w-[400px] w-full mx-auto rounded-lg bg-gray-200 p-8 px-8"
+              onSubmit={handleSubmit}
+            >
+              <h2 className="text-4xl text-slate-700 font-bold text-center">
+                SIGN UP
+              </h2>
+              <div className="flex flex-col text-gray-400 py-2">
+                <label>Email</label>
+                <input
+                  onChange={handleChange}
+                  name="email"
+                  className="rounded-lg bg-gray-50 mt-2 p-2 focus:border-blue-500 focus:bg-white focus:outline-none"
+                  type="text"
+                  placeholder="example@mail.com"
+                />
+              </div>
+              <div className="flex flex-col text-gray-400 py-2">
+                <label>Password</label>
+                <input
+                  onChange={handleChange}
+                  name="password"
+                  className="rounded-lg bg-gray-50 mt-2 p-2 focus:border-blue-500 focus:bg-white focus:outline-none"
+                  type="password"
+                  placeholder="********"
+                />
+              </div>
+              <div className="flex flex-col text-gray-400 py-2">
+                <label>Re-enter Password</label>
+                <input
+                  onChange={handleChange}
+                  name="repassword"
+                  className="rounded-lg bg-gray-50 mt-2 p-2 focus:border-blue-500 focus:bg-white focus:outline-none"
+                  type="password"
+                  placeholder="********"
+                />
+              </div>
+              <div className="flex justify-between text-gray-400 py-2">
+                <p className="flex items-center">
+                  <input className="mr-2" type="checkbox" /> Remember Me
+                </p>
+                <p>Forgot Password</p>
+              </div>
+              <button className="w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-slate-900 font-semibold rounded-lg">
+                SIGN UP
+              </button>
+
+              <button className="w-full cursor-pointer my-5">
+                <div className="flex items-center justify-center bg-white p-3 rounded-lg">
+                  <div>
+                    <FcGoogle />
+                  </div>
+                  <p className="text-black pl-4 font-bold">Google</p>
+                </div>
+              </button>
+
+              <button className="w-full cursor-pointer mb-3">
+                <div className=" flex items-center justify-center bg-white p-3 rounded-lg">
+                  <div>
+                    <BsFacebook className="text-blue-600" />
+                  </div>
+                  <p className="text-black pl-4 font-bold">Facebook</p>
+                </div>
+              </button>
+
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                Don’t have an account yet?{" "}
+                <Link
+                  href="/login"
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
+                  Sign in
+                </Link>
+              </p>
+            </form>
+          </Tilt>
+        </div>
       </div>
-    </Layout>
+      <Footer />
+    </>
   );
 }

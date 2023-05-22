@@ -36,12 +36,12 @@ export default function Navbar() {
   const { currentuser }: any = useCurrentUser();
   const placeholder = ` ${count} бараа байна`;
   useEffect(() => {
-    axios.get(process.env.API_URL + "/products/all/count").then((res) => {
+    axios.get( process.env.API_URL + "/products/all/count").then((res) => {
       setCount(res.data);
     });
   }, [count]);
   useEffect(() => {
-    axios.get(process.env.API_URL + "/categories").then((res) => {
+    axios.get( process.env.API_URL + "/categories").then((res) => {
       setCategory(res.data);
     });
   }, []);
@@ -130,7 +130,7 @@ export default function Navbar() {
                     }}
                   />
 
-                  <Link href={"/products/add"}>
+                  <Link href={"/my/wish"}>
                     <button
                       type="button"
                       className="rounded-full text-black hover:pb-5 text-lg p-3"
