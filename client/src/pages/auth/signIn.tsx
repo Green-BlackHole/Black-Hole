@@ -22,7 +22,7 @@ export default function Signin() {
     e.preventDefault();
     const status = 201;
     axios
-      .post(process.env.API_URL + "/signin", user)
+      .post(process.env.NEXT_PUBLIC_API_URL + "/signin", user)
       .then((res) => {
         // router.push("/");
         // console.log("res data is", res.data);
@@ -41,7 +41,7 @@ export default function Signin() {
             theme: "light",
           });
           axios
-            .get(process.env.API_URL + "/currentUser", {
+            .get(process.env.NEXT_PUBLIC_API_URL + "/currentUser", {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
               },

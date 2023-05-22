@@ -13,7 +13,7 @@ import { FC, useEffect, useState } from "react";
 import moment from "moment";
 
 export const getStaticPaths = async () => {
-  const response = await fetch(process.env.API_URL + "/products/idm/id");
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/products/idm/id");
   const data = await response.json();
 
   const paths = data.map((_id: string) => ({
@@ -28,7 +28,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
-  const response = await fetch(process.env.API_URL + `/products/${params?._id}`);
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/products/${params?._id}`);
   const data = await response.json();
 
   return {
@@ -43,7 +43,7 @@ interface Props {
 // const [myProducts,setMyProducts]= useState();
 // useEffect(() => {
 //   axios
-//     .get(process.env.API_URL + `/products/ids/${currentUser?._id}`)
+//     .get(process.env.NEXT_PUBLIC_API_URL + `/products/ids/${currentUser?._id}`)
 //     .then((res) => {
 //       setMyProducts(res.data);
 //       console.log("my product", myProducts);
@@ -59,27 +59,26 @@ const Index: FC<Props> = ({ data }) => {
   const removeWishlist =
     "https://cdn.icon-icons.com/icons2/3553/PNG/512/wishlist_favorites_favorite_heart_like_ecommerce_icon_224938.png";
   const [wishlist, setWishlist] = useState(true);
-  // useEffect(()=>{
-  //    //product ni wishlisted bgaa esehiig shalgaj bgaa
-  //    axios
-  //    .get(process.env.API_URL + `/wishlist/${product._id}`, {
-  //      data: { userId: product.userId },
-  //    })
-  //    .then((response) => {
-  //     console.log("res",response)
+  useEffect(()=>{
+     //product ni wishlisted bgaa esehiig shalgaj bgaa
+     axios
+     .get(process.env.NEXT_PUBLIC_API_URL + `/wishlist/${product._id}?userId=${product.userId}`
+     )
+     .then((response) => {
+      console.log("res",response)
 
-  //      return setWishlist(false);
-  //    })
-  //    .catch((error) => {
-  //      console.error("Error deleting product:", error);
-  //    });
-  // },[])
+        setWishlist(false);
+     })
+     .catch((error) => {
+       console.error("Error deleting product:", error);
+     });
+  },[])
   function handleWishlist(product: any) {
     //productiig wishliisted bhguu bol nemeed zurgiine solino
-    setWishlist(!wishlist);
+    
     wishlist &&
       axios
-        .post(process.env.API_URL + "/wishlist", product)
+        .post(process.env.NEXT_PUBLIC_API_URL + "/wishlist", product)
         .then((res) => {
           console.log(res.data);
         })
@@ -89,10 +88,12 @@ const Index: FC<Props> = ({ data }) => {
     //productiig wishliisted bgaa bol hasaad zurgiine solino
 
     !wishlist && deleteWishlist(product._id);
+    
+    setWishlist(!wishlist);
   }
   const deleteWishlist = (productId: string) => {
     axios
-      .delete(process.env.API_URL + `/wishlist/${productId}`, {
+      .delete(process.env.NEXT_PUBLIC_API_URL + `/wishlist/${productId}`, {
         data: { userId: product.userId },
       })
       .then((response) => {})
@@ -103,7 +104,7 @@ const Index: FC<Props> = ({ data }) => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   useEffect(() => {
     axios
-      .get(process.env.API_URL + `/products?category=${product.option}`)
+      .get(process.env.NEXT_PUBLIC_API_URL + `/products?category=${product.option}`)
       .then((res) => {
         setCategoryProducts(res.data);
         setIsLoading(false);

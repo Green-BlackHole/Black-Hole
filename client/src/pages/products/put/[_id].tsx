@@ -7,6 +7,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { IOption, IProduct } from "@/interfaces/product";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function update() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -29,7 +30,7 @@ export default function update() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     axios
-      .get(process.env.API_URL + `/products/${_id}`)
+      .get(process.env.NEXT_PUBLIC_API_URL + `/products/${_id}`)
       .then((res) => {
         setProduct(res.data);
       })
@@ -39,7 +40,7 @@ export default function update() {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    axios.get(process.env.API_URL + "/categories").then((res) => {
+    axios.get(process.env.NEXT_PUBLIC_API_URL + "/categories").then((res) => {
       setCategory(res.data);
     });
   }, [category, setCategory]);
@@ -48,7 +49,7 @@ export default function update() {
     const fd = new FormData();
     fd.append("file", e.target.files[0]);
     axios
-      .post(process.env.API_URL + "/products/upload", fd, {
+      .post(process.env.NEXT_PUBLIC_API_URL + "/products/upload", fd, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -62,7 +63,7 @@ export default function update() {
     e.preventDefault();
     console.log("product:", product);
     axios
-      .patch(process.env.API_URL + `/products/${product._id}`, product)
+      .patch(process.env.NEXT_PUBLIC_API_URL + `/products/${product._id}`, product)
       .then((res) => {
         console.log("Product updated successfully:", res.data);
         toast.success("amjilttai shinechillee");

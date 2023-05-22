@@ -23,9 +23,9 @@ import SpecialCategory from "@/components/SpecialCategory";
 const inter = Inter({ subsets: ["latin"] });
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { query } = context;
-  const { ordering = "", limit = 25, search = "", page = 0 } = query;
+  const { ordering = "", limit = 15, search = "", page = 0 } = query;
   const response = await axios.get(
-      `http://localhost:8000/products?limit=12&search=${search}&ordering${ordering}`
+      `http://localhost:8000/products?limit=${limit}&search=${search}&ordering${ordering}`
   );
   const { data } = response;
   return {
@@ -37,7 +37,7 @@ export default function Home({ data }: { data: IProduct[] }) {
   const products = data;
   const router = useRouter();
   const { query } = router;
-  const { ordering = "", limit = 25, search = "", page = 0 } = query;
+  const { ordering = "", limit = 15, search = "", page = 0 } = query;
   const { addQuery } = useQuery();
   {
     console.log(products);

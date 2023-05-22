@@ -32,7 +32,7 @@ export default function HomeNavbar() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [category, setCategory] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8000/categories").then((res) => {
+    axios.get(process.env.NEXT_PUBLIC_API_URL + "/categories").then((res) => {
       setCategory(res.data);
     });
   }, []);
@@ -154,7 +154,7 @@ export default function HomeNavbar() {
                 </div>
               </div>
 
-              <div>
+              <div className="max-sm:hidden">
                 <ul className="flex max-w-[1299px] items-center gap-10 mx-auto text-black text-xs-medium pb-3 relative">
                   {category.map((link: any, index) => {
                     // const isFull = link.sublinks?.length >= 2;

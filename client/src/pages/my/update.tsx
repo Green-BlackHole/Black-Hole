@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { IUser } from "@/interfaces/user";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Info = () => {
   const { currentUser, setCurrentUser } = useCurrentUser();
@@ -13,7 +14,7 @@ const Info = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.API_URL + `/users/${currentUser?._id}`)
+      .get(process.env.NEXT_PUBLIC_API_URL + `/users/${currentUser?._id}`)
       .then((res) => {
         setUser(res.data);
       })
@@ -26,7 +27,7 @@ const Info = () => {
     const fd = new FormData();
     fd.append("file", e.target.files[0]);
     axios
-      .post(process.env.API_URL + "/products/upload", fd, {
+      .post(process.env.NEXT_PUBLIC_API_URL + "/products/upload", fd, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -48,7 +49,7 @@ const Info = () => {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     axios
-      .patch(process.env.API_URL + `/users/${currentUser?._id}`, user)
+      .patch(process.env.NEXT_PUBLIC_API_URL + `/users/${currentUser?._id}`, user)
       .then((res) => {
         toast.success("amjilttai shinechillee");
       })

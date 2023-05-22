@@ -6,14 +6,18 @@ import axios from "axios";
 import { useCurrentUser } from "@/components/CurretnUserProvider";
 import ProductCard from "@/components/ProductCard";
 import { IProduct } from "@/interfaces/product";
+import MyModal from "@/components/Modal";
 
 const Wish = () => {
   const { currentUser } = useCurrentUser();
+  if (!currentUser) {
+    return <MyModal/>;
+  }
 
   const [myWishlist, setMyWhishlist] = useState<IProduct[]>();
   useEffect(() => {
     axios
-      .get(process.env.API_URL + `/wishlist/mywishlist/${currentUser?._id}`)
+      .get(process.env.NEXT_PUBLIC_API_URL + `/wishlist/mywishlist/${currentUser?._id}`)
       .then((res) => {
         setMyWhishlist(res.data);
       })

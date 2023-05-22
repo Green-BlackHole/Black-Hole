@@ -36,7 +36,7 @@ function classNames(...classes: any) {
 //     category = "",
 //   } = query;
 //   const response = await axios.get(
-//     process.env.API_URL + `/products?limit=${limit}&search=${search}&ordering=${ordering}&category=${category}`
+//     process.env.NEXT_PUBLIC_API_URL + `/products?limit=${limit}&search=${search}&ordering=${ordering}&category=${category}`
 //   );
 //   const { data } = response;
 //   return {
@@ -63,7 +63,7 @@ export default function Category({ data }: { data: IProduct }) {
   useEffect(() => {
     axios
       .get(
-        process.env.API_URL + `/products?limit=${limit}&search=${search}&ordering=${ordering}&category=${category}`
+        process.env.NEXT_PUBLIC_API_URL + `/products?limit=${limit}&search=${search}&ordering=${ordering}&category=${category}`
       )
       .then((res) => {
         setProducts(res.data);
@@ -71,14 +71,14 @@ export default function Category({ data }: { data: IProduct }) {
   }, [category, limit, ordering, products, search]);
   useEffect(() => {
     axios
-      .get(process.env.API_URL + `/products?search=ki&limit=1`)
+      .get(process.env.NEXT_PUBLIC_API_URL + `/products?search=ki&limit=1`)
       .then((res) => {
         console.log("category data", res.data);
       });
   }, []);
 
   useEffect(() => {
-    axios.get(process.env.API_URL + "/categories").then((res) => {
+    axios.get(process.env.NEXT_PUBLIC_API_URL + "/categories").then((res) => {
       setCategories(res.data);
     });
   }, []);

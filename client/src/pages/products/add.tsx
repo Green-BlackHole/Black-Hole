@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
 import { IOption } from "@/interfaces/product";
 import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Example() {
   const { currentUser } = useCurrentUser();
@@ -20,7 +21,7 @@ export default function Example() {
   const [subCategories, setSubCategories] = useState<IOption[]>([]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    axios.get(process.env.API_URL + "/categories").then((res) => {
+    axios.get(process.env.NEXT_PUBLIC_API_URL + "/categories").then((res) => {
       setCategory(res.data);
     });
   }, [category, setCategory]);
@@ -44,7 +45,7 @@ export default function Example() {
     const fd = new FormData();
     fd.append("file", e.target.files[0]);
     axios
-      .post(process.env.API_URL + "/products/upload", fd, {
+      .post(process.env.NEXT_PUBLIC_API_URL + "/products/upload", fd, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -58,7 +59,7 @@ export default function Example() {
     e.preventDefault();
 
     axios
-      .post(process.env.API_URL + "/products/add", {
+      .post(process.env.NEXT_PUBLIC_API_URL + "/products/add", {
         ...addProduct,
         price: Number(addProduct.price) + Number(addProduct.price / 10),
       })

@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer";
 import Tilt from "react-parallax-tilt";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
   const { currentUser, setCurrentUser } = useCurrentUser();
@@ -22,7 +23,7 @@ export default function Login() {
     e.preventDefault();
     const status = 201;
     axios
-      .post(process.env.API_URL + "/signin", user)
+      .post(process.env.NEXT_PUBLIC_API_URL + "/signin", user)
       .then((res) => {
         if (status === res.status) {
           router.push("/");
@@ -38,7 +39,7 @@ export default function Login() {
             theme: "light",
           });
           axios
-            .get(process.env.API_URL + "/currentUser", {
+            .get(process.env.NEXT_PUBLIC_API_URL + "/currentUser", {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
               },

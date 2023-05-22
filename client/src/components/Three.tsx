@@ -38,7 +38,7 @@ export default function Three() {
           </div>
 
         </div>
-        <div className="col-span-1 mt-20">
+        <div className="col-span-1 mt-20 max-sm:hidden">
           <Suspense fallback={<div>Loading...</div>}>
             <MyThreeComponent />
           </Suspense>

@@ -29,7 +29,7 @@ export const CurrentUserProvider: FC<CurrentUserProviderProps> = (props) => {
   const [currentUser, setCurrentUser] = useState<IUser>();
   useEffect(() => {
     axios
-      .get(process.env.API_URL + "/currentUser", {
+      .get(process.env.NEXT_PUBLIC_API_URL + "/currentUser", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
