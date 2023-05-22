@@ -59,24 +59,23 @@ const Index: FC<Props> = ({ data }) => {
   const removeWishlist =
     "https://cdn.icon-icons.com/icons2/3553/PNG/512/wishlist_favorites_favorite_heart_like_ecommerce_icon_224938.png";
   const [wishlist, setWishlist] = useState(true);
-  // useEffect(()=>{
-  //    //product ni wishlisted bgaa esehiig shalgaj bgaa
-  //    axios
-  //    .get(process.env.NEXT_PUBLIC_API_URL + `/wishlist/${product._id}`, {
-  //      data: { userId: product.userId },
-  //    })
-  //    .then((response) => {
-  //     console.log("res",response)
+  useEffect(()=>{
+     //product ni wishlisted bgaa esehiig shalgaj bgaa
+     axios
+     .get(process.env.NEXT_PUBLIC_API_URL + `/wishlist/${product._id}?userId=${product.userId}`
+     )
+     .then((response) => {
+      console.log("res",response)
 
-  //      return setWishlist(false);
-  //    })
-  //    .catch((error) => {
-  //      console.error("Error deleting product:", error);
-  //    });
-  // },[])
+        setWishlist(false);
+     })
+     .catch((error) => {
+       console.error("Error deleting product:", error);
+     });
+  },[])
   function handleWishlist(product: any) {
     //productiig wishliisted bhguu bol nemeed zurgiine solino
-    setWishlist(!wishlist);
+    
     wishlist &&
       axios
         .post(process.env.NEXT_PUBLIC_API_URL + "/wishlist", product)
@@ -89,6 +88,8 @@ const Index: FC<Props> = ({ data }) => {
     //productiig wishliisted bgaa bol hasaad zurgiine solino
 
     !wishlist && deleteWishlist(product._id);
+    
+    setWishlist(!wishlist);
   }
   const deleteWishlist = (productId: string) => {
     axios

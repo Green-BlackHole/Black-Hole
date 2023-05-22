@@ -154,7 +154,7 @@ export default function HomeNavbar() {
                 </div>
               </div>
 
-              <div>
+              <div className="max-sm:hidden">
                 <ul className="flex max-w-[1299px] items-center gap-10 mx-auto text-black text-xs-medium pb-3 relative">
                   {category.map((link: any, index) => {
                     // const isFull = link.sublinks?.length >= 2;

@@ -34,8 +34,9 @@ export class WishlistController {
   @Get(':_id')
   findOne(
     @Param('_id') id: string,
-    @Body('userId') userId: string,
+    @Query('userId') userId: string,
   ){
+    console.log("user",userId)
     return this.wishlistService.findOne(id, userId);
   }
   @Get('mywishlist/:id')
