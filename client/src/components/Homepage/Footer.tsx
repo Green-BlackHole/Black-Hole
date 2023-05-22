@@ -6,7 +6,13 @@ import styles from "./footer.module.css";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-white dark:bg-purple-900 mt-24 py-7">
+      <footer className="bg-white dark:bg-purple-900 footer">
+      <div className="waves">
+            <div className="wave" id="wave1"></div>
+            <div className="wave" id="wave2"></div>
+            <div className="wave" id="wave3"></div>
+            <div className="wave" id="wave4"></div>
+        </div>
         <div className="mx-auto max-w-2xl px-4 py-3 sm:px-6 sm:py-2 lg:max-w-7xl lg:px-8">
           <div className="md:flex md:justify-between gap-3">
             {/* Logo */}

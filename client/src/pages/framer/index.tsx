@@ -1,65 +1,65 @@
-// Photos from https://citizenofnowhe.re/lines-of-the-city
-// import "./styles.css";
-import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  MotionValue,
-} from "framer-motion";
-import Layout from "@/components/Layout";
-import Image from "next/image";
+// import Layout from "@/components/Layout";
+// import Image from "next/image";
+// import { useEffect } from "react";
+// import AOS from 'aos';
+// import 'aos/dist/aos.css'; 
 
-function useParallax(value: MotionValue<number>, distance: number) {
-  return useTransform(value, [0, 1.5], [-distance, distance]);
-}
+// export default function Scroll() {
+//   AOS.init();
 
-function Zurag({ id }: { id: number }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref });
-  const y = useParallax(scrollYProgress, 400);
+//   return (
+//     <>
+//       <Layout>
+//         <h2 className="">nemelt medeelel</h2>
+//         <div className="grid grid-cols-2">
+//           <Image
+//             src="https://cdn.shopify.com/s/files/1/0269/9644/1191/files/Secondhand_Shopping_2048x2048.jpg?v=1628535295"
+//             data-aos="fade-right"
+//             alt="image"
+//             width={1000}
+//             height={100}
+//             className="rounded-lg"
+//           />
+//           <div className="mx-auto my-auto" data-aos="fade-left">
+//             description
+//           </div>
+//           <div className="mx-auto my-auto" data-aos="fade-right">
+//             description{" "}
+//           </div>
 
-  return (
-    <>
-      <div className="flex items-center justify-center">
-        <section className="text-[rgb(0,255,255)] font-bold text-4xl">
-          <div ref={ref}>
-            <Image
-              width={1000}
-              height={100}
-              src={`https://www.fonewalls.com/wp-content/uploads/1536x2048-Background-HD-Wallpaper-006-300x400.jpg`}
-              alt="A London skyscraper"
-              className="m-2"
-            />
-          </div>
-          <motion.h2 style={{ y }} className="ml-48">{`#00${id}`}</motion.h2>
-        </section>
-        <div className="h-[30rem]"></div>
-      </div>
-    </>
-  );
-}
+//           <Image
+//             src="https://my.neighbor.org/wp-content/uploads/2020/08/reasons-to-buy-from-thrift-stores-960x640.jpg"
+//             data-aos="fade-left"
+//             alt="image"
+//             width={1000}
+//             height={100}
+//             className="rounded-lg"
+//           />
+//           <Image
+//             src="https://cdn.shopify.com/s/files/1/0269/9644/1191/files/Secondhand_Shopping_2048x2048.jpg?v=1628535295"
+//             data-aos="fade-right"
+//             alt="image"
+//             width={1000}
+//             height={100}
+//             className="rounded-lg"
+//           />
+//           <div className="mx-auto my-auto" data-aos="fade-left">
+//             description
+//           </div>
+//           <div className="mx-auto my-auto" data-aos="fade-right">
+//             description{" "}
+//           </div>
 
-export default function App() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 1000,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
-  return (
-    <>
-      <Layout>
-        {[1, 2].map((image) => (
-          <>
-            <Zurag id={image} key={image} />
-          </>
-        ))}
-        <div className="h-screen"></div>
-        <motion.div className="progress" style={{ scaleX }} />
-      </Layout>
-    </>
-  );
-}
+//           <Image
+//             src="https://my.neighbor.org/wp-content/uploads/2020/08/reasons-to-buy-from-thrift-stores-960x640.jpg"
+//             data-aos="fade-left"
+//             alt="image"
+//             width={1000}
+//             height={100}
+//             className="rounded-lg"
+//           />
+//         </div>
+//       </Layout>
+//     </>
+//   );
+// }

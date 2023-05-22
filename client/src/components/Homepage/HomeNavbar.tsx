@@ -32,7 +32,7 @@ export default function HomeNavbar() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [category, setCategory] = useState([]);
   useEffect(() => {
-    axios.get(process.env.API_URL + "/categories").then((res) => {
+    axios.get("http://localhost:8000/categories").then((res) => {
       setCategory(res.data);
     });
   }, []);
@@ -93,13 +93,13 @@ export default function HomeNavbar() {
                         width={100}
                         height={100}
                       />
-                      {/* <Image
+                      <Image
                         className="hidden h-10 w-auto lg:block"
                         src="/images/logo.png"
                         alt="Your Company"
                         width={100}
                         height={100}
-                      /> */}
+                      />
                     </Link>
                   </div>
                 </div>
@@ -125,7 +125,7 @@ export default function HomeNavbar() {
                     }}
                   />
 
-                  <Link href={"/products/add"}>
+                  <Link href={"/my/wish"}>
                     <button
                       type="button"
                       className="rounded-full text-black hover:pb-5 text-lg p-3"
@@ -155,7 +155,7 @@ export default function HomeNavbar() {
               </div>
 
               <div>
-                <ul className="flex max-w-[1299px] items-center gap-10 mx-auto text-black text-xs-medium py-5 relative">
+                <ul className="flex max-w-[1299px] items-center gap-10 mx-auto text-black text-xs-medium pb-3 relative">
                   {category.map((link: any, index) => {
                     // const isFull = link.sublinks?.length >= 2;
                     return (

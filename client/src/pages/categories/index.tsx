@@ -63,8 +63,7 @@ export default function Category({ data }: { data: IProduct }) {
   useEffect(() => {
     axios
       .get(
-        process.env.API_URL +
-          `/products?limit=${limit}&search=${search}&ordering=${ordering}&category=${category}`
+        process.env.API_URL + `/products?limit=${limit}&search=${search}&ordering=${ordering}&category=${category}`
       )
       .then((res) => {
         setProducts(res.data);
