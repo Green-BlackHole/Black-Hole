@@ -32,7 +32,7 @@ export default function HomeNavbar() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [category, setCategory] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8000/categories").then((res) => {
+    axios.get(process.env.NEXT_PUBLIC_API_URL + "/categories").then((res) => {
       setCategory(res.data);
     });
   }, []);

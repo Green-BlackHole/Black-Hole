@@ -10,6 +10,8 @@ import axios from "axios";
 import ProductCard from "@/components/ProductCard";
 import { toast } from "react-toastify";
 import { IUser } from "@/interfaces/user";
+import 'react-toastify/dist/ReactToastify.css';
+import MyModal from "@/components/Modal";
 
 const Info = () => {
   const [myProducts, setMyProducts] = useState<IProduct[] | []>([]);
@@ -17,16 +19,13 @@ const Info = () => {
   const router = useRouter();
 
   const { currentUser } = useCurrentUser();
-  // if (!currentUser) {
-  //   router.push("/auth/signIn");
-  // }
   if (!currentUser) {
-    return <>Ta nevtreegui baina!</>;
+    return <MyModal/>;
   }
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     axios
-      .get(process.env.API_URL + `/users/${currentUser?._id}`)
+      .get(process.env.NEXT_PUBLIC_API_URL + `/users/${currentUser?._id}`)
       .then((res) => {
         setUser(res.data);
       })
@@ -38,7 +37,7 @@ const Info = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     axios
-      .get(process.env.API_URL + `/products/ids/${currentUser?._id}`)
+      .get(process.env.NEXT_PUBLIC_API_URL + `/products/ids/${currentUser?._id}`)
       .then((res) => {
         setMyProducts(res.data);
         console.log("my product", myProducts);
@@ -49,7 +48,7 @@ const Info = () => {
   }, []);
   const deleteProduct = (productId: string) => {
     axios
-      .delete(process.env.API_URL + `/products/${productId}`)
+      .delete(process.env.NEXT_PUBLIC_API_URL + `/products/${productId}`)
       .then((response) => {
         toast.success("amjilttai ustgalaa");
 

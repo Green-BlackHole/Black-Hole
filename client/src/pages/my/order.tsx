@@ -13,7 +13,7 @@ const Order = () => {
   const { currentUser } = useCurrentUser();
   useEffect(() => {
     axios
-      .get(process.env.API_URL + `/orders/ids/${currentUser?._id}`)
+      .get(process.env.NEXT_PUBLIC_API_URL + `/orders/ids/${currentUser?._id}`)
       .then((res) => {
         setMyOrders(res.data);
       })

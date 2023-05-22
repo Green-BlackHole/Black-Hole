@@ -1,6 +1,7 @@
 import { useCurrentUser } from "@/components/CurretnUserProvider";
 import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
+import MyModal from "@/components/Modal";
 import Navbar from "@/components/Navbar/Navbar";
 import Three from "@/components/Three";
 import MyThreeComponent from "@/components/Three/three.dynamic";
@@ -11,7 +12,7 @@ import { useRouter } from "next/router";
 import React, { ChangeEvent, FC, Suspense, useEffect, useState } from "react";
 
 export const getStaticPaths = async () => {
-  const response = await fetch(process.env.API_URL + "/products/idm/id");
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/products/idm/id");
   const data = await response.json();
 
   const paths = data.map((_id: string) => ({
@@ -27,7 +28,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
   const response = await fetch(
-    process.env.API_URL + `/products/${params?._id}`
+    process.env.NEXT_PUBLIC_API_URL + `/products/${params?._id}`
   );
   const data = await response.json();
 
@@ -41,6 +42,9 @@ interface Props {
 
 export default function Order({ data }: { data: any }) {
   const { currentUser } = useCurrentUser();
+  if (!currentUser) {
+    return <MyModal/>;
+  }
   const order = data;
   const [addOrder, setAddOrder] = useState({
     firstName: "",
@@ -65,7 +69,7 @@ export default function Order({ data }: { data: any }) {
     e.preventDefault();
     console.log(addOrder);
     axios
-      .post(process.env.API_URL + "/orders/add", addOrder)
+      .post(process.env.NEXT_PUBLIC_API_URL + "/orders/add", addOrder)
       .then((res) => {
         console.log(res.data);
       })
